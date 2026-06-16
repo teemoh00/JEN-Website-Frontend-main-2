@@ -18,6 +18,8 @@ const CreateMeetingModal = ({ onClose }) => {
     const [loading, setLoading] = useState(false);
     const [createdMeeting, setCreatedMeeting] = useState(null);
     const [copied, setCopied] = useState(false);
+    const [isNewCategory, setIsNewCategory] = useState(false);
+    const [isNewType, setIsNewType] = useState(false);
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -181,20 +183,38 @@ const CreateMeetingModal = ({ onClose }) => {
 
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                         <div>
-                            <label style={labelStyle}>Category</label>
-                            <select name="category" value={formData.category} onChange={handleChange} style={inputStyle}>
-                                {categories.map(cat => (
-                                    <option key={cat.id} value={cat.id}>{cat.name}</option>
-                                ))}
-                            </select>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <label style={labelStyle}>Category</label>
+                                <span onClick={() => setIsNewCategory(!isNewCategory)} style={{ color: 'var(--primary)', fontSize: '0.75rem', fontWeight: '600', cursor: 'pointer' }}>
+                                    {isNewCategory ? 'Cancel' : '+ Add New'}
+                                </span>
+                            </div>
+                            {isNewCategory ? (
+                                <input type="text" name="category" value={formData.category} onChange={handleChange} placeholder="e.g. Special Meeting" style={inputStyle} />
+                            ) : (
+                                <select name="category" value={formData.category} onChange={handleChange} style={inputStyle}>
+                                    {categories.map(cat => (
+                                        <option key={cat.id} value={cat.id} style={{ color: '#ffffff', background: '#1a1a24' }}>{cat.name}</option>
+                                    ))}
+                                </select>
+                            )}
                         </div>
                         <div>
-                            <label style={labelStyle}>Type</label>
-                            <select name="type" value={formData.type} onChange={handleChange} style={inputStyle}>
-                                <option>Physical</option>
-                                <option>Online</option>
-                                <option>Hybrid</option>
-                            </select>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <label style={labelStyle}>Type</label>
+                                <span onClick={() => setIsNewType(!isNewType)} style={{ color: 'var(--primary)', fontSize: '0.75rem', fontWeight: '600', cursor: 'pointer' }}>
+                                    {isNewType ? 'Cancel' : '+ Add New'}
+                                </span>
+                            </div>
+                            {isNewType ? (
+                                <input type="text" name="type" value={formData.type} onChange={handleChange} placeholder="e.g. Webinar" style={inputStyle} />
+                            ) : (
+                                <select name="type" value={formData.type} onChange={handleChange} style={inputStyle}>
+                                    <option value="Physical" style={{ color: '#ffffff', background: '#1a1a24' }}>Physical</option>
+                                    <option value="Online" style={{ color: '#ffffff', background: '#1a1a24' }}>Online</option>
+                                    <option value="Hybrid" style={{ color: '#ffffff', background: '#1a1a24' }}>Hybrid</option>
+                                </select>
+                            )}
                         </div>
                     </div>
 
@@ -221,9 +241,9 @@ const CreateMeetingModal = ({ onClose }) => {
                         <div>
                             <label style={labelStyle}>Facilitator</label>
                             <select name="facilitator" value={formData.facilitator} onChange={handleChange} style={inputStyle} required>
-                                <option value="">Select a Facilitator</option>
+                                <option value="" style={{ color: '#ffffff', background: '#1a1a24' }}>Select a Facilitator</option>
                                 {members.map(member => (
-                                    <option key={member.id} value={member.id}>{member.full_name}</option>
+                                    <option key={member.id} value={member.id} style={{ color: '#ffffff', background: '#1a1a24' }}>{member.full_name}</option>
                                 ))}
                             </select>
                         </div>

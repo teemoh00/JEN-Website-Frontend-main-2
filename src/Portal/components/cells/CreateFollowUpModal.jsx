@@ -93,9 +93,9 @@ const CreateFollowUpModal = ({ onClose }) => {
                                     fontWeight: '700'
                                 }}
                             >
-                                <option value="General" style={{ color: 'var(--text-color)', background: 'var(--bg-color)' }}>General</option>
-                                <option value="Pastoral Care" style={{ color: 'var(--text-color)', background: 'var(--bg-color)' }}>Pastoral Care</option>
-                                <option value="First Timer" style={{ color: 'var(--text-color)', background: 'var(--bg-color)' }}>First Timer</option>
+                                <option value="General" style={{ color: '#ffffff', background: '#1a1a24' }}>General</option>
+                                <option value="Pastoral Care" style={{ color: '#ffffff', background: '#1a1a24' }}>Pastoral Care</option>
+                                <option value="First Timer" style={{ color: '#ffffff', background: '#1a1a24' }}>First Timer</option>
                             </select>
                             <span style={{ position: 'absolute', right: '0', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: '#ffffff', fontSize: '0.8rem', fontWeight: 'bold' }}>
                                 ▼

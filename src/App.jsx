@@ -19,6 +19,7 @@ import CellAnalytics from './Portal/pages/CellAnalytics';
 import MeetingsDashboard from './Portal/pages/MeetingsDashboard';
 import EventsDashboard from './Portal/pages/EventsDashboard';
 import EventAttendance from './Portal/pages/EventAttendance';
+import EventStatistics from './Portal/pages/EventStatistics';
 import EventSchedule from './Portal/pages/EventSchedule';
 import EventBudget from './Portal/pages/EventBudget';
 import AttendanceDashboard from './Portal/pages/AttendanceDashboard';
@@ -80,6 +81,7 @@ function App() {
                   <Route path="meetings" element={<MeetingsDashboard />} />
                   <Route path="meetings/events" element={<EventsDashboard />} />
                   <Route path="meetings/event-attendance" element={<EventAttendance />} />
+                  <Route path="meetings/event-statistics" element={<EventStatistics />} />
                   <Route path="meetings/event-schedule" element={<EventSchedule />} />
                   <Route path="meetings/event-budget" element={<EventBudget />} />
                   <Route path="meetings/attendance" element={<AttendanceDashboard />} />
