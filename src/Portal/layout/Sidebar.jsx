@@ -22,18 +22,18 @@ const SidebarItem = ({ icon, label, path, active, hovered, setHovered, subItems,
                     transition: 'all 0.2s ease',
                     borderLeft: active ? '3px solid var(--primary)' : '3px solid transparent',
                     cursor: subItems ? 'pointer' : 'default',
-                    whiteSpace: 'nowrap'
+                    whiteSpace: 'normal'
                 }}
             >
                 {subItems ? (
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.75rem', flex: 1 }}>
-                        <span style={{ fontSize: '1.25rem', display: 'flex', alignItems: 'center' }}>{icon}</span>
-                        <span style={{ fontWeight: active ? '600' : '500', fontSize: '0.95rem' }}>{label}</span>
+                        <span style={{ fontSize: '1.25rem', display: 'flex', alignItems: 'center', flexShrink: 0 }}>{icon}</span>
+                        <span style={{ fontWeight: active ? '600' : '500', fontSize: '0.95rem', lineHeight: '1.2' }}>{label}</span>
                     </div>
                 ) : (
                     <Link to={path} onClick={onClose} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.75rem', flex: 1, textDecoration: 'none', color: 'inherit' }}>
-                        <span style={{ fontSize: '1.25rem', display: 'flex', alignItems: 'center' }}>{icon}</span>
-                        <span style={{ fontWeight: active ? '600' : '500', fontSize: '0.95rem' }}>{label}</span>
+                        <span style={{ fontSize: '1.25rem', display: 'flex', alignItems: 'center', flexShrink: 0 }}>{icon}</span>
+                        <span style={{ fontWeight: active ? '600' : '500', fontSize: '0.95rem', lineHeight: '1.2' }}>{label}</span>
                     </Link>
                 )}
 
@@ -53,18 +53,34 @@ const SidebarItem = ({ icon, label, path, active, hovered, setHovered, subItems,
                             style={{
                                 textDecoration: 'none',
                                 color: location.pathname === sub.path ? 'var(--primary)' : 'var(--text-muted)',
-                                fontSize: '0.9rem',
+                                fontSize: '0.85rem',
                                 padding: '0.5rem',
                                 borderRadius: '0.5rem',
-                                display: 'block',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.75rem',
                                 transition: 'all 0.2s',
-                                fontWeight: location.pathname === sub.path ? '600' : '400'
+                                fontWeight: location.pathname === sub.path ? '600' : '500'
                             }}
-                            onMouseEnter={(e) => e.target.style.color = 'var(--primary)'}
+                            onMouseEnter={(e) => {
+                                e.target.style.color = 'var(--primary)';
+                                if(e.target.firstChild) e.target.firstChild.style.background = 'var(--primary)';
+                            }}
                             onMouseLeave={(e) => {
-                                if (location.pathname !== sub.path) e.target.style.color = 'var(--text-muted)';
+                                if (location.pathname !== sub.path) {
+                                    e.target.style.color = 'var(--text-muted)';
+                                    if(e.target.firstChild) e.target.firstChild.style.background = '#4b5563';
+                                }
                             }}
                         >
+                            <span style={{
+                                width: '5px',
+                                height: '5px',
+                                borderRadius: '50%',
+                                background: location.pathname === sub.path ? 'var(--primary)' : '#4b5563',
+                                display: 'inline-block',
+                                transition: 'background 0.2s'
+                            }}></span>
                             {sub.label}
                         </Link>
                     ))}
@@ -88,22 +104,28 @@ const Sidebar = ({ isOpen, onClose }) => {
         { icon: '📅', label: 'Calendar', path: '/portal/calendar' },
         {
             icon: '🏘️',
-            label: 'Cell Management',
+            label: 'Follow up & Cell Management',
             path: '/portal/cell-management',
             subItems: [
                 { label: 'Cells', path: '/portal/cells' },
                 { label: 'Assign Members', path: '/portal/cells/assign' },
-                { label: 'My Cells', path: '/portal/my-cell' }
+                { label: 'Cell Attendance', path: '/portal/cells/attendance' },
+                { label: 'Cell Analytics', path: '/portal/cells/analytics' },
+                { label: 'Follow-Ups', path: '/portal/follow-ups' },
+                { label: 'My Cell', path: '/portal/my-cell' }
             ]
         },
         {
-            icon: '📅',
+            icon: '👥',
             label: 'Meetings',
             path: '/portal/meetings-module',
             subItems: [
                 { label: 'View Meetings', path: '/portal/meetings' },
                 { label: 'Events', path: '/portal/meetings/events' },
-                { label: 'Meetings Attendance', path: '/portal/meetings/attendance' }
+                { label: 'Event Attendance', path: '/portal/meetings/event-attendance' },
+                { label: 'Event Schedule', path: '/portal/meetings/event-schedule' },
+                { label: 'Event Budget', path: '/portal/meetings/event-budget' },
+                { label: 'Attendance', path: '/portal/meetings/attendance' }
             ]
         },
         { icon: '👥', label: 'Members', path: '/portal/members' },

@@ -57,7 +57,7 @@ const CellMembersList = ({ members = [] }) => {
                 </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '1rem', overflowY: 'auto' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '1rem', overflowY: 'auto' }}>
                 {filtered.map(member => (
                     <div key={member.id} style={{
                         background: 'var(--surface-2)',
@@ -91,7 +91,16 @@ const CellMembersList = ({ members = [] }) => {
                             {(member.full_name || '?').charAt(0)}
                         </div>
                         <div style={{ color: 'var(--text-color)', fontSize: '0.85rem', fontWeight: '500' }}>{member.full_name}</div>
-                        <div style={{ color: 'var(--text-muted)', fontSize: '0.7rem' }}>{member.category}</div>
+                        <div style={{ color: 'var(--text-muted)', fontSize: '0.7rem', marginBottom: '0.5rem' }}>{member.category}</div>
+                        
+                        <div style={{ color: '#0ea5e9', fontSize: '0.7rem', fontWeight: '600', marginBottom: '0.75rem', background: 'rgba(14, 165, 233, 0.1)', padding: '0.2rem 0.5rem', borderRadius: '0.25rem' }}>
+                            Attended: 3 days ago
+                        </div>
+
+                        <div style={{ display: 'flex', gap: '0.5rem', marginTop: 'auto', width: '100%', justifyContent: 'center' }}>
+                            <button style={{ flex: 1, background: 'var(--surface-1)', color: 'var(--text-color)', border: '1px solid var(--border-color)', padding: '0.3rem', borderRadius: '0.25rem', fontSize: '0.7rem', cursor: 'pointer', transition: 'background 0.2s' }} onMouseEnter={e => e.target.style.background='var(--surface-2)'} onMouseLeave={e => e.target.style.background='var(--surface-1)'}>Contact</button>
+                            <button style={{ flex: 1, background: '#ef444420', color: '#ef4444', border: '1px solid #ef444450', padding: '0.3rem', borderRadius: '0.25rem', fontSize: '0.7rem', cursor: 'pointer', transition: 'background 0.2s' }} onMouseEnter={e => e.target.style.background='#ef444430'} onMouseLeave={e => e.target.style.background='#ef444420'}>Flag</button>
+                        </div>
                     </div>
                 ))}
             </div>

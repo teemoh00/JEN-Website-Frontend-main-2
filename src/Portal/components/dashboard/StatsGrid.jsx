@@ -1,22 +1,38 @@
 import React from 'react';
 
-const StatCard = ({ label, value, subtext, icon }) => (
+const StatCard = ({ label, value, icon, bgStyle }) => (
     <div style={{
-        background: 'var(--surface-1)', // Dark card background for stats
-        border: '1px solid var(--border-color)',
+        background: bgStyle,
+        border: 'none',
         padding: '1.5rem',
         borderRadius: '1rem',
         display: 'flex',
         flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
         gap: '0.5rem',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        color: '#333'
     }}>
         <div style={{
-            fontSize: '0.75rem',
-            textTransform: 'uppercase',
+            fontSize: '1.5rem',
+            marginBottom: '0.25rem',
+            background: 'rgba(0,0,0,0.05)',
+            width: '40px',
+            height: '40px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: '50%'
+        }}>
+            {icon}
+        </div>
+        <div style={{
+            fontSize: '0.85rem',
+            textTransform: 'capitalize',
             letterSpacing: '0.05em',
-            color: 'var(--text-muted)',
+            color: '#64748b',
             fontWeight: '600'
         }}>
             {label}
@@ -24,15 +40,10 @@ const StatCard = ({ label, value, subtext, icon }) => (
         <div style={{
             fontSize: '1.75rem',
             fontWeight: '700',
-            color: 'var(--primary)'
+            color: '#0f172a'
         }}>
             {value}
         </div>
-        {subtext && (
-            <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                {subtext}
-            </div>
-        )}
     </div>
 );
 
@@ -40,27 +51,54 @@ const StatsGrid = ({ data, loading }) => {
     return (
         <div className="stats-grid-container">
             <StatCard
-                label="Total Attendance"
-                value={loading ? "..." : (data?.total_attendance ?? 0)}
-                subtext="This Year"
+                label="Members"
+                value={loading ? "..." : (data?.members ?? 471)}
+                icon="👥"
+                bgStyle="#ffffff"
             />
             <StatCard
-                label="Next Meeting"
-                value={loading ? "..." : (data?.next_meeting?.date ?? "None")}
-                subtext={data?.next_meeting ? `${data.next_meeting.title} - ${data.next_meeting.time}` : "No upcoming meetings"}
+                label="Cells"
+                value={loading ? "..." : (data?.cells ?? 0)}
+                icon="🏘️"
+                bgStyle="#fff9c4"
             />
             <StatCard
-                label="Giving (YTD)"
-                value={loading ? "..." : (data?.giving_ytd ?? "KES 0")}
-                subtext="15% increase"
+                label="Events"
+                value={loading ? "..." : (data?.events ?? 0)}
+                icon="📅"
+                bgStyle="#e3f2fd"
+            />
+            <StatCard
+                label="Meetings"
+                value={loading ? "..." : (data?.meetings ?? 0)}
+                icon="📋"
+                bgStyle="#ffebee"
+            />
+            <StatCard
+                label="Giving"
+                value={loading ? "..." : (data?.giving_ytd ?? "KES 441k")}
+                icon="💰"
+                bgStyle="#e8f5e9"
+            />
+            <StatCard
+                label="Attendance"
+                value={loading ? "..." : ((data?.attendance_percentage ?? 0) + "%")}
+                icon="📊"
+                bgStyle="#f3e5f5"
             />
 
             <style>{`
                 .stats-grid-container {
                     display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    grid-template-columns: repeat(3, 1fr);
                     gap: 1.5rem;
                     margin-bottom: 2.5rem;
+                }
+
+                @media (max-width: 1024px) {
+                    .stats-grid-container {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
                 }
 
                 @media (max-width: 768px) {
@@ -78,7 +116,7 @@ const StatsGrid = ({ data, loading }) => {
                         display: none; /* Hide scrollbar Chrome/Safari */
                     }
                     .stats-grid-container > div {
-                        flex: 0 0 280px !important; /* Standardized width with charts */
+                        flex: 0 0 160px !important;
                         scroll-snap-align: start;
                     }
                 }

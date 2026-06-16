@@ -59,6 +59,8 @@ const CellsDashboard = () => {
                 }
             `}</style>
 
+
+
             {/* Statistics */}
             <CellStatsCards />
 

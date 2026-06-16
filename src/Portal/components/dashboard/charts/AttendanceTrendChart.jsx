@@ -37,10 +37,31 @@ const AttendanceTrendChart = ({ trendData }) => {
             display: 'flex',
             flexDirection: 'column'
         }}>
-            <h3 style={{ color: 'var(--primary)', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '1rem' }}>
-                Attendance Trend (Last 6 Months)
-            </h3>
-
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
+                <div>
+                    <h3 style={{ color: 'var(--text-color)', fontSize: '1.1rem', fontWeight: '700', margin: '0 0 0.25rem 0' }}>
+                        Revenue Updates
+                    </h3>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.75rem', margin: 0 }}>
+                        Overview of Attendance
+                    </p>
+                </div>
+                <div style={{
+                    background: 'var(--surface-2)',
+                    padding: '0.25rem 0.5rem',
+                    borderRadius: '0.5rem',
+                    fontSize: '0.75rem',
+                    color: 'var(--text-muted)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    border: '1px solid var(--border-color)',
+                    cursor: 'pointer'
+                }}>
+                    March 2020
+                    <span style={{ fontSize: '0.6rem' }}>▼</span>
+                </div>
+            </div>
             <div className="chart-wrapper">
                 <ResponsiveContainer width="99%" height="100%" minWidth={0} minHeight={1}>
                     <AreaChart data={data} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>

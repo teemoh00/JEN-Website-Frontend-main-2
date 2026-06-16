@@ -59,17 +59,14 @@ const CellsList = () => {
 
     return (
         <div style={{
-            background: 'var(--surface-1)',
-            borderRadius: '1rem',
-            border: '1px solid var(--border-color)',
+            background: 'transparent',
             display: 'flex',
             flexDirection: 'column',
             overflow: 'hidden'
         }}>
             {/* Toolbar */}
             <div style={{
-                padding: '1.5rem',
-                borderBottom: '1px solid var(--border-color)',
+                padding: '1.5rem 0',
                 display: 'flex',
                 flexWrap: 'wrap',
                 gap: '1rem',
@@ -77,13 +74,13 @@ const CellsList = () => {
                 alignItems: 'center'
             }}>
                 <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                    <h3 style={{ margin: 0, color: 'var(--text-color)', fontSize: '1.1rem' }}>All Cells</h3>
-                    <span style={{ background: 'var(--border-color)', padding: '0.2rem 0.6rem', borderRadius: '1rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>{filteredCells.length}</span>
+                    <h3 style={{ margin: 0, color: 'var(--text-color)', fontSize: '1.2rem', fontWeight: '800' }}>All Cells</h3>
+                    <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>{filteredCells.length}</span>
                 </div>
 
                 <div style={{ display: 'flex', gap: '1rem', flex: 1, justifyContent: 'flex-end', minWidth: '300px' }}>
-                    <div style={{ position: 'relative', flex: 1, maxWidth: '300px' }}>
-                        <span style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', opacity: 0.5 }}>🔍</span>
+                    <div style={{ position: 'relative', flex: 1, maxWidth: '300px', display: 'flex', alignItems: 'center' }}>
+                        <span style={{ position: 'absolute', left: '0.5rem', opacity: 0.6, fontSize: '0.9rem' }}>🔍</span>
                         <input
                             type="text"
                             placeholder="Search cells..."
@@ -91,26 +88,29 @@ const CellsList = () => {
                             onChange={(e) => setSearchTerm(e.target.value)}
                             style={{
                                 width: '100%',
-                                padding: '0.6rem 1rem 0.6rem 2.5rem',
-                                background: 'var(--bg-color)',
-                                border: '1px solid var(--border-color)',
-                                borderRadius: '2rem',
+                                padding: '0.5rem 1rem 0.5rem 2rem',
+                                background: 'transparent',
+                                border: 'none',
                                 color: 'var(--text-color)',
+                                fontSize: '0.85rem',
                                 outline: 'none'
                             }}
                         />
                     </div>
 
-                    <div style={{ display: 'flex', background: 'var(--bg-color)', borderRadius: '0.5rem', padding: '0.2rem', border: '1px solid var(--border-color)' }}>
+                    <div style={{ display: 'flex', gap: '0.5rem' }}>
                         <button
                             onClick={() => setViewMode('grid')}
                             style={{
-                                background: viewMode === 'grid' ? 'var(--border-color)' : 'transparent',
+                                background: viewMode === 'grid' ? '#a855f7' : 'transparent',
                                 border: 'none',
-                                color: viewMode === 'grid' ? 'var(--text-color)' : 'var(--text-muted)',
-                                padding: '0.4rem 0.8rem',
-                                borderRadius: '0.3rem',
-                                cursor: 'pointer'
+                                color: viewMode === 'grid' ? 'white' : 'var(--text-muted)',
+                                padding: '0.3rem 0.4rem',
+                                borderRadius: '0.25rem',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
                             }}
                         >
                             🔲
@@ -118,12 +118,15 @@ const CellsList = () => {
                         <button
                             onClick={() => setViewMode('table')}
                             style={{
-                                background: viewMode === 'table' ? 'var(--border-color)' : 'transparent',
+                                background: viewMode === 'table' ? '#a855f7' : 'transparent',
                                 border: 'none',
-                                color: viewMode === 'table' ? 'var(--text-color)' : 'var(--text-muted)',
-                                padding: '0.4rem 0.8rem',
-                                borderRadius: '0.3rem',
-                                cursor: 'pointer'
+                                color: viewMode === 'table' ? 'white' : 'var(--text-muted)',
+                                padding: '0.3rem 0.4rem',
+                                borderRadius: '0.25rem',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
                             }}
                         >
                             ≣
@@ -133,7 +136,7 @@ const CellsList = () => {
             </div>
 
             {/* List Content */}
-            <div style={{ padding: '1.5rem', overflowX: 'auto' }}>
+            <div style={{ padding: '0 0 1.5rem 0', overflowX: 'auto' }}>
                 {loading ? (
                     <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>Loading cell data...</div>
                 ) : error ? (

@@ -12,8 +12,15 @@ import Dashboard from './Portal/pages/Dashboard';
 import CellsDashboard from './Portal/pages/CellsDashboard';
 import AssignMembersDashboard from './Portal/pages/AssignMembersDashboard';
 import MyCellDashboard from './Portal/pages/MyCellDashboard';
+import FirstTimersDashboard from './Portal/pages/FirstTimersDashboard';
+import FollowUpTasksDashboard from './Portal/pages/FollowUpTasksDashboard';
+import CellAttendance from './Portal/pages/CellAttendance';
+import CellAnalytics from './Portal/pages/CellAnalytics';
 import MeetingsDashboard from './Portal/pages/MeetingsDashboard';
 import EventsDashboard from './Portal/pages/EventsDashboard';
+import EventAttendance from './Portal/pages/EventAttendance';
+import EventSchedule from './Portal/pages/EventSchedule';
+import EventBudget from './Portal/pages/EventBudget';
 import AttendanceDashboard from './Portal/pages/AttendanceDashboard';
 import MembersDashboard from './Portal/pages/MembersDashboard';
 import UsersDashboard from './Portal/pages/UsersDashboard';
@@ -67,8 +74,14 @@ function App() {
                   <Route path="cells" element={<CellsDashboard />} />
                   <Route path="cells/assign" element={<AssignMembersDashboard />} />
                   <Route path="my-cell" element={<MyCellDashboard />} />
+                  <Route path="cells/attendance" element={<CellAttendance />} />
+                  <Route path="cells/analytics" element={<CellAnalytics />} />
+                  <Route path="follow-ups" element={<FollowUpTasksDashboard />} />
                   <Route path="meetings" element={<MeetingsDashboard />} />
                   <Route path="meetings/events" element={<EventsDashboard />} />
+                  <Route path="meetings/event-attendance" element={<EventAttendance />} />
+                  <Route path="meetings/event-schedule" element={<EventSchedule />} />
+                  <Route path="meetings/event-budget" element={<EventBudget />} />
                   <Route path="meetings/attendance" element={<AttendanceDashboard />} />
                   <Route path="members" element={<MembersDashboard />} />
 
