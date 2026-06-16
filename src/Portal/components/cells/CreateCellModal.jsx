@@ -1,76 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import api from '../../../api/axios';
+import React, { useState } from 'react';
 
 const CreateCellModal = ({ onClose }) => {
     const [formData, setFormData] = useState({
         cellName: '',
-        leader: ''
+        category: 'General',
+        leader: '',
+        meetingDay: 'Wednesday',
+        time: '06:00 PM',
+        location: '',
+        maxCapacity: '15'
     });
-    const [committedMembers, setCommittedMembers] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [fetchingMembers, setFetchingMembers] = useState(true);
-    const [status, setStatus] = useState('idle'); // 'idle', 'loading', 'success', 'error'
-    const [errorMsg, setErrorMsg] = useState('');
-
-    useEffect(() => {
-        const fetchCommittedMembers = async () => {
-            try {
-                const response = await api.get('church/members/?commitment=Committed Member');
-                const results = response.data.results || response.data;
-                setCommittedMembers(Array.isArray(results) ? results : []);
-            } catch (err) {
-                console.error('Error fetching committed members:', err);
-            } finally {
-                setFetchingMembers(false);
-            }
-        };
-        fetchCommittedMembers();
-    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        setLoading(true);
-        setStatus('loading');
-        try {
-            await api.post('church/cells/', {
-                name: formData.cellName,
-                leader_name: formData.leader
-            });
-            setStatus('success');
-            // Auto-close after a few seconds or let user click
-            setTimeout(() => {
-                onClose();
-            }, 2000);
-        } catch (err) {
-            console.error('Error creating cell:', err);
-            const msg = err.response?.data ? JSON.stringify(err.response.data) : 'Failed to create cell. Please try again.';
-            setErrorMsg(msg);
-            setStatus('error');
-        } finally {
-            setLoading(false);
-        }
+        alert('Cell creation simulated: ' + JSON.stringify(formData));
+        onClose();
     };
 
     const inputStyle = {
         width: '100%',
-        padding: '0.75rem',
-        background: 'var(--bg-color)',
-        border: '1px solid var(--border-color)',
-        borderRadius: '0.5rem',
+        padding: '0.5rem 0',
+        background: 'transparent',
+        border: 'none',
         color: 'var(--text-color)',
         fontSize: '0.9rem',
-        marginTop: '0.5rem'
+        marginTop: '0.4rem',
+        outline: 'none',
+        fontWeight: '600'
     };
 
     const labelStyle = {
         color: 'var(--text-muted)',
-        fontSize: '0.85rem',
-        fontWeight: '500'
+        fontSize: '0.8rem',
+        fontWeight: '600'
     };
 
     return (
@@ -89,66 +56,20 @@ const CreateCellModal = ({ onClose }) => {
         }}>
             <div style={{
                 background: 'var(--surface-1)',
-                padding: '2rem',
+                padding: '2.5rem',
                 borderRadius: '1rem',
                 width: '100%',
-                maxWidth: '450px',
+                maxWidth: '480px',
                 border: '1px solid var(--border-color)',
                 boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
             }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                    <h2 style={{ fontSize: '1.5rem', color: 'var(--text-color)', margin: 0 }}>Create New Cell</h2>
-                    <button onClick={onClose} style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', fontSize: '1.5rem', cursor: 'pointer' }}>×</button>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
+                    <h2 style={{ fontSize: '1.4rem', color: 'white', margin: 0, fontWeight: '700' }}>Create New Cell</h2>
+                    <button onClick={onClose} style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', fontSize: '1.2rem', cursor: 'pointer', padding: 0 }}>×</button>
                 </div>
 
-                {status === 'success' ? (
-                    <div style={{ textAlign: 'center', padding: '1rem 0' }}>
-                        <div style={{
-                            width: '70px',
-                            height: '70px',
-                            background: 'rgba(34, 197, 94, 0.1)',
-                            borderRadius: '50%',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            margin: '0 auto 1.5rem',
-                            color: '#4ade80',
-                            fontSize: '2.5rem'
-                        }}>
-                            ✓
-                        </div>
-                        <h3 style={{ color: 'var(--text-color)', marginBottom: '0.5rem' }}>Cell Created!</h3>
-                        <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>The cell has been successfully registered in the system.</p>
-                        <button
-                            onClick={onClose}
-                            style={{
-                                marginTop: '1.5rem',
-                                padding: '0.75rem 2rem',
-                                borderRadius: '0.5rem',
-                                border: 'none',
-                                background: 'linear-gradient(135deg, #4ade80 0%, #22c55e 100%)',
-                                color: 'white',
-                                fontWeight: '700',
-                                cursor: 'pointer'
-                            }}
-                        >
-                            Back to Dashboard
-                        </button>
-                    </div>
-                ) : (
-                    <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '1.25rem' }}>
-                        {status === 'error' && (
-                            <div style={{
-                                padding: '1rem',
-                                background: 'rgba(239, 68, 68, 0.1)',
-                                border: '1px solid rgba(239, 68, 68, 0.2)',
-                                borderRadius: '0.5rem',
-                                color: '#f87171',
-                                fontSize: '0.85rem'
-                            }}>
-                                <strong>Setup Error:</strong> {errorMsg}
-                            </div>
-                        )}
+                <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '1.5rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
                         <div>
                             <label style={labelStyle}>Cell Name</label>
                             <input
@@ -157,65 +78,114 @@ const CreateCellModal = ({ onClose }) => {
                                 value={formData.cellName}
                                 onChange={handleChange}
                                 placeholder="e.g. Goshen Alpha"
-                                style={inputStyle}
-                                required
+                                style={{ ...inputStyle, color: formData.cellName ? 'white' : 'var(--text-muted)', fontWeight: formData.cellName ? '600' : 'normal' }}
                             />
                         </div>
-
-                        <div>
-                            <label style={labelStyle}>Cell Leader</label>
+                        <div style={{ position: 'relative' }}>
+                            <label style={labelStyle}>Category</label>
                             <select
-                                name="leader"
-                                value={formData.leader}
+                                name="category"
+                                value={formData.category}
                                 onChange={handleChange}
-                                style={inputStyle}
-                                required
-                                disabled={fetchingMembers}
+                                style={{ ...inputStyle, appearance: 'none', color: 'white' }}
                             >
-                                <option value="">{fetchingMembers ? 'Loading members...' : '-- Select a Lead --'}</option>
-                                {committedMembers.map(member => (
-                                    <option key={member.id} value={member.profile_full_name || member.full_name}>
-                                        {member.profile_full_name || member.full_name}
-                                    </option>
-                                ))}
+                                <option>General</option>
+                                <option>Youth</option>
+                                <option>Young Adults</option>
+                                <option>Couples</option>
                             </select>
+                            <span style={{ position: 'absolute', right: '0', top: '2rem', pointerEvents: 'none', fontSize: '0.8rem', color: 'white', fontWeight: 'bold' }}>v</span>
                         </div>
+                    </div>
 
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '1rem' }}>
-                            <button
-                                type="button"
-                                onClick={onClose}
-                                style={{
-                                    padding: '0.75rem 1.5rem',
-                                    borderRadius: '0.5rem',
-                                    border: '1px solid var(--border-color)',
-                                    background: 'transparent',
-                                    color: 'var(--text-muted)',
-                                    cursor: 'pointer',
-                                    fontWeight: '600'
-                                }}
+                    <div>
+                        <label style={labelStyle}>Cell Leader</label>
+                        <input
+                            type="text"
+                            name="leader"
+                            value={formData.leader}
+                            onChange={handleChange}
+                            placeholder="Search member..."
+                            style={{ ...inputStyle, color: formData.leader ? 'white' : 'var(--text-muted)', fontWeight: formData.leader ? '600' : 'normal' }}
+                        />
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+                        <div style={{ position: 'relative' }}>
+                            <label style={labelStyle}>Meeting Day</label>
+                            <select
+                                name="meetingDay"
+                                value={formData.meetingDay}
+                                onChange={handleChange}
+                                style={{ ...inputStyle, appearance: 'none', color: 'white' }}
                             >
-                                Cancel
-                            </button>
-                            <button
-                                type="submit"
-                                disabled={loading}
-                                style={{
-                                    padding: '0.75rem 1.5rem',
-                                    borderRadius: '0.5rem',
-                                    border: 'none',
-                                    background: 'var(--primary)',
-                                    color: 'var(--bg-color)',
-                                    cursor: loading ? 'not-allowed' : 'pointer',
-                                    fontWeight: '700',
-                                    opacity: loading ? 0.7 : 1
-                                }}
-                            >
-                                {loading ? 'Creating...' : 'Create Cell'}
-                            </button>
+                                <option>Monday</option>
+                                <option>Tuesday</option>
+                                <option>Wednesday</option>
+                                <option>Thursday</option>
+                                <option>Friday</option>
+                                <option>Saturday</option>
+                                <option>Sunday</option>
+                            </select>
+                            <span style={{ position: 'absolute', right: '0', top: '2rem', pointerEvents: 'none', fontSize: '0.8rem', color: 'white', fontWeight: 'bold' }}>v</span>
                         </div>
-                    </form>
-                )}
+                        <div style={{ position: 'relative' }}>
+                            <label style={labelStyle}>Time</label>
+                            <input
+                                type="text"
+                                name="time"
+                                value={formData.time}
+                                onChange={handleChange}
+                                style={{ ...inputStyle, color: 'white' }}
+                            />
+                            <span style={{ position: 'absolute', right: '0', top: '2rem', color: 'var(--text-muted)', fontSize: '0.9rem', opacity: 0.5 }}>🕒</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label style={labelStyle}>Location / Area</label>
+                        <input
+                            type="text"
+                            name="location"
+                            value={formData.location}
+                            onChange={handleChange}
+                            placeholder="e.g. Westlands, Nairobi"
+                            style={{ ...inputStyle, color: formData.location ? 'white' : 'var(--text-muted)', fontWeight: formData.location ? '600' : 'normal' }}
+                        />
+                    </div>
+
+                    <div>
+                        <label style={labelStyle}>Max Capacity</label>
+                        <input
+                            type="text"
+                            name="maxCapacity"
+                            value={formData.maxCapacity}
+                            onChange={handleChange}
+                            style={{ ...inputStyle, color: 'white' }}
+                        />
+                    </div>
+
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '1.5rem', marginTop: '1.5rem' }}>
+                        <button type="button" onClick={onClose} style={{
+                            padding: '0.5rem',
+                            border: 'none',
+                            background: 'transparent',
+                            color: 'var(--text-muted)',
+                            cursor: 'pointer',
+                            fontSize: '0.85rem'
+                        }}>Cancel</button>
+                        <button type="submit" style={{
+                            padding: '0.6rem 1.2rem',
+                            borderRadius: '0.4rem',
+                            border: 'none',
+                            background: 'var(--primary)',
+                            color: 'white',
+                            fontWeight: '700',
+                            cursor: 'pointer',
+                            fontSize: '0.85rem'
+                        }}>Create Cell</button>
+                    </div>
+                </form>
             </div>
         </div>
     );

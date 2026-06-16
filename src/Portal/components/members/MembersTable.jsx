@@ -17,32 +17,28 @@ const MembersTable = () => {
     const [loading] = useState(false);
     const [error] = useState(null);
     const [totalCount] = useState(allMockMembers.length);
-    const [tabStats] = useState({ regular: allMockMembers.length, committed: 0 });
+    const [tabStats] = useState({ regular: 475, committed: 48 });
     const [selectedMember, setSelectedMember] = useState(null);
     const [showDetailModal, setShowDetailModal] = useState(false);
 
     const formatNum = (num) => num >= 1000 ? (num / 1000).toFixed(1) + 'k' : num;
 
-    const ExportButton = ({ icon, label, onClick }) => (
+    const ExportButton = ({ color, label, onClick }) => (
         <button
             onClick={onClick}
             style={{
                 background: 'transparent',
-                border: '1px solid var(--border-color)',
+                border: 'none',
                 color: 'var(--text-muted)',
-                borderRadius: '0.4rem',
                 padding: '0.3rem 0.6rem',
-                fontSize: '0.75rem',
+                fontSize: '0.8rem',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.3rem',
-                transition: 'all 0.2s'
+                gap: '0.4rem',
             }}
-            onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--primary)'}
-            onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border-color)'}
         >
-            {icon} {label}
+            <span style={{ display: 'inline-block', width: '10px', height: '10px', background: color, borderRadius: '2px' }}></span> {label}
         </button>
     );
 
@@ -76,15 +72,15 @@ const MembersTable = () => {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
 
                     {/* Tabs */}
-                    <div className="members-tabs" style={{ display: 'flex', background: 'var(--border-color)', borderRadius: '0.5rem', padding: '0.25rem' }}>
+                    <div className="members-tabs" style={{ display: 'flex', gap: '0.5rem' }}>
                         <button
                             onClick={() => setActiveTab('regular')}
                             style={{
                                 background: activeTab === 'regular' ? 'var(--primary)' : 'transparent',
                                 color: activeTab === 'regular' ? 'var(--bg-color)' : 'var(--text-muted)',
                                 border: 'none',
-                                padding: '0.5rem 1rem',
-                                borderRadius: '0.3rem',
+                                padding: '0.6rem 1.2rem',
+                                borderRadius: '0.4rem',
                                 fontSize: '0.85rem',
                                 fontWeight: '600',
                                 cursor: 'pointer',
@@ -92,7 +88,7 @@ const MembersTable = () => {
                                 whiteSpace: 'nowrap'
                             }}
                         >
-                            Regular Members <span style={{ fontSize: '0.7rem', opacity: 0.7, marginLeft: '4px' }}>({formatNum(tabStats.regular)})</span>
+                            Regular Members <span style={{ fontSize: '0.75rem', opacity: 0.8, marginLeft: '4px' }}>({formatNum(tabStats.regular)})</span>
                         </button>
                         <button
                             onClick={() => setActiveTab('committed')}
@@ -100,8 +96,8 @@ const MembersTable = () => {
                                 background: activeTab === 'committed' ? 'var(--primary)' : 'transparent',
                                 color: activeTab === 'committed' ? 'var(--bg-color)' : 'var(--text-muted)',
                                 border: 'none',
-                                padding: '0.5rem 1rem',
-                                borderRadius: '0.3rem',
+                                padding: '0.6rem 1.2rem',
+                                borderRadius: '0.4rem',
                                 fontSize: '0.85rem',
                                 fontWeight: '600',
                                 cursor: 'pointer',
@@ -109,7 +105,7 @@ const MembersTable = () => {
                                 whiteSpace: 'nowrap'
                             }}
                         >
-                            Committed Members <span style={{ fontSize: '0.7rem', opacity: 0.7, marginLeft: '4px' }}>({formatNum(tabStats.committed)})</span>
+                            Committed Members <span style={{ fontSize: '0.75rem', opacity: 0.8, marginLeft: '4px' }}>({formatNum(tabStats.committed)})</span>
                         </button>
                     </div>
 
@@ -119,8 +115,8 @@ const MembersTable = () => {
                             type="text"
                             placeholder="Search members..."
                             style={{
-                                background: 'var(--surface-2)',
-                                border: '1px solid var(--border-color)',
+                                background: 'transparent',
+                                border: 'none',
                                 color: 'var(--text-color)',
                                 padding: '0.6rem 1rem 0.6rem 2.2rem',
                                 borderRadius: '0.5rem',
@@ -133,14 +129,14 @@ const MembersTable = () => {
                 </div>
 
                 {/* Export Tools */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap', paddingTop: '0.8rem', borderTop: '1px solid var(--surface-2)' }}>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginRight: '0.5rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Export Tools:</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap', paddingTop: '1rem' }}>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '500' }}>Export:</span>
                     <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                        <ExportButton icon="📋" label="Copy" onClick={() => handleExport('Copy')} />
-                        <ExportButton icon="📊" label="CSV" onClick={() => handleExport('CSV')} />
-                        <ExportButton icon="📗" label="Excel" onClick={() => handleExport('Excel')} />
-                        <ExportButton icon="📕" label="PDF" onClick={() => handleExport('PDF')} />
-                        <ExportButton icon="🖨️" label="Print" onClick={() => handleExport('Print')} />
+                        <ExportButton color="#d1d5db" label="Copy" onClick={() => handleExport('Copy')} />
+                        <ExportButton color="#fcd34d" label="CSV" onClick={() => handleExport('CSV')} />
+                        <ExportButton color="#4ade80" label="Excel" onClick={() => handleExport('Excel')} />
+                        <ExportButton color="#f87171" label="PDF" onClick={() => handleExport('PDF')} />
+                        <ExportButton color="#a78bfa" label="Print" onClick={() => handleExport('Print')} />
                     </div>
                 </div>
             </div>
@@ -149,14 +145,13 @@ const MembersTable = () => {
             <div style={{ overflowX: 'auto' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
                     <thead>
-                        <tr style={{ color: 'var(--text-muted)', borderBottom: '1px solid var(--border-color)', background: 'var(--surface-2)' }}>
-                            <th style={{ textAlign: 'left', padding: '1rem' }}>Member ID</th>
+                        <tr style={{ color: 'var(--text-color)', fontSize: '0.85rem', fontWeight: '700' }}>
+                            <th style={{ textAlign: 'left', padding: '1rem' }}>ID</th>
                             <th style={{ textAlign: 'left', padding: '1rem' }}>Full Name</th>
-                            <th style={{ textAlign: 'left', padding: '1rem' }}>Phone / Email</th>
-                            <th style={{ textAlign: 'left', padding: '1rem' }}>Cell Group</th>
-                            <th style={{ textAlign: 'left', padding: '1rem' }}>Category</th>
+                            <th style={{ textAlign: 'left', padding: '1rem' }}>Phone</th>
+                            <th style={{ textAlign: 'left', padding: '1rem' }}>Email</th>
+                            <th style={{ textAlign: 'left', padding: '1rem' }}>Invited By</th>
                             <th style={{ textAlign: 'left', padding: '1rem' }}>Status</th>
-                            {activeTab === 'committed' && <th style={{ textAlign: 'center', padding: '1rem' }}>Linked</th>}
                             <th style={{ textAlign: 'right', padding: '1rem' }}>Actions</th>
                         </tr>
                     </thead>
@@ -164,41 +159,28 @@ const MembersTable = () => {
                         {loading && <tr><td colSpan="8" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>Loading members...</td></tr>}
                         {error && <tr><td colSpan="8" style={{ textAlign: 'center', padding: '2rem', color: '#ef4444' }}>{error}</td></tr>}
                         {!loading && !error && members.map(member => (
-                            <tr key={member.id} style={{ borderBottom: '1px solid var(--surface-2)', color: 'var(--text-color)' }}>
-                                <td style={{ padding: '1rem', fontFamily: 'monospace', color: 'var(--text-muted)' }}>MEM-{member.id.toString().padStart(3, '0')}</td>
-                                <td style={{ padding: '1rem', fontWeight: '500', color: 'var(--text-color)' }}>
+                            <tr key={member.id} style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                                <td style={{ padding: '1.5rem 1rem' }}>{member.id}</td>
+                                <td style={{ padding: '1.5rem 1rem', color: 'var(--text-color)' }}>
                                     {member.profile_full_name || member.full_name}
                                 </td>
-                                <td style={{ padding: '1rem' }}>
+                                <td style={{ padding: '1.5rem 1rem' }}>
                                     {member.user_phone_number || member.phone_number}
                                 </td>
-                                <td style={{ padding: '1rem' }}>
-                                    {member.cell_group_name ? (
-                                        <span style={{ background: 'rgba(34, 193, 230, 0.1)', color: 'var(--primary)', padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.8rem' }}>{member.cell_group_name}</span>
-                                    ) : (
-                                        <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>-</span>
-                                    )}
+                                <td style={{ padding: '1.5rem 1rem', color: 'var(--text-color)' }}>
+                                    {member.email || ''}
                                 </td>
-                                <td style={{ padding: '1rem' }}>{member.category}</td>
-                                <td style={{ padding: '1rem' }}>
-                                    <span style={{ color: '#4ade80', fontSize: '0.85rem' }}>● Active</span>
+                                <td style={{ padding: '1.5rem 1rem' }}>-</td>
+                                <td style={{ padding: '1.5rem 1rem' }}>
+                                    <span style={{ color: '#4ade80' }}>● Active</span>
                                 </td>
-                                {activeTab === 'committed' && (
-                                    <td style={{ padding: '1rem', textAlign: 'center' }}>
-                                        {member.email ? (
-                                            <span style={{ color: '#4ade80', fontSize: '1.2rem' }} title="Linked">✓</span>
-                                        ) : (
-                                            <span style={{ color: '#f59e0b', fontSize: '1.2rem' }} title="Unlinked">⚠️</span>
-                                        )}
-                                    </td>
-                                )}
-                                <td style={{ padding: '1rem', textAlign: 'right' }}>
+                                <td style={{ padding: '1.5rem 1rem', textAlign: 'right' }}>
                                     <button
                                         onClick={() => {
                                             setSelectedMember(member);
                                             setShowDetailModal(true);
                                         }}
-                                        style={{ background: 'transparent', border: '1px solid var(--border-color)', color: 'var(--primary)', borderRadius: '0.3rem', padding: '0.3rem 0.6rem', fontSize: '0.8rem', cursor: 'pointer' }}
+                                        style={{ background: 'transparent', border: 'none', color: 'var(--primary)', fontWeight: '600', fontSize: '0.85rem', cursor: 'pointer' }}
                                     >
                                         View
                                     </button>

@@ -140,7 +140,19 @@ const Sidebar = ({ isOpen, onClose }) => {
             ]
         },
         { icon: '📹', label: 'Media & Sermons', path: '/portal/media' },
-        { icon: '❤', label: 'Contributions', path: '/portal/giving' },
+        { icon: '📖', label: 'Devotionals', path: '/portal/media/devotional' },
+        {
+            icon: '💰',
+            label: 'Financial Management',
+            path: '/portal/financial-module',
+            subItems: [
+                { label: 'Overview', path: '/portal/giving' },
+                { label: 'Contributions', path: '/portal/financial/contributions' },
+                { label: 'Pledges', path: '/portal/financial/pledges' },
+                { label: 'Budgets', path: '/portal/financial/budgets' },
+                { label: 'Settings', path: '/portal/financial/settings' }
+            ]
+        },
         {
             icon: '👤',
             label: 'Users',

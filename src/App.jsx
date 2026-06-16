@@ -27,8 +27,11 @@ import MembersDashboard from './Portal/pages/MembersDashboard';
 import UsersDashboard from './Portal/pages/UsersDashboard';
 import MyAccountDashboard from './Portal/pages/MyAccountDashboard';
 import MediaDashboard from './Portal/pages/MediaDashboard';
+import Devotional from './Portal/pages/media/Devotional';
 import RolesDashboard from './Portal/pages/RolesDashboard';
 import ContributionDashboard from './Portal/pages/ContributionDashboard';
+import Contributions from './Portal/pages/financial/Contributions';
+import Pledges from './Portal/pages/financial/Pledges';
 import CalendarPage from './Portal/pages/CalendarPage';
 // import PrayersDashboard from './Portal/pages/PrayersDashboard'; // Deprecated
 import FastingCommitment from './Portal/pages/prayers/FastingCommitment';
@@ -92,7 +95,12 @@ function App() {
                   <Route path="prayers/prophetic" element={<PropheticInstructions />} />
                   <Route path="prayers/communications" element={<PrayerCommunications />} />
                   <Route path="media" element={<MediaDashboard />} />
+                  <Route path="media/devotional" element={<Devotional />} />
                   <Route path="giving" element={<ContributionDashboard />} />
+                  <Route path="financial/contributions" element={<Contributions />} />
+                  <Route path="financial/pledges" element={<Pledges />} />
+                  <Route path="financial/budgets" element={<Placeholder title="Budgets Module" />} />
+                  <Route path="financial/settings" element={<Placeholder title="Financial Settings" />} />
                   <Route path="users" element={<UsersDashboard />} />
                   <Route path="users/account" element={<MyAccountDashboard />} />
                   <Route path="roles" element={<RolesDashboard />} />

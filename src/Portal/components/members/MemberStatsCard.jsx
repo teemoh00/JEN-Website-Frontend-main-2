@@ -40,7 +40,7 @@ const StatCard = ({ title, value, label, description, icon, color = 'var(--prima
 );
 
 const MemberStatsCard = () => {
-    const [stats] = useState({ total: 215, committed: 87, linked: 63 });
+    const [stats] = useState({ total: 475, committed: 48, linked: 0, unlinked: 0 });
     const [loading] = useState(false);
 
     const formatNum = (num) => num?.toLocaleString() || '0';
@@ -77,6 +77,15 @@ const MemberStatsCard = () => {
                 description="Committed & ID linked"
                 icon="🔗"
                 color="#a855f7"
+                loading={loading}
+            />
+            <StatCard
+                title="Unlinked Accounts"
+                value={formatNum(stats?.unlinked)}
+                label="Unlinked"
+                description="Action required"
+                icon="⚠️"
+                color="#f59e0b"
                 loading={loading}
             />
         </div>

@@ -24,20 +24,19 @@ const CreateMemberModal = ({ onClose, initialStatus = 'Regular Member' }) => {
 
     const inputStyle = {
         width: '100%',
-        padding: '0.75rem',
-        background: 'var(--bg-color)',
-        border: '1px solid var(--border-color)',
-        borderRadius: '0.5rem',
-        color: 'var(--text-color)',
+        padding: '0.5rem 0',
+        background: 'transparent',
+        border: 'none',
+        color: 'var(--text-muted)',
         fontSize: '0.9rem',
         marginTop: '0.4rem',
-        outline: 'none'
+        outline: 'none',
     };
 
     const labelStyle = {
-        color: 'var(--text-muted)',
+        color: 'var(--text-color)',
         fontSize: '0.85rem',
-        fontWeight: '500',
+        fontWeight: '600',
         display: 'flex',
         alignItems: 'center',
         gap: '0.5rem'
@@ -66,61 +65,63 @@ const CreateMemberModal = ({ onClose, initialStatus = 'Regular Member' }) => {
                 border: '1px solid var(--border-color)',
                 boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
             }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                    <h2 style={{ fontSize: '1.5rem', color: 'var(--primary)', margin: 0 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+                    <h2 style={{ fontSize: '1.4rem', color: 'var(--primary)', margin: 0, fontWeight: '700' }}>
                         {initialStatus === 'Committed Member' ? 'Register Committed Member' : 'Register New Member'}
                     </h2>
-                    <button onClick={onClose} style={{ background: 'var(--border-color)', border: 'none', color: 'var(--text-muted)', fontSize: '1.2rem', borderRadius: '50%', width: '32px', height: '32px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>
+                    <button onClick={onClose} style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', fontSize: '1.2rem', cursor: 'pointer', padding: 0 }}>×</button>
                 </div>
 
                 <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '1.2rem' }}>
 
                     {/* Full Name */}
-                    <div>
-                        <label style={labelStyle}>👤 Full Name</label>
-                        <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="Enter full name" style={inputStyle} required />
+                    <div style={{ marginBottom: '0.5rem' }}>
+                        <label style={{...labelStyle, color: 'var(--text-muted)'}}><span style={{ color: '#8b5cf6', fontSize: '1rem' }}>👤</span> Full Name</label>
+                        <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="Enter full name" style={{...inputStyle, paddingLeft: '0.2rem'}} required />
                     </div>
 
                     {/* Phone & Email */}
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '0.5rem' }}>
                         <div>
-                            <label style={labelStyle}>📞 Phone Number</label>
-                            <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="0712 345 678" style={inputStyle} required />
+                            <label style={{...labelStyle, color: 'var(--text-muted)'}}><span style={{ color: '#ec4899', fontSize: '1rem' }}>📞</span> Phone Number</label>
+                            <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="0712 345 678" style={{...inputStyle, paddingLeft: '0.2rem'}} required />
                         </div>
                         <div>
-                            <label style={labelStyle}>✉️ Email Address</label>
-                            <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="example@mail.com" style={inputStyle} />
+                            <label style={{...labelStyle, color: 'var(--text-muted)'}}><span style={{ color: '#d8b4e2', fontSize: '1rem' }}>✉️</span> Email Address</label>
+                            <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="example@mail.com" style={{...inputStyle, paddingLeft: '0.2rem'}} />
                         </div>
                     </div>
 
                     {/* Cell Group & Category */}
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                        <div>
-                            <label style={labelStyle}>👥 Cell Group</label>
-                            <select name="cellGroup" value={formData.cellGroup} onChange={handleChange} style={inputStyle}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '0.5rem' }}>
+                        <div style={{ position: 'relative' }}>
+                            <label style={{...labelStyle, color: 'var(--text-muted)'}}><span style={{ color: '#8b5cf6', fontSize: '1rem' }}>👥</span> Cell Group</label>
+                            <select name="cellGroup" value={formData.cellGroup} onChange={handleChange} style={{...inputStyle, appearance: 'none', paddingLeft: '0.2rem', color: formData.cellGroup ? 'var(--text-color)' : 'var(--text-color)', fontWeight: '600'}}>
                                 <option value="" disabled>Select Cell</option>
                                 <option>Goshen Alpha</option>
                                 <option>Judah Beta</option>
                                 <option>Zion</option>
                                 <option>None</option>
                             </select>
+                            <span style={{ position: 'absolute', right: '0.5rem', top: '2.2rem', pointerEvents: 'none', fontSize: '0.8rem', color: 'var(--text-color)', fontWeight: 'bold' }}>v</span>
                         </div>
-                        <div>
-                            <label style={labelStyle}>🏷️ Category</label>
-                            <select name="category" value={formData.category} onChange={handleChange} style={inputStyle}>
+                        <div style={{ position: 'relative' }}>
+                            <label style={{...labelStyle, color: 'var(--text-muted)'}}><span style={{ color: '#fcd34d', fontSize: '1rem' }}>🏷️</span> Category</label>
+                            <select name="category" value={formData.category} onChange={handleChange} style={{...inputStyle, appearance: 'none', paddingLeft: '0.2rem', color: formData.category ? 'var(--text-color)' : 'var(--text-color)', fontWeight: '600'}}>
                                 <option value="" disabled>Select Category</option>
                                 <option>Member</option>
                                 <option>Leader</option>
                                 <option>Visitor</option>
                                 <option>Child</option>
                             </select>
+                            <span style={{ position: 'absolute', right: '0.5rem', top: '2.2rem', pointerEvents: 'none', fontSize: '0.8rem', color: 'var(--text-color)', fontWeight: 'bold' }}>v</span>
                         </div>
                     </div>
 
                     {/* Commitment Status */}
-                    <div>
-                        <label style={labelStyle}>♡ Commitment Status</label>
-                        <div style={{ display: 'flex', gap: '2rem', marginTop: '0.5rem' }}>
+                    <div style={{ marginBottom: '0.5rem' }}>
+                        <label style={{...labelStyle, color: 'var(--text-muted)'}}><span style={{ color: '#a1a1aa', fontSize: '1rem' }}>♡</span> Commitment Status</label>
+                        <div style={{ display: 'flex', gap: '2rem', marginTop: '0.8rem' }}>
                             <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', color: formData.commitmentStatus === 'Regular Member' ? 'var(--primary)' : 'var(--text-muted)' }}>
                                 <input
                                     type="radio"
@@ -128,7 +129,7 @@ const CreateMemberModal = ({ onClose, initialStatus = 'Regular Member' }) => {
                                     value="Regular Member"
                                     checked={formData.commitmentStatus === 'Regular Member'}
                                     onChange={handleChange}
-                                    style={{ accentColor: 'var(--primary)' }}
+                                    style={{ accentColor: formData.commitmentStatus === 'Regular Member' ? 'var(--primary)' : 'var(--text-muted)' }}
                                 />
                                 Regular Member
                             </label>
@@ -139,7 +140,7 @@ const CreateMemberModal = ({ onClose, initialStatus = 'Regular Member' }) => {
                                     value="Committed Member"
                                     checked={formData.commitmentStatus === 'Committed Member'}
                                     onChange={handleChange}
-                                    style={{ accentColor: 'var(--primary)' }}
+                                    style={{ accentColor: formData.commitmentStatus === 'Committed Member' ? 'var(--primary)' : 'var(--text-muted)' }}
                                 />
                                 Committed Member
                             </label>
@@ -147,30 +148,31 @@ const CreateMemberModal = ({ onClose, initialStatus = 'Regular Member' }) => {
                     </div>
 
                     {/* Address */}
-                    <div>
-                        <label style={labelStyle}>📍 Home Address / Location</label>
-                        <textarea name="address" value={formData.address} onChange={handleChange} placeholder="Enter residential area or specific address" style={{ ...inputStyle, minHeight: '80px', resize: 'vertical' }} />
+                    <div style={{ marginBottom: '0.5rem' }}>
+                        <label style={{...labelStyle, color: 'var(--text-muted)'}}><span style={{ color: '#ec4899', fontSize: '1rem' }}>📍</span> Home Address / Location</label>
+                        <textarea name="address" value={formData.address} onChange={handleChange} placeholder="Enter residential area or specific address" style={{ ...inputStyle, minHeight: '60px', resize: 'vertical', paddingLeft: '0.2rem', fontFamily: 'monospace' }} />
                     </div>
 
                     {/* Actions */}
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '1rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '1.5rem', marginTop: '1.5rem' }}>
                         <button type="button" onClick={onClose} style={{
-                            padding: '0.75rem 1.5rem',
-                            borderRadius: '0.5rem',
-                            border: '1px solid var(--border-color)',
+                            padding: '0.5rem',
+                            border: 'none',
                             background: 'transparent',
                             color: 'var(--text-color)',
-                            cursor: 'pointer'
+                            fontWeight: '600',
+                            cursor: 'pointer',
+                            fontSize: '0.85rem'
                         }}>Cancel</button>
                         <button type="submit" style={{
-                            padding: '0.75rem 1.5rem',
-                            borderRadius: '0.5rem',
+                            padding: '0.6rem 1.2rem',
+                            borderRadius: '0.4rem',
                             border: 'none',
                             background: 'var(--primary)',
-                            color: 'var(--bg-color)',
+                            color: 'white',
                             fontWeight: '700',
                             cursor: 'pointer',
-                            boxShadow: '0 4px 12px rgba(34, 193, 230, 0.3)'
+                            fontSize: '0.85rem'
                         }}>Register Member</button>
                     </div>
                 </form>

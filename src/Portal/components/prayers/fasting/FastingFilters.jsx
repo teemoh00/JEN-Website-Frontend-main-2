@@ -42,6 +42,26 @@ const FastingFilters = () => {
                 }
             `}</style>
             <div className="fasting-input-group" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                <label style={{ fontSize: '0.875rem', color: 'var(--text-muted)', fontWeight: '500' }}>Filter by Event</label>
+                <select style={{
+                    padding: '0.75rem 1rem',
+                    background: 'var(--surface-2)',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: '0.5rem',
+                    color: 'var(--text-color)',
+                    minWidth: '200px',
+                    outline: 'none',
+                    cursor: 'pointer',
+                    colorScheme: 'dark'
+                }}>
+                    <option value="all">All Events</option>
+                    <option value="21-days">21 Days of Prayer</option>
+                    <option value="esther-fast">Esther Fast</option>
+                    <option value="daniel-fast">Daniel Fast</option>
+                </select>
+            </div>
+
+            <div className="fasting-input-group" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 <label style={{ fontSize: '0.875rem', color: 'var(--text-muted)', fontWeight: '500' }}>Filter by Day</label>
                 <select style={{
                     padding: '0.75rem 1rem',
@@ -51,7 +71,8 @@ const FastingFilters = () => {
                     color: 'var(--text-color)',
                     minWidth: '200px',
                     outline: 'none',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    colorScheme: 'dark'
                 }}>
                     <option value="all">All Days</option>
                     <option value="Monday">Monday</option>
