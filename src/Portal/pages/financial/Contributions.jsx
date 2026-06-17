@@ -5,7 +5,7 @@ const Contributions = () => {
         <div style={{ maxWidth: '1400px', margin: '0 auto', paddingBottom: '3rem' }}>
             {/* Header Section */}
             <div style={{ marginBottom: '3rem' }}>
-                <h1 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'white', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>
+                <h1 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'var(--text-color)', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>
                     Contributions
                 </h1>
                 <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: 0 }}>
@@ -22,7 +22,7 @@ const Contributions = () => {
                     alignItems: 'center', 
                     marginBottom: '2rem' 
                 }}>
-                    <h2 style={{ fontSize: '1.1rem', color: 'white', margin: 0, fontWeight: '700' }}>
+                    <h2 style={{ fontSize: '1.1rem', color: 'var(--text-color)', margin: 0, fontWeight: '700' }}>
                         Contributions
                     </h2>
                     
@@ -33,7 +33,7 @@ const Contributions = () => {
                             padding: '0.5rem',
                             background: 'transparent',
                             border: 'none',
-                            color: 'white',
+                            color: 'var(--text-color)',
                             outline: 'none',
                             fontSize: '0.85rem',
                             minWidth: '200px'

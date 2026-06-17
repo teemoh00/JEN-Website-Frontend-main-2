@@ -34,8 +34,8 @@ const CellAttendance = () => {
                             }}
                         >
                             <option value="" disabled style={{ color: 'var(--text-muted)', background: '#1a1a24' }}>Select a cell...</option>
-                            <option value="1" style={{ color: '#ffffff', background: '#1a1a24' }}>North Region Cell 1</option>
-                            <option value="2" style={{ color: '#ffffff', background: '#1a1a24' }}>Youth Cell East</option>
+                            <option value="1" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>North Region Cell 1</option>
+                            <option value="2" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>Youth Cell East</option>
                         </select>
                         <span style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: 'var(--text-color)', fontSize: '0.8rem', fontWeight: 'bold' }}>
                             ▼

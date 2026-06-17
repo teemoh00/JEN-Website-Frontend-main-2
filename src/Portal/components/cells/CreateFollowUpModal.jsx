@@ -31,7 +31,7 @@ const CreateFollowUpModal = ({ onClose }) => {
             }}>
                 {/* Header */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                    <h2 style={{ margin: 0, color: '#ffffff', fontSize: '1.5rem', fontWeight: '800' }}>New Follow-Up</h2>
+                    <h2 style={{ margin: 0, color: 'var(--text-color)', fontSize: '1.5rem', fontWeight: '800' }}>New Follow-Up</h2>
                     <button
                         onClick={onClose}
                         style={{
@@ -65,7 +65,7 @@ const CreateFollowUpModal = ({ onClose }) => {
                                 padding: '0.75rem 0',
                                 background: 'transparent',
                                 border: 'none',
-                                color: '#ffffff',
+                                color: 'var(--text-color)',
                                 fontSize: '0.95rem',
                                 outline: 'none',
                                 fontWeight: '500'
@@ -85,7 +85,7 @@ const CreateFollowUpModal = ({ onClose }) => {
                                     padding: '0.75rem 0',
                                     background: 'transparent',
                                     border: 'none',
-                                    color: '#ffffff',
+                                    color: 'var(--text-color)',
                                     fontSize: '0.95rem',
                                     outline: 'none',
                                     appearance: 'none',
@@ -93,11 +93,11 @@ const CreateFollowUpModal = ({ onClose }) => {
                                     fontWeight: '700'
                                 }}
                             >
-                                <option value="General" style={{ color: '#ffffff', background: '#1a1a24' }}>General</option>
-                                <option value="Pastoral Care" style={{ color: '#ffffff', background: '#1a1a24' }}>Pastoral Care</option>
-                                <option value="First Timer" style={{ color: '#ffffff', background: '#1a1a24' }}>First Timer</option>
+                                <option value="General" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>General</option>
+                                <option value="Pastoral Care" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>Pastoral Care</option>
+                                <option value="First Timer" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>First Timer</option>
                             </select>
-                            <span style={{ position: 'absolute', right: '0', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: '#ffffff', fontSize: '0.8rem', fontWeight: 'bold' }}>
+                            <span style={{ position: 'absolute', right: '0', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: 'var(--text-color)', fontSize: '0.8rem', fontWeight: 'bold' }}>
                                 ▼
                             </span>
                         </div>
@@ -115,7 +115,7 @@ const CreateFollowUpModal = ({ onClose }) => {
                                 padding: '0.75rem 0',
                                 background: 'transparent',
                                 border: 'none',
-                                color: '#ffffff',
+                                color: 'var(--text-color)',
                                 fontSize: '0.95rem',
                                 outline: 'none',
                                 resize: 'vertical',
@@ -146,7 +146,7 @@ const CreateFollowUpModal = ({ onClose }) => {
                         onClick={onClose}
                         style={{
                             background: '#94a3b8', // matches the light grey-blue in mockup
-                            color: '#ffffff',
+                            color: 'var(--text-color)',
                             border: 'none',
                             borderRadius: '0.5rem',
                             padding: '0.75rem 1.5rem',

@@ -154,6 +154,21 @@ const Sidebar = ({ isOpen, onClose }) => {
             ]
         },
         {
+            icon: '🧾',
+            label: 'Accounting',
+            path: '/portal/accounting-module',
+            subItems: [
+                { label: 'Chart of Accounts', path: '/portal/accounting/chart-of-accounts' },
+                { label: 'General Ledger', path: '/portal/accounting/general-ledger' },
+                { label: 'Trial Balance', path: '/portal/accounting/trial-balance' },
+                { label: 'Income Statement', path: '/portal/accounting/income-statement' },
+                { label: 'Balance Sheet', path: '/portal/accounting/balance-sheet' },
+                { label: 'Journal Entries', path: '/portal/accounting/journal-entries' },
+                { label: 'Payroll', path: '/portal/accounting/payroll' },
+                { label: 'Audit Log', path: '/portal/accounting/audit-log' }
+            ]
+        },
+        {
             icon: '👤',
             label: 'Users',
             path: '/portal/users-module',
@@ -241,6 +256,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                     }
                     .portal-sidebar {
                         transform: translateX(-100%) !important;
+                        background-color: var(--bg-color, #120D20) !important;
                     }
                     .portal-sidebar.mobile-visible {
                         transform: translateX(0) !important;

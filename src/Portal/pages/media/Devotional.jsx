@@ -38,7 +38,7 @@ const Devotional = () => {
                     style={{
                     padding: '0.6rem 1.2rem',
                     background: 'var(--primary)',
-                    color: 'white',
+                    color: 'var(--text-color)',
                     border: 'none',
                     borderRadius: '0.5rem',
                     fontWeight: '600',
@@ -80,7 +80,7 @@ const Devotional = () => {
                         fontSize: '1.5rem'
                     }}>📖</div>
                     <div>
-                        <div style={{ fontSize: '1.5rem', fontWeight: '700', color: 'white', lineHeight: 1 }}>0</div>
+                        <div style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--text-color)', lineHeight: 1 }}>0</div>
                         <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '0.25rem' }}>Total Devotionals</div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@ const Devotional = () => {
                         fontSize: '1.5rem'
                     }}>✅</div>
                     <div>
-                        <div style={{ fontSize: '1.5rem', fontWeight: '700', color: 'white', lineHeight: 1 }}>0</div>
+                        <div style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--text-color)', lineHeight: 1 }}>0</div>
                         <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '0.25rem' }}>Published</div>
                     </div>
                 </div>
@@ -132,7 +132,7 @@ const Devotional = () => {
                         fontSize: '1.5rem'
                     }}>📝</div>
                     <div>
-                        <div style={{ fontSize: '1.5rem', fontWeight: '700', color: 'white', lineHeight: 1 }}>0</div>
+                        <div style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--text-color)', lineHeight: 1 }}>0</div>
                         <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '0.25rem' }}>Drafts</div>
                     </div>
                 </div>
@@ -153,7 +153,7 @@ const Devotional = () => {
                         background: 'transparent',
                         border: '1px solid var(--border-color)',
                         borderRadius: '0.4rem',
-                        color: 'white',
+                        color: 'var(--text-color)',
                         outline: 'none',
                         fontSize: '0.9rem'
                     }}
@@ -163,7 +163,7 @@ const Devotional = () => {
                     background: 'transparent',
                     border: '1px solid var(--border-color)',
                     borderRadius: '0.4rem',
-                    color: 'white',
+                    color: 'var(--text-color)',
                     outline: 'none',
                     minWidth: '150px',
                     fontSize: '0.9rem',
@@ -189,7 +189,7 @@ const Devotional = () => {
                 justifyContent: 'center'
             }}>
                 <span style={{ fontSize: '3rem', marginBottom: '1rem', display: 'inline-block', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.3))' }}>📖</span>
-                <h3 style={{ color: 'white', fontSize: '1.2rem', margin: '0 0 0.5rem 0', fontWeight: '600' }}>
+                <h3 style={{ color: 'var(--text-color)', fontSize: '1.2rem', margin: '0 0 0.5rem 0', fontWeight: '600' }}>
                     No devotionals found
                 </h3>
                 <p style={{ color: 'var(--text-muted)', margin: 0, fontSize: '0.9rem' }}>

@@ -27,7 +27,7 @@ const UpcomingEventsList = ({ events, loading }) => {
                             alignItems: 'center',
                             justifyContent: 'space-between',
                             padding: '1rem',
-                            background: 'rgba(255,255,255,0.03)',
+                            background: 'var(--border-color)',
                             borderRadius: '0.75rem',
                             borderLeft: '3px solid #22c1e6'
                         }}>

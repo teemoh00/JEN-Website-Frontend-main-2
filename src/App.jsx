@@ -32,6 +32,14 @@ import RolesDashboard from './Portal/pages/RolesDashboard';
 import ContributionDashboard from './Portal/pages/ContributionDashboard';
 import Contributions from './Portal/pages/financial/Contributions';
 import Pledges from './Portal/pages/financial/Pledges';
+import ChartOfAccounts from './Portal/pages/accounting/ChartOfAccounts';
+import GeneralLedger from './Portal/pages/accounting/GeneralLedger';
+import TrialBalance from './Portal/pages/accounting/TrialBalance';
+import IncomeStatement from './Portal/pages/accounting/IncomeStatement';
+import BalanceSheet from './Portal/pages/accounting/BalanceSheet';
+import JournalEntries from './Portal/pages/accounting/JournalEntries';
+import Payroll from './Portal/pages/accounting/Payroll';
+import AuditLog from './Portal/pages/accounting/AuditLog';
 import CalendarPage from './Portal/pages/CalendarPage';
 // import PrayersDashboard from './Portal/pages/PrayersDashboard'; // Deprecated
 import FastingCommitment from './Portal/pages/prayers/FastingCommitment';
@@ -100,6 +108,14 @@ function App() {
                   <Route path="financial/contributions" element={<Contributions />} />
                   <Route path="financial/pledges" element={<Pledges />} />
                   <Route path="financial/budgets" element={<Placeholder title="Budgets Module" />} />
+                  <Route path="accounting/chart-of-accounts" element={<ChartOfAccounts />} />
+                  <Route path="accounting/general-ledger" element={<GeneralLedger />} />
+                  <Route path="accounting/trial-balance" element={<TrialBalance />} />
+                  <Route path="accounting/income-statement" element={<IncomeStatement />} />
+                  <Route path="accounting/balance-sheet" element={<BalanceSheet />} />
+                  <Route path="accounting/journal-entries" element={<JournalEntries />} />
+                  <Route path="accounting/payroll" element={<Payroll />} />
+                  <Route path="accounting/audit-log" element={<AuditLog />} />
                   <Route path="financial/settings" element={<Placeholder title="Financial Settings" />} />
                   <Route path="users" element={<UsersDashboard />} />
                   <Route path="users/account" element={<MyAccountDashboard />} />

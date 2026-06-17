@@ -29,7 +29,7 @@ const CreateEventModal = ({ onClose }) => {
                     ✕
                 </button>
 
-                <h2 style={{ margin: '0 0 2rem 0', color: '#ffffff', fontSize: '1.4rem', fontWeight: '800' }}>Create New Event</h2>
+                <h2 style={{ margin: '0 0 2rem 0', color: 'var(--text-color)', fontSize: '1.4rem', fontWeight: '800' }}>Create New Event</h2>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     {/* Row 1: Event Name & Type */}
@@ -37,7 +37,7 @@ const CreateEventModal = ({ onClose }) => {
                         <div>
                             <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.5rem' }}>Event Name</label>
                             <input type="text" placeholder="e.g. Easter Conference" style={{
-                                width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: '#ffffff', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box'
+                                width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box'
                             }} />
                         </div>
                         <div>
@@ -50,18 +50,18 @@ const CreateEventModal = ({ onClose }) => {
                             <div style={{ position: 'relative', height: '2.5rem', display: 'flex', alignItems: 'center' }}>
                                 {isNewEventType ? (
                                     <input type="text" placeholder="e.g. Workshop" style={{
-                                        width: '100%', padding: '0 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: '#ffffff', outline: 'none', fontSize: '0.9rem', height: '100%', boxSizing: 'border-box'
+                                        width: '100%', padding: '0 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', height: '100%', boxSizing: 'border-box'
                                     }} />
                                 ) : (
                                     <>
                                         <select style={{
-                                            width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: '#ffffff', outline: 'none', appearance: 'none', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', height: '100%', boxSizing: 'border-box'
+                                            width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: 'var(--text-color)', outline: 'none', appearance: 'none', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', height: '100%', boxSizing: 'border-box'
                                         }}>
-                                            <option value="Conference" style={{ color: '#ffffff', background: '#1a1a24' }}>Conference</option>
-                                            <option value="Retreat" style={{ color: '#ffffff', background: '#1a1a24' }}>Retreat</option>
-                                            <option value="Seminar" style={{ color: '#ffffff', background: '#1a1a24' }}>Seminar</option>
+                                            <option value="Conference" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>Conference</option>
+                                            <option value="Retreat" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>Retreat</option>
+                                            <option value="Seminar" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>Seminar</option>
                                         </select>
-                                        <span style={{ position: 'absolute', right: '1rem', pointerEvents: 'none', color: '#ffffff', fontSize: '0.8rem' }}>▼</span>
+                                        <span style={{ position: 'absolute', right: '1rem', pointerEvents: 'none', color: 'var(--text-color)', fontSize: '0.8rem' }}>▼</span>
                                     </>
                                 )}
                             </div>
@@ -75,12 +75,12 @@ const CreateEventModal = ({ onClose }) => {
                             <div style={{ display: 'flex', gap: '0.5rem' }}>
                                 <div style={{ position: 'relative', flex: 1 }}>
                                     <input type="date" style={{
-                                        width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: '#ffffff', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', fontFamily: 'monospace', fontWeight: '700'
+                                        width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', fontFamily: 'monospace', fontWeight: '700'
                                     }} />
                                 </div>
                                 <div style={{ position: 'relative', flex: 1 }}>
                                     <input type="time" style={{
-                                        width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: '#ffffff', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', fontFamily: 'monospace', fontWeight: '700'
+                                        width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', fontFamily: 'monospace', fontWeight: '700'
                                     }} />
                                 </div>
                             </div>
@@ -90,12 +90,12 @@ const CreateEventModal = ({ onClose }) => {
                             <div style={{ display: 'flex', gap: '0.5rem' }}>
                                 <div style={{ position: 'relative', flex: 1 }}>
                                     <input type="date" style={{
-                                        width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: '#ffffff', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', fontFamily: 'monospace', fontWeight: '700'
+                                        width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', fontFamily: 'monospace', fontWeight: '700'
                                     }} />
                                 </div>
                                 <div style={{ position: 'relative', flex: 1 }}>
                                     <input type="time" style={{
-                                        width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: '#ffffff', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', fontFamily: 'monospace', fontWeight: '700'
+                                        width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', fontFamily: 'monospace', fontWeight: '700'
                                     }} />
                                 </div>
                             </div>
@@ -137,12 +137,12 @@ const CreateEventModal = ({ onClose }) => {
                     {/* Actions */}
                     <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1.5rem', marginTop: '1rem' }}>
                         <button onClick={onClose} style={{
-                            background: 'transparent', border: 'none', color: '#ffffff', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '600', cursor: 'pointer'
+                            background: 'transparent', border: 'none', color: 'var(--text-color)', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '600', cursor: 'pointer'
                         }}>
                             Cancel
                         </button>
                         <button onClick={onClose} style={{
-                            background: '#22c1e6', color: '#ffffff', border: 'none', borderRadius: '0.5rem', padding: '0.8rem 1.5rem', fontSize: '0.95rem', fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 15px rgba(34, 193, 230, 0.4)'
+                            background: '#22c1e6', color: 'var(--text-color)', border: 'none', borderRadius: '0.5rem', padding: '0.8rem 1.5rem', fontSize: '0.95rem', fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 15px rgba(34, 193, 230, 0.4)'
                         }}>
                             Publish Event
                         </button>

@@ -15,10 +15,10 @@ const AttendanceDashboard = () => {
             {/* Header */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
                 <div>
-                    <h1 style={{ fontSize: '1.8rem', fontWeight: '800', margin: 0, color: '#ffffff' }}>Attendance & Analytics</h1>
+                    <h1 style={{ fontSize: '1.8rem', fontWeight: '800', margin: 0, color: 'var(--text-color)' }}>Attendance & Analytics</h1>
                     <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem', fontSize: '0.95rem' }}>Track engagement and participation health.</p>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', color: '#ffffff', fontSize: '0.9rem', fontWeight: '600' }}>
+                <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', color: 'var(--text-color)', fontSize: '0.9rem', fontWeight: '600' }}>
                     This Month <span style={{ marginLeft: '0.5rem', fontSize: '0.8rem' }}>▼</span>
                 </div>
             </div>
@@ -28,7 +28,7 @@ const AttendanceDashboard = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'rgba(59, 130, 246, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>📅</div>
                     <div>
-                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>15</div>
+                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>15</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Total Sessions</div>
                         <div style={{ fontSize: '0.65rem', color: '#f59e0b', marginTop: '0.25rem' }}>Last 30 days</div>
                     </div>
@@ -36,21 +36,21 @@ const AttendanceDashboard = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'rgba(168, 85, 247, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>👥</div>
                     <div>
-                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>1,240</div>
+                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>1,240</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Total Attendance</div>
                     </div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'rgba(236, 72, 153, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>📊</div>
                     <div>
-                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>82</div>
+                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>82</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Avg. Attendance</div>
                     </div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'rgba(16, 185, 129, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>📈</div>
                     <div>
-                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>92%</div>
+                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>92%</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Attendance Rate</div>
                         <div style={{ fontSize: '0.65rem', color: '#10b981', marginTop: '0.25rem' }}>+ 5% from last month</div>
                     </div>
@@ -58,7 +58,7 @@ const AttendanceDashboard = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'rgba(245, 158, 11, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>⚠️</div>
                     <div>
-                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>8%</div>
+                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>8%</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Missed Rate</div>
                     </div>
                 </div>
@@ -71,10 +71,10 @@ const AttendanceDashboard = () => {
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' }}>
                         <div>
-                            <h3 style={{ margin: 0, color: '#ffffff', fontSize: '0.95rem', fontWeight: '700' }}>Attendance Trend</h3>
+                            <h3 style={{ margin: 0, color: 'var(--text-color)', fontSize: '0.95rem', fontWeight: '700' }}>Attendance Trend</h3>
                             <p style={{ margin: '0.25rem 0 0 0', color: 'var(--text-muted)', fontSize: '0.75rem' }}>Year-to-date performance vs last year</p>
                         </div>
-                        <div style={{ color: '#ffffff', fontSize: '0.8rem', fontWeight: '600', cursor: 'pointer' }}>
+                        <div style={{ color: 'var(--text-color)', fontSize: '0.8rem', fontWeight: '600', cursor: 'pointer' }}>
                             This Year <span style={{ fontSize: '0.7rem' }}>▼</span>
                         </div>
                     </div>
@@ -102,7 +102,7 @@ const AttendanceDashboard = () => {
 
                 {/* Meetings vs Events Bar Chart */}
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <h3 style={{ margin: '0 0 2rem 0', color: '#ffffff', fontSize: '0.95rem', fontWeight: '700', textAlign: 'center' }}>Meetings vs Events</h3>
+                    <h3 style={{ margin: '0 0 2rem 0', color: 'var(--text-color)', fontSize: '0.95rem', fontWeight: '700', textAlign: 'center' }}>Meetings vs Events</h3>
                     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', height: '220px', paddingBottom: '1rem' }}>
                             {/* Week 1 */}
@@ -129,7 +129,7 @@ const AttendanceDashboard = () => {
                         <div style={{ display: 'flex', justifyContent: 'space-around', color: 'var(--text-muted)', fontSize: '0.7rem' }}>
                             <span>Week 1</span><span>Week 2</span><span>Week 3</span><span>Week 4</span>
                         </div>
-                        <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginTop: '1.5rem', fontSize: '0.75rem', color: '#ffffff', fontWeight: '600' }}>
+                        <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginTop: '1.5rem', fontSize: '0.75rem', color: 'var(--text-color)', fontWeight: '600' }}>
                             <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><span style={{ width: '8px', height: '8px', background: '#0ea5e9' }}></span>Meetings</span>
                             <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><span style={{ width: '8px', height: '8px', background: '#d4d4aa' }}></span>Events</span>
                         </div>
@@ -138,7 +138,7 @@ const AttendanceDashboard = () => {
 
                 {/* Attendance Distribution Pie Chart */}
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <h3 style={{ margin: '0 0 2rem 0', color: '#ffffff', fontSize: '0.95rem', fontWeight: '700', textAlign: 'center' }}>Attendance Distribution</h3>
+                    <h3 style={{ margin: '0 0 2rem 0', color: 'var(--text-color)', fontSize: '0.95rem', fontWeight: '700', textAlign: 'center' }}>Attendance Distribution</h3>
                     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                         {/* CSS Pie Chart Mockup using conic-gradient */}
                         <div style={{
@@ -153,11 +153,11 @@ const AttendanceDashboard = () => {
                             marginBottom: '2rem'
                         }}>
                             <div style={{ textAlign: 'center', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
-                                <div style={{ fontSize: '1.5rem', fontWeight: '800', color: '#ffffff' }}>100%</div>
+                                <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-color)' }}>100%</div>
                                 <div style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase' }}>Engagement</div>
                             </div>
                         </div>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: '0.75rem', color: '#ffffff', fontWeight: '600', width: '80%' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: '0.75rem', color: 'var(--text-color)', fontWeight: '600', width: '80%' }}>
                             <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><span style={{ width: '8px', height: '8px', background: '#0ea5e9', borderRadius: '50%' }}></span>35% Cell Meetings</span>
                             <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><span style={{ width: '8px', height: '8px', background: '#22c55e', borderRadius: '50%' }}></span>45% Sunday Service</span>
                             <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><span style={{ width: '8px', height: '8px', background: '#f59e0b', borderRadius: '50%' }}></span>15% Prayer</span>
@@ -171,10 +171,10 @@ const AttendanceDashboard = () => {
             {/* Detailed Attendance Breakdown Table */}
             <div style={{ marginTop: '2rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                    <h3 style={{ color: '#ffffff', fontSize: '1.1rem', fontWeight: '700', margin: 0 }}>Detailed Attendance Breakdown</h3>
+                    <h3 style={{ color: 'var(--text-color)', fontSize: '1.1rem', fontWeight: '700', margin: 0 }}>Detailed Attendance Breakdown</h3>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                         <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem', cursor: 'pointer' }}>Filter</span>
-                        <button style={{ background: '#22c1e6', color: '#ffffff', border: 'none', borderRadius: '0.5rem', padding: '0.5rem 1.25rem', fontSize: '0.85rem', fontWeight: '700', cursor: 'pointer' }}>
+                        <button style={{ background: '#22c1e6', color: 'var(--text-color)', border: 'none', borderRadius: '0.5rem', padding: '0.5rem 1.25rem', fontSize: '0.85rem', fontWeight: '700', cursor: 'pointer' }}>
                             Export Report
                         </button>
                     </div>
@@ -183,7 +183,7 @@ const AttendanceDashboard = () => {
                 <div style={{ overflowX: 'auto' }}>
                     <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
                         <thead>
-                            <tr style={{ color: 'var(--text-muted)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                            <tr style={{ color: 'var(--text-muted)', borderBottom: '1px solid var(--border-color)' }}>
                                 <th style={{ padding: '1rem 0' }}>Name</th>
                                 <th style={{ padding: '1rem 0' }}>Type</th>
                                 <th style={{ padding: '1rem 0', textAlign: 'center' }}>Present</th>
@@ -195,13 +195,13 @@ const AttendanceDashboard = () => {
                         </thead>
                         <tbody>
                             {mockBreakdownData.map((row) => (
-                                <tr key={row.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                                <tr key={row.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
                                     <td style={{ padding: '1.5rem 0' }}>
-                                        <div style={{ color: '#ffffff', fontWeight: '700', marginBottom: '0.25rem' }}>{row.name}</div>
+                                        <div style={{ color: 'var(--text-color)', fontWeight: '700', marginBottom: '0.25rem' }}>{row.name}</div>
                                         <div style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>{row.date}</div>
                                     </td>
                                     <td style={{ padding: '1.5rem 0' }}>
-                                        <span style={{ background: 'rgba(255,255,255,0.05)', color: '#ffffff', padding: '0.25rem 0.75rem', borderRadius: '1rem', fontSize: '0.75rem' }}>{row.type}</span>
+                                        <span style={{ background: 'var(--border-color)', color: 'var(--text-color)', padding: '0.25rem 0.75rem', borderRadius: '1rem', fontSize: '0.75rem' }}>{row.type}</span>
                                     </td>
                                     <td style={{ padding: '1.5rem 0', color: '#22c55e', fontWeight: '600', textAlign: 'center' }}>{row.present}</td>
                                     <td style={{ padding: '1.5rem 0', color: '#ef4444', fontWeight: '600', textAlign: 'center' }}>{row.absent}</td>

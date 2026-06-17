@@ -147,7 +147,7 @@ const PersonalInfoPanel = ({ user, onUpdate }) => {
                             disabled={loading}
                             style={{
                                 background: 'var(--primary)',
-                                color: 'white',
+                                color: 'var(--text-color)',
                                 border: 'none',
                                 padding: '1.25rem 2.5rem',
                                 borderRadius: '1rem',
@@ -177,7 +177,7 @@ const PersonalInfoPanel = ({ user, onUpdate }) => {
                         }}>
                             <div style={{
                                 background: '#10b981',
-                                color: 'white',
+                                color: 'var(--text-color)',
                                 width: '28px',
                                 height: '28px',
                                 borderRadius: '50%',
@@ -226,7 +226,7 @@ const PersonalInfoPanel = ({ user, onUpdate }) => {
                                 borderRadius: '0.75rem',
                                 border: 'none',
                                 background: 'var(--primary)',
-                                color: 'white',
+                                color: 'var(--text-color)',
                                 fontWeight: '900',
                                 cursor: 'pointer',
                                 boxShadow: '0 10px 20px -5px rgba(34, 193, 230, 0.3)'
@@ -266,7 +266,7 @@ const PersonalInfoPanel = ({ user, onUpdate }) => {
                             borderRadius: '1rem',
                             border: 'none',
                             background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-                            color: 'white',
+                            color: 'var(--text-color)',
                             fontWeight: '900',
                             fontSize: '1.1rem',
                             cursor: 'pointer',

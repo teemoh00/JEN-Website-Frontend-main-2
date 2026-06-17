@@ -15,11 +15,11 @@ const EventStatistics = () => {
             {/* Header */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
                 <div>
-                    <h1 style={{ fontSize: '1.8rem', fontWeight: '800', margin: 0, color: '#ffffff' }}>Event Statistics & Analytics</h1>
+                    <h1 style={{ fontSize: '1.8rem', fontWeight: '800', margin: 0, color: 'var(--text-color)' }}>Event Statistics & Analytics</h1>
                     <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem', fontSize: '0.95rem' }}>Track engagement and participation health for specific events.</p>
                 </div>
                 {selectedEvent && (
-                    <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', color: '#ffffff', fontSize: '0.9rem', fontWeight: '600' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', color: 'var(--text-color)', fontSize: '0.9rem', fontWeight: '600' }}>
                         This Event <span style={{ marginLeft: '0.5rem', fontSize: '0.8rem' }}>▼</span>
                     </div>
                 )}
@@ -38,7 +38,7 @@ const EventStatistics = () => {
                             background: 'transparent',
                             border: '1px solid #ffffff',
                             borderRadius: '0.5rem',
-                            color: '#ffffff',
+                            color: 'var(--text-color)',
                             fontSize: '0.9rem',
                             fontWeight: '600',
                             outline: 'none',
@@ -46,13 +46,13 @@ const EventStatistics = () => {
                             cursor: 'pointer'
                         }}
                     >
-                        <option value="" style={{ color: '#ffffff', background: '#1a1a24' }}>Select an event...</option>
-                        <option value="1" style={{ color: '#ffffff', background: '#1a1a24' }}>LEADERSHIP TRAINING 2026 EDITION — 4/2/2026 (GILGIL)</option>
-                        <option value="2" style={{ color: '#ffffff', background: '#1a1a24' }}>YOUTH RETREAT 2026 — 5/15/2026 (NAIROBI)</option>
-                        <option value="3" style={{ color: '#ffffff', background: '#1a1a24' }}>ANNUAL GENERAL MEETING — 6/20/2026 (NAKURU)</option>
-                        <option value="4" style={{ color: '#ffffff', background: '#1a1a24' }}>SUNDAY SERVICE EXTRAVAGANZA — 7/05/2026 (MAIN SANCTUARY)</option>
+                        <option value="" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>Select an event...</option>
+                        <option value="1" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>LEADERSHIP TRAINING 2026 EDITION — 4/2/2026 (GILGIL)</option>
+                        <option value="2" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>YOUTH RETREAT 2026 — 5/15/2026 (NAIROBI)</option>
+                        <option value="3" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>ANNUAL GENERAL MEETING — 6/20/2026 (NAKURU)</option>
+                        <option value="4" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>SUNDAY SERVICE EXTRAVAGANZA — 7/05/2026 (MAIN SANCTUARY)</option>
                     </select>
-                    <span style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: '#ffffff', fontSize: '0.8rem' }}>▼</span>
+                    <span style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: 'var(--text-color)', fontSize: '0.8rem' }}>▼</span>
                 </div>
             </div>
 
@@ -63,7 +63,7 @@ const EventStatistics = () => {
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                             <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'rgba(59, 130, 246, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>📅</div>
                             <div>
-                                <div style={{ fontSize: '1.4rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>4</div>
+                                <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>4</div>
                                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Total Sessions</div>
                                 <div style={{ fontSize: '0.65rem', color: '#f59e0b', marginTop: '0.25rem' }}>For this event</div>
                             </div>
@@ -71,21 +71,21 @@ const EventStatistics = () => {
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                             <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'rgba(168, 85, 247, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>👥</div>
                             <div>
-                                <div style={{ fontSize: '1.4rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>1,070</div>
+                                <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>1,070</div>
                                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Total Check-Ins</div>
                             </div>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                             <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'rgba(236, 72, 153, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>📊</div>
                             <div>
-                                <div style={{ fontSize: '1.4rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>267</div>
+                                <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>267</div>
                                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Avg. Per Session</div>
                             </div>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                             <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'rgba(16, 185, 129, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>📈</div>
                             <div>
-                                <div style={{ fontSize: '1.4rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>88%</div>
+                                <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>88%</div>
                                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Attendance Rate</div>
                                 <div style={{ fontSize: '0.65rem', color: '#10b981', marginTop: '0.25rem' }}>High engagement</div>
                             </div>
@@ -93,7 +93,7 @@ const EventStatistics = () => {
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                             <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'rgba(245, 158, 11, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>⚠️</div>
                             <div>
-                                <div style={{ fontSize: '1.4rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>12%</div>
+                                <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>12%</div>
                                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Missed Rate</div>
                             </div>
                         </div>
@@ -106,7 +106,7 @@ const EventStatistics = () => {
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' }}>
                                 <div>
-                                    <h3 style={{ margin: 0, color: '#ffffff', fontSize: '0.95rem', fontWeight: '700' }}>Check-In Timeline</h3>
+                                    <h3 style={{ margin: 0, color: 'var(--text-color)', fontSize: '0.95rem', fontWeight: '700' }}>Check-In Timeline</h3>
                                     <p style={{ margin: '0.25rem 0 0 0', color: 'var(--text-muted)', fontSize: '0.75rem' }}>Arrival patterns throughout the event</p>
                                 </div>
                             </div>
@@ -134,7 +134,7 @@ const EventStatistics = () => {
 
                         {/* Meetings vs Events Bar Chart (now Session Comparison) */}
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <h3 style={{ margin: '0 0 2rem 0', color: '#ffffff', fontSize: '0.95rem', fontWeight: '700', textAlign: 'center' }}>Session Comparison</h3>
+                            <h3 style={{ margin: '0 0 2rem 0', color: 'var(--text-color)', fontSize: '0.95rem', fontWeight: '700', textAlign: 'center' }}>Session Comparison</h3>
                             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', height: '220px', paddingBottom: '1rem' }}>
                                     {/* S1 */}
@@ -161,7 +161,7 @@ const EventStatistics = () => {
                                 <div style={{ display: 'flex', justifyContent: 'space-around', color: 'var(--text-muted)', fontSize: '0.7rem' }}>
                                     <span>Session 1</span><span>Session 2</span><span>Session 3</span><span>Session 4</span>
                                 </div>
-                                <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginTop: '1.5rem', fontSize: '0.75rem', color: '#ffffff', fontWeight: '600' }}>
+                                <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginTop: '1.5rem', fontSize: '0.75rem', color: 'var(--text-color)', fontWeight: '600' }}>
                                     <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><span style={{ width: '8px', height: '8px', background: '#0ea5e9' }}></span>Expected</span>
                                     <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><span style={{ width: '8px', height: '8px', background: '#d4d4aa' }}></span>Actual</span>
                                 </div>
@@ -170,7 +170,7 @@ const EventStatistics = () => {
 
                         {/* Attendance Distribution Pie Chart */}
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <h3 style={{ margin: '0 0 2rem 0', color: '#ffffff', fontSize: '0.95rem', fontWeight: '700', textAlign: 'center' }}>Demographic Split</h3>
+                            <h3 style={{ margin: '0 0 2rem 0', color: 'var(--text-color)', fontSize: '0.95rem', fontWeight: '700', textAlign: 'center' }}>Demographic Split</h3>
                             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                                 {/* CSS Pie Chart Mockup using conic-gradient */}
                                 <div style={{
@@ -185,11 +185,11 @@ const EventStatistics = () => {
                                     marginBottom: '2rem'
                                 }}>
                                     <div style={{ textAlign: 'center', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
-                                        <div style={{ fontSize: '1.5rem', fontWeight: '800', color: '#ffffff' }}>100%</div>
+                                        <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-color)' }}>100%</div>
                                         <div style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase' }}>Attendees</div>
                                     </div>
                                 </div>
-                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: '0.75rem', color: '#ffffff', fontWeight: '600', width: '80%' }}>
+                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: '0.75rem', color: 'var(--text-color)', fontWeight: '600', width: '80%' }}>
                                     <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><span style={{ width: '8px', height: '8px', background: '#0ea5e9', borderRadius: '50%' }}></span>35% Youth</span>
                                     <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><span style={{ width: '8px', height: '8px', background: '#22c55e', borderRadius: '50%' }}></span>45% Adults</span>
                                     <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><span style={{ width: '8px', height: '8px', background: '#f59e0b', borderRadius: '50%' }}></span>15% Leaders</span>
@@ -203,10 +203,10 @@ const EventStatistics = () => {
                     {/* Detailed Attendance Breakdown Table */}
                     <div style={{ marginTop: '2rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                            <h3 style={{ color: '#ffffff', fontSize: '1.1rem', fontWeight: '700', margin: 0 }}>Session Breakdown</h3>
+                            <h3 style={{ color: 'var(--text-color)', fontSize: '1.1rem', fontWeight: '700', margin: 0 }}>Session Breakdown</h3>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                 <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem', cursor: 'pointer' }}>Filter</span>
-                                <button style={{ background: '#22c1e6', color: '#ffffff', border: 'none', borderRadius: '0.5rem', padding: '0.5rem 1.25rem', fontSize: '0.85rem', fontWeight: '700', cursor: 'pointer' }}>
+                                <button style={{ background: '#22c1e6', color: 'var(--text-color)', border: 'none', borderRadius: '0.5rem', padding: '0.5rem 1.25rem', fontSize: '0.85rem', fontWeight: '700', cursor: 'pointer' }}>
                                     Export Report
                                 </button>
                             </div>
@@ -215,7 +215,7 @@ const EventStatistics = () => {
                         <div style={{ overflowX: 'auto' }}>
                             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
                                 <thead>
-                                    <tr style={{ color: 'var(--text-muted)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                                    <tr style={{ color: 'var(--text-muted)', borderBottom: '1px solid var(--border-color)' }}>
                                         <th style={{ padding: '1rem 0' }}>Session Name</th>
                                         <th style={{ padding: '1rem 0' }}>Type</th>
                                         <th style={{ padding: '1rem 0', textAlign: 'center' }}>Present</th>
@@ -227,13 +227,13 @@ const EventStatistics = () => {
                                 </thead>
                                 <tbody>
                                     {mockBreakdownData.map((row) => (
-                                        <tr key={row.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                                        <tr key={row.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
                                             <td style={{ padding: '1.5rem 0' }}>
-                                                <div style={{ color: '#ffffff', fontWeight: '700', marginBottom: '0.25rem' }}>{row.name}</div>
+                                                <div style={{ color: 'var(--text-color)', fontWeight: '700', marginBottom: '0.25rem' }}>{row.name}</div>
                                                 <div style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>{row.date}</div>
                                             </td>
                                             <td style={{ padding: '1.5rem 0' }}>
-                                                <span style={{ background: 'rgba(255,255,255,0.05)', color: '#ffffff', padding: '0.25rem 0.75rem', borderRadius: '1rem', fontSize: '0.75rem' }}>{row.type}</span>
+                                                <span style={{ background: 'var(--border-color)', color: 'var(--text-color)', padding: '0.25rem 0.75rem', borderRadius: '1rem', fontSize: '0.75rem' }}>{row.type}</span>
                                             </td>
                                             <td style={{ padding: '1.5rem 0', color: '#22c55e', fontWeight: '600', textAlign: 'center' }}>{row.present}</td>
                                             <td style={{ padding: '1.5rem 0', color: '#ef4444', fontWeight: '600', textAlign: 'center' }}>{row.absent}</td>
@@ -255,7 +255,7 @@ const EventStatistics = () => {
                     </div>
                 </>
             ) : (
-                <div style={{ textAlign: 'center', color: 'var(--text-muted)', marginTop: '4rem', padding: '3rem', background: 'rgba(255,255,255,0.02)', borderRadius: '1rem' }}>
+                <div style={{ textAlign: 'center', color: 'var(--text-muted)', marginTop: '4rem', padding: '3rem', background: 'var(--border-color)', borderRadius: '1rem' }}>
                     <div style={{ fontSize: '3rem', marginBottom: '1rem', opacity: 0.5 }}>📊</div>
                     <p style={{ fontSize: '1.1rem', fontWeight: '600' }}>Please select an event to view its statistics.</p>
                 </div>

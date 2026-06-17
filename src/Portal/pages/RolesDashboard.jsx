@@ -38,7 +38,7 @@ const RolesDashboard = () => {
                     onClick={() => setIsModalOpen(true)}
                     style={{
                         background: 'var(--primary)',
-                        color: 'white',
+                        color: 'var(--text-color)',
                         border: 'none',
                         padding: '0.75rem 1.5rem',
                         borderRadius: '0.75rem',

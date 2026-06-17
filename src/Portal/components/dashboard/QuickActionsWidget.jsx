@@ -5,7 +5,7 @@ const QuickActionItem = ({ icon, label, onClick, primary = false }) => (
     <button
         onClick={onClick}
         style={{
-            background: primary ? 'var(--primary)' : 'rgba(255,255,255,0.03)',
+            background: primary ? 'var(--primary)' : 'var(--border-color)',
             border: primary ? 'none' : '1px solid var(--border-color)',
             borderRadius: '0.75rem',
             padding: '1rem',
@@ -70,7 +70,7 @@ const LatestMeetingsModal = ({ onClose, meetings }) => {
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
                                 padding: '1rem',
-                                background: 'rgba(255,255,255,0.03)',
+                                background: 'var(--border-color)',
                                 borderRadius: '0.75rem',
                                 border: '1px solid var(--border-color)'
                             }}>
@@ -168,7 +168,7 @@ const CreateMeetingModal = ({ onClose, meetingCategories }) => {
                         <input type="text" required value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} placeholder="e.g. Weekly Prayer" style={{
                             width: '93%',
                             padding: '0.75rem',
-                            background: 'rgba(255,255,255,0.03)',
+                            background: 'var(--border-color)',
                             border: '1px solid var(--border-color)',
                             borderRadius: '0.5rem',
                             color: 'var(--text-color)',
@@ -182,7 +182,7 @@ const CreateMeetingModal = ({ onClose, meetingCategories }) => {
                             <input type="date" required value={formData.date} onChange={e => setFormData({ ...formData, date: e.target.value })} style={{
                                 width: '85%',
                                 padding: '0.75rem',
-                                background: 'rgba(255,255,255,0.03)',
+                                background: 'var(--border-color)',
                                 border: '1px solid var(--border-color)',
                                 borderRadius: '0.5rem',
                                 color: 'var(--text-color)',
@@ -194,7 +194,7 @@ const CreateMeetingModal = ({ onClose, meetingCategories }) => {
                             <input type="time" required value={formData.time} onChange={e => setFormData({ ...formData, time: e.target.value })} style={{
                                 width: '85%',
                                 padding: '0.75rem',
-                                background: 'rgba(255,255,255,0.03)',
+                                background: 'var(--border-color)',
                                 border: '1px solid var(--border-color)',
                                 borderRadius: '0.5rem',
                                 color: 'var(--text-color)',
@@ -209,7 +209,7 @@ const CreateMeetingModal = ({ onClose, meetingCategories }) => {
                             <select value={formData.category} required onChange={e => setFormData({ ...formData, category: e.target.value })} style={{
                                 width: '100%',
                                 padding: '0.75rem',
-                                background: 'rgba(255,255,255,0.03)',
+                                background: 'var(--border-color)',
                                 border: '1px solid var(--border-color)',
                                 borderRadius: '0.5rem',
                                 color: 'var(--text-color)',
@@ -226,7 +226,7 @@ const CreateMeetingModal = ({ onClose, meetingCategories }) => {
                             <select value={formData.meeting_type} onChange={e => setFormData({ ...formData, meeting_type: e.target.value })} style={{
                                 width: '100%',
                                 padding: '0.75rem',
-                                background: 'rgba(255,255,255,0.03)',
+                                background: 'var(--border-color)',
                                 border: '1px solid var(--border-color)',
                                 borderRadius: '0.5rem',
                                 color: 'var(--text-color)',
@@ -244,7 +244,7 @@ const CreateMeetingModal = ({ onClose, meetingCategories }) => {
                         <input type="text" value={formData.location} onChange={e => setFormData({ ...formData, location: e.target.value })} placeholder="Physical Address" style={{
                             width: '93%',
                             padding: '0.75rem',
-                            background: 'rgba(255,255,255,0.03)',
+                            background: 'var(--border-color)',
                             border: '1px solid var(--border-color)',
                             borderRadius: '0.5rem',
                             color: 'var(--text-color)',
@@ -256,7 +256,7 @@ const CreateMeetingModal = ({ onClose, meetingCategories }) => {
                             <input type="url" value={formData.meeting_link} onChange={e => setFormData({ ...formData, meeting_link: e.target.value })} placeholder="Meeting Link (Zoom, Meet, etc.)" style={{
                                 width: '93%',
                                 padding: '0.75rem',
-                                background: 'rgba(255,255,255,0.03)',
+                                background: 'var(--border-color)',
                                 border: '1px solid var(--border-color)',
                                 borderRadius: '0.5rem',
                                 color: 'var(--text-color)',
@@ -332,7 +332,7 @@ const CreateEventModal = ({ onClose }) => {
                         <input type="text" placeholder="e.g. Community Outreach" style={{
                             width: '93%',
                             padding: '0.75rem',
-                            background: 'rgba(255,255,255,0.03)',
+                            background: 'var(--border-color)',
                             border: '1px solid var(--border-color)',
                             borderRadius: '0.5rem',
                             color: 'var(--text-color)',
@@ -346,7 +346,7 @@ const CreateEventModal = ({ onClose }) => {
                             <input type="date" style={{
                                 width: '85%',
                                 padding: '0.75rem',
-                                background: 'rgba(255,255,255,0.03)',
+                                background: 'var(--border-color)',
                                 border: '1px solid var(--border-color)',
                                 borderRadius: '0.5rem',
                                 color: 'var(--text-color)',
@@ -358,7 +358,7 @@ const CreateEventModal = ({ onClose }) => {
                             <input type="time" style={{
                                 width: '85%',
                                 padding: '0.75rem',
-                                background: 'rgba(255,255,255,0.03)',
+                                background: 'var(--border-color)',
                                 border: '1px solid var(--border-color)',
                                 borderRadius: '0.5rem',
                                 color: 'var(--text-color)',
@@ -372,7 +372,7 @@ const CreateEventModal = ({ onClose }) => {
                         <input type="text" placeholder="Location" style={{
                             width: '93%',
                             padding: '0.75rem',
-                            background: 'rgba(255,255,255,0.03)',
+                            background: 'var(--border-color)',
                             border: '1px solid var(--border-color)',
                             borderRadius: '0.5rem',
                             color: 'var(--text-color)',
@@ -385,7 +385,7 @@ const CreateEventModal = ({ onClose }) => {
                         <textarea placeholder="Event details..." style={{
                             width: '93%',
                             padding: '0.75rem',
-                            background: 'rgba(255,255,255,0.03)',
+                            background: 'var(--border-color)',
                             border: '1px solid var(--border-color)',
                             borderRadius: '0.5rem',
                             color: 'var(--text-color)',
@@ -461,7 +461,7 @@ const RecordGivingModal = ({ onClose }) => {
                         <input type="text" placeholder="Search member..." style={{
                             width: '93%',
                             padding: '0.75rem',
-                            background: 'rgba(255,255,255,0.03)',
+                            background: 'var(--border-color)',
                             border: '1px solid var(--border-color)',
                             borderRadius: '0.5rem',
                             color: 'var(--text-color)',
@@ -475,7 +475,7 @@ const RecordGivingModal = ({ onClose }) => {
                             <input type="number" placeholder="0.00" style={{
                                 width: '85%',
                                 padding: '0.75rem',
-                                background: 'rgba(255,255,255,0.03)',
+                                background: 'var(--border-color)',
                                 border: '1px solid var(--border-color)',
                                 borderRadius: '0.5rem',
                                 color: 'var(--text-color)',
@@ -487,7 +487,7 @@ const RecordGivingModal = ({ onClose }) => {
                             <input type="date" style={{
                                 width: '85%',
                                 padding: '0.75rem',
-                                background: 'rgba(255,255,255,0.03)',
+                                background: 'var(--border-color)',
                                 border: '1px solid var(--border-color)',
                                 borderRadius: '0.5rem',
                                 color: 'var(--text-color)',
@@ -502,7 +502,7 @@ const RecordGivingModal = ({ onClose }) => {
                             <select style={{
                                 width: '100%',
                                 padding: '0.75rem',
-                                background: 'rgba(255,255,255,0.03)',
+                                background: 'var(--border-color)',
                                 border: '1px solid var(--border-color)',
                                 borderRadius: '0.5rem',
                                 color: 'var(--text-color)',
@@ -520,7 +520,7 @@ const RecordGivingModal = ({ onClose }) => {
                             <select style={{
                                 width: '100%',
                                 padding: '0.75rem',
-                                background: 'rgba(255,255,255,0.03)',
+                                background: 'var(--border-color)',
                                 border: '1px solid var(--border-color)',
                                 borderRadius: '0.5rem',
                                 color: 'var(--text-color)',
@@ -539,7 +539,7 @@ const RecordGivingModal = ({ onClose }) => {
                         <input type="text" placeholder="Transaction ID or notes" style={{
                             width: '93%',
                             padding: '0.75rem',
-                            background: 'rgba(255,255,255,0.03)',
+                            background: 'var(--border-color)',
                             border: '1px solid var(--border-color)',
                             borderRadius: '0.5rem',
                             color: 'var(--text-color)',

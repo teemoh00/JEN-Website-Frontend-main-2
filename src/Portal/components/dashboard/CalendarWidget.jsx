@@ -71,7 +71,7 @@ const CalendarWidget = () => {
                 ))}
             </div>
 
-            <div style={{ marginTop: '1.5rem', padding: '0.75rem', background: 'rgba(255,255,255,0.03)', borderRadius: '0.5rem' }}>
+            <div style={{ marginTop: '1.5rem', padding: '0.75rem', background: 'var(--border-color)', borderRadius: '0.5rem' }}>
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Upcoming</div>
                 <div style={{ color: 'var(--text-color)', fontSize: '0.9rem', fontWeight: '600' }}>Goshen Cell Meeting</div>
                 <div style={{ color: 'var(--primary)', fontSize: '0.8rem' }}>Thursday, Feb 5th • 6:00 PM</div>

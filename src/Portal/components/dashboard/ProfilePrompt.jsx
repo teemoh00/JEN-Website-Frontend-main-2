@@ -55,7 +55,7 @@ const ProfilePrompt = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontSize: '1.5rem',
-                    color: 'white',
+                    color: 'var(--text-color)',
                     boxShadow: '0 4px 12px rgba(34, 193, 230, 0.3)'
                 }}>
                     ✨
@@ -74,7 +74,7 @@ const ProfilePrompt = () => {
                 onClick={() => navigate('/portal/users/account')}
                 style={{
                     background: 'var(--primary)',
-                    color: 'white',
+                    color: 'var(--text-color)',
                     border: 'none',
                     padding: '0.75rem 1.5rem',
                     borderRadius: '0.75rem',

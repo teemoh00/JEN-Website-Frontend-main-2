@@ -41,7 +41,7 @@ const CreateBudgetModal = ({ onClose }) => {
         padding: '0.5rem 0',
         background: 'transparent',
         border: 'none',
-        color: 'white',
+        color: 'var(--text-color)',
         fontSize: '0.9rem',
         marginTop: '0.25rem',
         outline: 'none',
@@ -75,7 +75,7 @@ const CreateBudgetModal = ({ onClose }) => {
                 borderRadius: '0.8rem',
                 width: '100%',
                 maxWidth: '500px',
-                border: '1px solid rgba(255,255,255,0.05)',
+                border: '1px solid var(--border-color)',
                 boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
                 display: 'flex',
                 flexDirection: 'column',
@@ -88,7 +88,7 @@ const CreateBudgetModal = ({ onClose }) => {
                     alignItems: 'center',
                     flexShrink: 0
                 }}>
-                    <h2 style={{ fontSize: '1.25rem', color: 'white', margin: 0, fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <h2 style={{ fontSize: '1.25rem', color: 'var(--text-color)', margin: 0, fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <span>📝</span> Create Budget
                     </h2>
                     <button onClick={onClose} style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', fontSize: '1.2rem', cursor: 'pointer', padding: 0 }}>×</button>
@@ -108,12 +108,12 @@ const CreateBudgetModal = ({ onClose }) => {
                         </div>
 
                         {/* Budget Line Items Section */}
-                        <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '1.5rem' }}>
+                        <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '1.5rem' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                                 <label style={labelStyle}>Budget Line Items</label>
                                 <button type="button" onClick={handleAddItem} style={{
                                     background: 'var(--primary)',
-                                    color: 'white',
+                                    color: 'var(--text-color)',
                                     border: 'none',
                                     borderRadius: '0.25rem',
                                     padding: '0.3rem 0.6rem',
@@ -159,7 +159,7 @@ const CreateBudgetModal = ({ onClose }) => {
                             ))}
 
                             <div style={{ textAlign: 'right', marginTop: '1rem', color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: '600' }}>
-                                Total: <span style={{ color: 'white' }}>KES {totalAmount.toLocaleString()}</span>
+                                Total: <span style={{ color: 'var(--text-color)' }}>KES {totalAmount.toLocaleString()}</span>
                             </div>
                         </div>
 
@@ -170,7 +170,7 @@ const CreateBudgetModal = ({ onClose }) => {
                                 borderRadius: '0.5rem',
                                 border: 'none',
                                 background: 'var(--primary)',
-                                color: 'white',
+                                color: 'var(--text-color)',
                                 fontWeight: '700',
                                 cursor: 'pointer',
                                 fontSize: '0.95rem'

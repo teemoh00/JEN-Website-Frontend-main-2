@@ -182,7 +182,7 @@ const MeetingCategories = () => {
                                     padding: '0.75rem',
                                     borderRadius: '0.5rem',
                                     background: '#ef4444',
-                                    color: 'white',
+                                    color: 'var(--text-color)',
                                     border: 'none',
                                     cursor: 'pointer',
                                     fontWeight: '600',

@@ -87,7 +87,7 @@ const EventsDashboard = () => {
 
                     {/* Overall Registration Progress */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <h3 style={{ margin: '0 0 2rem 0', color: '#ffffff', fontSize: '0.95rem', fontWeight: '700', width: '100%' }}>Overall Registration Progress</h3>
+                        <h3 style={{ margin: '0 0 2rem 0', color: 'var(--text-color)', fontSize: '0.95rem', fontWeight: '700', width: '100%' }}>Overall Registration Progress</h3>
                         
                         <div style={{
                             width: '160px',
@@ -105,15 +105,15 @@ const EventsDashboard = () => {
 
                         <div style={{ display: 'flex', width: '100%', justifyContent: 'space-around', textAlign: 'center' }}>
                             <div>
-                                <div style={{ fontSize: '1.25rem', fontWeight: '800', color: '#ffffff' }}>0</div>
+                                <div style={{ fontSize: '1.25rem', fontWeight: '800', color: 'var(--text-color)' }}>0</div>
                                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Registered</div>
                             </div>
                             <div>
-                                <div style={{ fontSize: '1.25rem', fontWeight: '800', color: '#ffffff' }}>0</div>
+                                <div style={{ fontSize: '1.25rem', fontWeight: '800', color: 'var(--text-color)' }}>0</div>
                                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Target</div>
                             </div>
                             <div>
-                                <div style={{ fontSize: '1.25rem', fontWeight: '800', color: '#ffffff' }}>0</div>
+                                <div style={{ fontSize: '1.25rem', fontWeight: '800', color: 'var(--text-color)' }}>0</div>
                                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Invited</div>
                             </div>
                         </div>
@@ -124,7 +124,7 @@ const EventsDashboard = () => {
                 <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '2rem' }}>
                     {/* Event Financial Summary (Empty Graph) */}
                     <div>
-                        <h3 style={{ margin: '0 0 2rem 0', color: '#ffffff', fontSize: '0.95rem', fontWeight: '700' }}>Event Financial Summary</h3>
+                        <h3 style={{ margin: '0 0 2rem 0', color: 'var(--text-color)', fontSize: '0.95rem', fontWeight: '700' }}>Event Financial Summary</h3>
                         <div style={{ display: 'flex', flexDirection: 'column', color: 'var(--text-muted)', fontSize: '0.75rem', width: '80%' }}>
                             {/* Y axis */}
                             <div style={{ display: 'flex', flex: 1, minHeight: '150px' }}>
@@ -161,7 +161,7 @@ const EventsDashboard = () => {
 
                     {/* Gender Distribution */}
                     <div>
-                        <h3 style={{ margin: '0 0 1rem 0', color: '#ffffff', fontSize: '0.95rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <h3 style={{ margin: '0 0 1rem 0', color: 'var(--text-color)', fontSize: '0.95rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <span>📊</span> Gender Distribution
                         </h3>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '150px', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
@@ -175,28 +175,28 @@ const EventsDashboard = () => {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                         <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#1e293b', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem' }}>🎉</div>
                         <div>
-                            <div style={{ fontSize: '1.5rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>4</div>
+                            <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>4</div>
                             <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Total Events</div>
                         </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                         <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#422006', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem' }}>⏳</div>
                         <div>
-                            <div style={{ fontSize: '1.5rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>0</div>
+                            <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>0</div>
                             <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Upcoming</div>
                         </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                         <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#14532d', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem' }}>✅</div>
                         <div>
-                            <div style={{ fontSize: '1.5rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>4</div>
+                            <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>4</div>
                             <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Completed</div>
                         </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                         <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#4c1d95', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem' }}>👥</div>
                         <div>
-                            <div style={{ fontSize: '1.5rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>0</div>
+                            <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>0</div>
                             <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Registered</div>
                         </div>
                     </div>

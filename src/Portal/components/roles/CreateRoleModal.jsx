@@ -115,7 +115,7 @@ const CreateRoleModal = ({ isOpen, onClose }) => {
                                 borderRadius: '0.75rem',
                                 border: 'none',
                                 background: 'var(--primary)',
-                                color: 'white',
+                                color: 'var(--text-color)',
                                 fontWeight: '600',
                                 cursor: 'pointer'
                             }}

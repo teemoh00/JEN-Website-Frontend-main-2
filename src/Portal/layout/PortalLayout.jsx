@@ -92,7 +92,7 @@ const PortalLayout = () => {
                         --text-color: #f8fafc !important;
                         --text-muted: #94a3b8 !important;
                         --nav-bg: #120D20 !important;
-                        --border-color: rgba(255, 255, 255, 0.05) !important;
+                        --border-color: var(--border-color) !important;
                         --card-bg: #1A1625 !important;
                         color: var(--text-color) !important;
                     }

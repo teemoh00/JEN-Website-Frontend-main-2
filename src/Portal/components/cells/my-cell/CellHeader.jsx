@@ -53,7 +53,7 @@ const CellHeader = ({ cell }) => {
 
             <div style={{ flex: 1 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
-                    <h1 style={{ margin: 0, fontSize: '2rem', fontWeight: '800', color: '#ffffff' }}>{cellInfo.name}</h1>
+                    <h1 style={{ margin: 0, fontSize: '2rem', fontWeight: '800', color: 'var(--text-color)' }}>{cellInfo.name}</h1>
                     <span style={{
                         background: 'rgba(34, 197, 94, 0.2)',
 

@@ -64,7 +64,7 @@ const CreateCellModal = ({ onClose }) => {
                 boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
             }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
-                    <h2 style={{ fontSize: '1.4rem', color: 'white', margin: 0, fontWeight: '700' }}>Create New Cell</h2>
+                    <h2 style={{ fontSize: '1.4rem', color: 'var(--text-color)', margin: 0, fontWeight: '700' }}>Create New Cell</h2>
                     <button onClick={onClose} style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', fontSize: '1.2rem', cursor: 'pointer', padding: 0 }}>×</button>
                 </div>
 
@@ -87,14 +87,14 @@ const CreateCellModal = ({ onClose }) => {
                                 name="category"
                                 value={formData.category}
                                 onChange={handleChange}
-                                style={{ ...inputStyle, appearance: 'none', color: 'white' }}
+                                style={{ ...inputStyle, appearance: 'none', color: 'var(--text-color)' }}
                             >
                                 <option>General</option>
                                 <option>Youth</option>
                                 <option>Young Adults</option>
                                 <option>Couples</option>
                             </select>
-                            <span style={{ position: 'absolute', right: '0', top: '2rem', pointerEvents: 'none', fontSize: '0.8rem', color: 'white', fontWeight: 'bold' }}>v</span>
+                            <span style={{ position: 'absolute', right: '0', top: '2rem', pointerEvents: 'none', fontSize: '0.8rem', color: 'var(--text-color)', fontWeight: 'bold' }}>v</span>
                         </div>
                     </div>
 
@@ -117,7 +117,7 @@ const CreateCellModal = ({ onClose }) => {
                                 name="meetingDay"
                                 value={formData.meetingDay}
                                 onChange={handleChange}
-                                style={{ ...inputStyle, appearance: 'none', color: 'white' }}
+                                style={{ ...inputStyle, appearance: 'none', color: 'var(--text-color)' }}
                             >
                                 <option>Monday</option>
                                 <option>Tuesday</option>
@@ -127,7 +127,7 @@ const CreateCellModal = ({ onClose }) => {
                                 <option>Saturday</option>
                                 <option>Sunday</option>
                             </select>
-                            <span style={{ position: 'absolute', right: '0', top: '2rem', pointerEvents: 'none', fontSize: '0.8rem', color: 'white', fontWeight: 'bold' }}>v</span>
+                            <span style={{ position: 'absolute', right: '0', top: '2rem', pointerEvents: 'none', fontSize: '0.8rem', color: 'var(--text-color)', fontWeight: 'bold' }}>v</span>
                         </div>
                         <div style={{ position: 'relative' }}>
                             <label style={labelStyle}>Time</label>
@@ -136,7 +136,7 @@ const CreateCellModal = ({ onClose }) => {
                                 name="time"
                                 value={formData.time}
                                 onChange={handleChange}
-                                style={{ ...inputStyle, color: 'white' }}
+                                style={{ ...inputStyle, color: 'var(--text-color)' }}
                             />
                             <span style={{ position: 'absolute', right: '0', top: '2rem', color: 'var(--text-muted)', fontSize: '0.9rem', opacity: 0.5 }}>🕒</span>
                         </div>
@@ -161,7 +161,7 @@ const CreateCellModal = ({ onClose }) => {
                             name="maxCapacity"
                             value={formData.maxCapacity}
                             onChange={handleChange}
-                            style={{ ...inputStyle, color: 'white' }}
+                            style={{ ...inputStyle, color: 'var(--text-color)' }}
                         />
                     </div>
 
@@ -179,7 +179,7 @@ const CreateCellModal = ({ onClose }) => {
                             borderRadius: '0.4rem',
                             border: 'none',
                             background: 'var(--primary)',
-                            color: 'white',
+                            color: 'var(--text-color)',
                             fontWeight: '700',
                             cursor: 'pointer',
                             fontSize: '0.85rem'

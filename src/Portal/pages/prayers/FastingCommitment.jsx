@@ -58,7 +58,7 @@ const FastingCommitment = () => {
                             borderRadius: '0.5rem',
                             border: 'none',
                             background: 'var(--primary)',
-                            color: 'white',
+                            color: 'var(--text-color)',
                             fontWeight: '700',
                             cursor: 'pointer',
                             display: 'flex',

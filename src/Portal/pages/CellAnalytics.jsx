@@ -15,7 +15,7 @@ const CellAnalytics = () => {
                     <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <span style={{ fontSize: '1.1rem' }}>👥</span> Total Members
                     </div>
-                    <div style={{ fontSize: '2rem', fontWeight: '800', color: '#ffffff' }}>0</div>
+                    <div style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--text-color)' }}>0</div>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -35,7 +35,7 @@ const CellAnalytics = () => {
                     <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <span style={{ fontSize: '1.1rem' }}>🏘️</span> Active Cells
                     </div>
-                    <div style={{ fontSize: '2rem', fontWeight: '800', color: '#ffffff', display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
+                    <div style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--text-color)', display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
                         0 <span style={{ fontSize: '1rem', color: 'var(--text-muted)' }}>of 0</span>
                     </div>
                 </div>
@@ -43,7 +43,7 @@ const CellAnalytics = () => {
                     <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <span style={{ fontSize: '1.1rem' }}>📊</span> Avg / Cell
                     </div>
-                    <div style={{ fontSize: '2rem', fontWeight: '800', color: '#ffffff' }}>0</div>
+                    <div style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--text-color)' }}>0</div>
                 </div>
             </div>
 
@@ -94,7 +94,7 @@ const CellAnalytics = () => {
                 <h3 style={{ margin: '0 0 1.5rem 0', color: 'var(--text-color)', fontSize: '1rem', fontWeight: '700' }}>Follow-Up Summary</h3>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', textAlign: 'center', gap: '1rem' }}>
                     <div>
-                        <div style={{ fontSize: '2rem', fontWeight: '800', color: '#ffffff', marginBottom: '0.25rem' }}>0</div>
+                        <div style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--text-color)', marginBottom: '0.25rem' }}>0</div>
                         <div style={{ color: 'var(--text-muted)', fontSize: '0.75rem', textTransform: 'uppercase' }}>Total</div>
                     </div>
                     <div>

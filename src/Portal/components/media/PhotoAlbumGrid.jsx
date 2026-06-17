@@ -130,7 +130,7 @@ const PhotoAlbumGrid = () => {
                                     transition: 'background 0.2s',
                                     flex: 1
                                 }}
-                                onMouseOver={(e) => e.target.style.background = 'rgba(255,255,255,0.05)'}
+                                onMouseOver={(e) => e.target.style.background = 'var(--border-color)'}
                                 onMouseOut={(e) => e.target.style.background = 'transparent'}
                             >
                                 Cancel
@@ -142,7 +142,7 @@ const PhotoAlbumGrid = () => {
                                     borderRadius: '0.75rem',
                                     border: 'none',
                                     background: 'var(--danger)',
-                                    color: 'white',
+                                    color: 'var(--text-color)',
                                     fontWeight: '700',
                                     cursor: 'pointer',
                                     transition: 'opacity 0.2s',

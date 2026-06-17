@@ -30,7 +30,7 @@ const Pledges = () => {
     return (
         <div style={{ maxWidth: '1400px', margin: '0 auto', paddingBottom: '3rem' }}>
             <div style={{ marginBottom: '3rem' }}>
-                <h1 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'white', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>
+                <h1 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'var(--text-color)', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>
                     Pledges
                 </h1>
                 <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: 0 }}>
@@ -53,7 +53,7 @@ const Pledges = () => {
                             padding: '0.5rem',
                             background: 'transparent',
                             border: 'none',
-                            color: 'white',
+                            color: 'var(--text-color)',
                             outline: 'none',
                             fontSize: '0.85rem',
                             minWidth: '150px'
@@ -64,7 +64,7 @@ const Pledges = () => {
                         padding: '0.5rem',
                         background: 'transparent',
                         border: 'none',
-                        color: 'white',
+                        color: 'var(--text-color)',
                         outline: 'none',
                         fontSize: '0.85rem',
                         cursor: 'pointer'
@@ -75,9 +75,9 @@ const Pledges = () => {
                     </select>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-                        <input type="date" style={{ background: 'transparent', border: 'none', color: 'white', outline: 'none', colorScheme: 'dark' }} />
+                        <input type="date" style={{ background: 'transparent', border: 'none', color: 'var(--text-color)', outline: 'none', colorScheme: 'dark' }} />
                         <span>-</span>
-                        <input type="date" style={{ background: 'transparent', border: 'none', color: 'white', outline: 'none', colorScheme: 'dark' }} />
+                        <input type="date" style={{ background: 'transparent', border: 'none', color: 'var(--text-color)', outline: 'none', colorScheme: 'dark' }} />
                     </div>
                 </div>
 
@@ -88,7 +88,7 @@ const Pledges = () => {
                         borderRadius: '0.4rem',
                         border: 'none',
                         background: 'var(--primary)',
-                        color: 'white',
+                        color: 'var(--text-color)',
                         fontWeight: '700',
                         cursor: 'pointer',
                         fontSize: '0.85rem',
@@ -104,7 +104,7 @@ const Pledges = () => {
             <div style={{ overflowX: 'auto' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                     <thead>
-                        <tr style={{ color: 'var(--text-muted)', fontSize: '0.75rem', textTransform: 'uppercase', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                        <tr style={{ color: 'var(--text-muted)', fontSize: '0.75rem', textTransform: 'uppercase', borderBottom: '1px solid var(--border-color)' }}>
                             <th style={{ padding: '1rem 0', fontWeight: '600' }}>Date</th>
                             <th style={{ padding: '1rem 0', fontWeight: '600' }}>Name</th>
                             <th style={{ padding: '1rem 0', fontWeight: '600' }}>Purpose</th>
@@ -117,11 +117,11 @@ const Pledges = () => {
                     </thead>
                     <tbody>
                         {pledgesData.map(p => (
-                            <tr key={p.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', fontSize: '0.85rem' }}>
+                            <tr key={p.id} style={{ borderBottom: '1px solid var(--border-color)', fontSize: '0.85rem' }}>
                                 <td style={{ padding: '1.25rem 0', color: 'var(--text-muted)' }}>{p.date}</td>
-                                <td style={{ padding: '1.25rem 0', color: 'white', fontWeight: '700' }}>{p.name}</td>
+                                <td style={{ padding: '1.25rem 0', color: 'var(--text-color)', fontWeight: '700' }}>{p.name}</td>
                                 <td style={{ padding: '1.25rem 0', color: '#60a5fa' }}>{p.purpose}</td>
-                                <td style={{ padding: '1.25rem 0', color: 'white', fontWeight: '700' }}>{p.pledged}</td>
+                                <td style={{ padding: '1.25rem 0', color: 'var(--text-color)', fontWeight: '700' }}>{p.pledged}</td>
                                 <td style={{ padding: '1.25rem 0', color: '#22c55e', fontWeight: '700' }}>{p.redeemed}</td>
                                 <td style={{ padding: '1.25rem 0', color: 'var(--text-muted)' }}>{p.progress}</td>
                                 <td style={{ padding: '1.25rem 0' }}>

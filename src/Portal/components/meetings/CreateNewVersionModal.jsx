@@ -20,14 +20,14 @@ const CreateNewVersionModal = ({ onClose }) => {
                 padding: '2.5rem 2rem',
                 boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
             }}>
-                <h2 style={{ margin: '0 0 2rem 0', color: '#ffffff', fontSize: '1.25rem', fontWeight: '800' }}>Create New Version</h2>
+                <h2 style={{ margin: '0 0 2rem 0', color: 'var(--text-color)', fontSize: '1.25rem', fontWeight: '800' }}>Create New Version</h2>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     {/* Budget Name */}
                     <div>
                         <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.7rem', fontWeight: '700', marginBottom: '0.5rem', textTransform: 'capitalize' }}>Budget Name *</label>
                         <input type="text" placeholder="e.g. Main Event Budget" style={{
-                            width: '100%', padding: '0.8rem 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: '#ffffff', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box'
+                            width: '100%', padding: '0.8rem 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box'
                         }} />
                     </div>
 
@@ -35,7 +35,7 @@ const CreateNewVersionModal = ({ onClose }) => {
                     <div>
                         <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.7rem', fontWeight: '700', marginBottom: '0.5rem', textTransform: 'capitalize' }}>Notes</label>
                         <textarea placeholder="Optional notes..." rows="3" style={{
-                            width: '100%', padding: '0.8rem 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: '#ffffff', outline: 'none', fontSize: '0.9rem', resize: 'vertical', fontFamily: 'monospace', boxSizing: 'border-box'
+                            width: '100%', padding: '0.8rem 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', resize: 'vertical', fontFamily: 'monospace', boxSizing: 'border-box'
                         }}></textarea>
                     </div>
 
@@ -48,12 +48,12 @@ const CreateNewVersionModal = ({ onClose }) => {
                     {/* Actions */}
                     <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '1rem' }}>
                         <button onClick={onClose} style={{
-                            background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', color: '#ffffff', padding: '0.6rem 1.25rem', borderRadius: '0.5rem', fontSize: '0.9rem', fontWeight: '600', cursor: 'pointer'
+                            background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', color: 'var(--text-color)', padding: '0.6rem 1.25rem', borderRadius: '0.5rem', fontSize: '0.9rem', fontWeight: '600', cursor: 'pointer'
                         }}>
                             Cancel
                         </button>
                         <button onClick={onClose} style={{
-                            background: '#7c3aed', color: '#ffffff', border: 'none', borderRadius: '0.5rem', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer'
+                            background: '#7c3aed', color: 'var(--text-color)', border: 'none', borderRadius: '0.5rem', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer'
                         }}>
                             Create
                         </button>

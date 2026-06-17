@@ -19,17 +19,17 @@ const EventSchedule = () => {
             {/* Header */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
                 <div>
-                    <h1 style={{ fontSize: '1.8rem', fontWeight: '800', margin: 0, color: '#ffffff' }}>Event Schedule</h1>
+                    <h1 style={{ fontSize: '1.8rem', fontWeight: '800', margin: 0, color: 'var(--text-color)' }}>Event Schedule</h1>
                     <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem', fontSize: '0.95rem' }}>Plan and manage your event program — sessions, speakers, and timing.</p>
                 </div>
                 <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                    <button onClick={() => setIsModalOpen(true)} style={{ background: '#22c55e', color: '#ffffff', border: 'none', borderRadius: '0.5rem', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <button onClick={() => setIsModalOpen(true)} style={{ background: '#22c55e', color: 'var(--text-color)', border: 'none', borderRadius: '0.5rem', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <span>+</span> Add Session
                     </button>
-                    <button style={{ background: '#ef4444', color: '#ffffff', border: 'none', borderRadius: '0.5rem', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <button style={{ background: '#ef4444', color: 'var(--text-color)', border: 'none', borderRadius: '0.5rem', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <span>📄</span> PDF Report
                     </button>
-                    <button style={{ background: '#a855f7', color: '#ffffff', border: 'none', borderRadius: '0.5rem', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <button style={{ background: '#a855f7', color: 'var(--text-color)', border: 'none', borderRadius: '0.5rem', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <span>📅</span> Timetable
                     </button>
                 </div>
@@ -48,7 +48,7 @@ const EventSchedule = () => {
                             background: 'transparent',
                             border: '1px solid #ffffff',
                             borderRadius: '0.5rem',
-                            color: '#ffffff',
+                            color: 'var(--text-color)',
                             fontSize: '0.9rem',
                             fontWeight: '600',
                             outline: 'none',
@@ -56,11 +56,11 @@ const EventSchedule = () => {
                             cursor: 'pointer'
                         }}
                     >
-                        <option value="" style={{ color: '#ffffff', background: '#1a1a24' }}>Select an event...</option>
-                        <option value="1" style={{ color: '#ffffff', background: '#1a1a24' }}>LEADERSHIP TRAINING 2026 EDITION — 4/2/2026 (GILGIL)</option>
-                        <option value="2" style={{ color: '#ffffff', background: '#1a1a24' }}>YOUTH RETREAT 2026 — 5/15/2026 (NAIROBI)</option>
+                        <option value="" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>Select an event...</option>
+                        <option value="1" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>LEADERSHIP TRAINING 2026 EDITION — 4/2/2026 (GILGIL)</option>
+                        <option value="2" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>YOUTH RETREAT 2026 — 5/15/2026 (NAIROBI)</option>
                     </select>
-                    <span style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: '#ffffff', fontSize: '0.8rem' }}>▼</span>
+                    <span style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: 'var(--text-color)', fontSize: '0.8rem' }}>▼</span>
                 </div>
             </div>
 
@@ -69,30 +69,30 @@ const EventSchedule = () => {
                     {/* Stats Row */}
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                            <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>📅</div>
+                            <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>📅</div>
                             <div>
-                                <div style={{ fontSize: '1.4rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>3</div>
+                                <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>3</div>
                                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Days</div>
                             </div>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                            <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>📋</div>
+                            <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>📋</div>
                             <div>
-                                <div style={{ fontSize: '1.4rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>17</div>
+                                <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>17</div>
                                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Sessions</div>
                             </div>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                            <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>🎤</div>
+                            <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>🎤</div>
                             <div>
-                                <div style={{ fontSize: '1.4rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>6</div>
+                                <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>6</div>
                                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Speakers</div>
                             </div>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                            <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>⏱️</div>
+                            <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>⏱️</div>
                             <div>
-                                <div style={{ fontSize: '1.4rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>16h</div>
+                                <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>16h</div>
                                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Total Time</div>
                             </div>
                         </div>
@@ -171,7 +171,7 @@ const EventSchedule = () => {
                             <div key={session.id} style={{ display: 'flex', gap: '2rem', position: 'relative' }}>
                                 {/* Start Time & Dot */}
                                 <div style={{ width: '80px', textAlign: 'right', flexShrink: 0, position: 'relative' }}>
-                                    <div style={{ color: '#ffffff', fontWeight: '700', fontSize: '0.9rem' }}>{session.start}</div>
+                                    <div style={{ color: 'var(--text-color)', fontWeight: '700', fontSize: '0.9rem' }}>{session.start}</div>
                                     <div style={{ color: 'var(--text-muted)', fontSize: '0.7rem', marginTop: '0.2rem' }}>{session.end}</div>
                                     {/* Dot indicator */}
                                     <div style={{
@@ -191,14 +191,14 @@ const EventSchedule = () => {
                                     {/* Type Pill & Duration */}
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
                                         <span style={{
-                                            background: 'rgba(255,255,255,0.05)',
+                                            background: 'var(--border-color)',
                                             color: session.typeColor,
                                             padding: '0.15rem 0.5rem',
                                             borderRadius: '0.25rem',
                                             fontSize: '0.65rem',
                                             fontWeight: '700',
                                             textTransform: 'uppercase',
-                                            border: `1px solid rgba(255,255,255,0.05)`
+                                            border: `1px solid var(--border-color)`
                                         }}>
                                             {session.type}
                                         </span>
@@ -206,7 +206,7 @@ const EventSchedule = () => {
                                     </div>
 
                                     {/* Title */}
-                                    <h3 style={{ color: '#ffffff', fontSize: '1rem', fontWeight: '700', margin: '0 0 0.5rem 0' }}>{session.title}</h3>
+                                    <h3 style={{ color: 'var(--text-color)', fontSize: '1rem', fontWeight: '700', margin: '0 0 0.5rem 0' }}>{session.title}</h3>
 
                                     {/* Speaker & Location */}
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem', marginBottom: '0.75rem' }}>
@@ -236,7 +236,7 @@ const EventSchedule = () => {
                     </div>
                 </>
             ) : (
-                <div style={{ textAlign: 'center', color: 'var(--text-muted)', marginTop: '4rem', padding: '3rem', background: 'rgba(255,255,255,0.02)', borderRadius: '1rem' }}>
+                <div style={{ textAlign: 'center', color: 'var(--text-muted)', marginTop: '4rem', padding: '3rem', background: 'var(--border-color)', borderRadius: '1rem' }}>
                     <div style={{ fontSize: '3rem', marginBottom: '1rem', opacity: 0.5 }}>📅</div>
                     <p style={{ fontSize: '1.1rem', fontWeight: '600' }}>Please select an event to view its schedule.</p>
                 </div>

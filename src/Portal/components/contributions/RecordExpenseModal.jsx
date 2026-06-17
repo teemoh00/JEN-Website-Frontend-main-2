@@ -24,7 +24,7 @@ const RecordExpenseModal = ({ onClose }) => {
         padding: '0.5rem 0',
         background: 'transparent',
         border: 'none',
-        color: 'white',
+        color: 'var(--text-color)',
         fontSize: '0.9rem',
         marginTop: '0.25rem',
         outline: 'none',
@@ -58,7 +58,7 @@ const RecordExpenseModal = ({ onClose }) => {
                 borderRadius: '0.8rem',
                 width: '100%',
                 maxWidth: '420px',
-                border: '1px solid rgba(255,255,255,0.05)',
+                border: '1px solid var(--border-color)',
                 boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
                 display: 'flex',
                 flexDirection: 'column'
@@ -69,7 +69,7 @@ const RecordExpenseModal = ({ onClose }) => {
                     justifyContent: 'space-between', 
                     alignItems: 'center' 
                 }}>
-                    <h2 style={{ fontSize: '1.25rem', color: 'white', margin: 0, fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <h2 style={{ fontSize: '1.25rem', color: 'var(--text-color)', margin: 0, fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <span>🧾</span> Record Expense
                     </h2>
                     <button onClick={onClose} style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', fontSize: '1.2rem', cursor: 'pointer', padding: 0 }}>×</button>
@@ -88,7 +88,7 @@ const RecordExpenseModal = ({ onClose }) => {
                                 <option value="Event" style={{ color: 'var(--text-color)', background: 'var(--surface-2)' }}>Event</option>
                                 <option value="Other" style={{ color: 'var(--text-color)', background: 'var(--surface-2)' }}>Other</option>
                             </select>
-                            <span style={{ position: 'absolute', right: '0', top: '1.75rem', pointerEvents: 'none', color: 'white', fontSize: '0.8rem', fontWeight: 'bold' }}>v</span>
+                            <span style={{ position: 'absolute', right: '0', top: '1.75rem', pointerEvents: 'none', color: 'var(--text-color)', fontSize: '0.8rem', fontWeight: 'bold' }}>v</span>
                         </div>
 
                         <div>
@@ -113,7 +113,7 @@ const RecordExpenseModal = ({ onClose }) => {
                                 borderRadius: '0.5rem',
                                 border: 'none',
                                 background: '#f87171', // Matches the coral red from the screenshot
-                                color: 'white',
+                                color: 'var(--text-color)',
                                 fontWeight: '700',
                                 cursor: 'pointer',
                                 fontSize: '0.95rem'

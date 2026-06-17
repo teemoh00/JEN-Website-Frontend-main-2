@@ -327,7 +327,7 @@ const MeetingAttendeesModal = ({ meeting, onClose }) => {
                                             width: '42px', height: '42px', borderRadius: '50%',
                                             background: 'linear-gradient(135deg, var(--primary), #6366f1)',
                                             display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                            color: 'white', fontWeight: '700', fontSize: '0.9rem',
+                                            color: 'var(--text-color)', fontWeight: '700', fontSize: '0.9rem',
                                             flexShrink: 0
                                         }}>
                                             {getInitials(name)}

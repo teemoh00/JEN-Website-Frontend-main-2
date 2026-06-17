@@ -104,7 +104,7 @@ const GiveNowModal = ({ isOpen, onClose }) => {
                             borderRadius: '1rem',
                             border: 'none',
                             background: 'var(--primary)',
-                            color: 'white',
+                            color: 'var(--text-color)',
                             fontWeight: '800',
                             fontSize: '1.1rem',
                             cursor: 'pointer',

@@ -33,7 +33,7 @@ const CommitToFastModal = ({ onClose }) => {
         padding: '0.5rem 0',
         background: 'transparent',
         border: 'none',
-        color: 'white',
+        color: 'var(--text-color)',
         fontSize: '0.9rem',
         marginTop: '0.4rem',
         outline: 'none',
@@ -70,7 +70,7 @@ const CommitToFastModal = ({ onClose }) => {
                 boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
             }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
-                    <h2 style={{ fontSize: '1.4rem', color: 'white', margin: 0, fontWeight: '700' }}>Commit to Fast</h2>
+                    <h2 style={{ fontSize: '1.4rem', color: 'var(--text-color)', margin: 0, fontWeight: '700' }}>Commit to Fast</h2>
                     <button onClick={onClose} style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', fontSize: '1.2rem', cursor: 'pointer', padding: 0 }}>×</button>
                 </div>
 
@@ -158,7 +158,7 @@ const CommitToFastModal = ({ onClose }) => {
                             borderRadius: '0.4rem',
                             border: 'none',
                             background: 'var(--primary)',
-                            color: 'white',
+                            color: 'var(--text-color)',
                             fontWeight: '700',
                             cursor: 'pointer',
                             fontSize: '0.85rem'

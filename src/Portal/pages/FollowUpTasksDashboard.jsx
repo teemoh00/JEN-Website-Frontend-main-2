@@ -39,7 +39,7 @@ const FollowUpTasksDashboard = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <div style={{ fontSize: '1.5rem' }}>📋</div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-                        <div style={{ fontSize: '1.8rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>0</div>
+                        <div style={{ fontSize: '1.8rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>0</div>
                         <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '600' }}>Total Follow-Ups</div>
                     </div>
                 </div>

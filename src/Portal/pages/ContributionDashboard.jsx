@@ -32,14 +32,14 @@ const ContributionDashboard = () => {
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1.5rem', minWidth: '220px', flex: '1 1 220px' }}>
             <div style={{ flex: 1 }}>
                 <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '0.25rem' }}>{title}</div>
-                <div style={{ color: 'white', fontSize: '1.8rem', fontWeight: '800', lineHeight: 1.2, marginBottom: '0.25rem' }}>{amount}</div>
+                <div style={{ color: 'var(--text-color)', fontSize: '1.8rem', fontWeight: '800', lineHeight: 1.2, marginBottom: '0.25rem' }}>{amount}</div>
                 <div style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>{subtitle}</div>
             </div>
             <div style={{ 
                 width: '42px', 
                 height: '42px', 
                 borderRadius: '0.5rem', 
-                background: 'rgba(255,255,255,0.05)', 
+                background: 'var(--border-color)', 
                 display: 'flex', 
                 alignItems: 'center', 
                 justifyContent: 'center',
@@ -56,7 +56,7 @@ const ContributionDashboard = () => {
         borderRadius: '0.4rem',
         border: 'none',
         background: isPrimary ? 'var(--primary)' : 'transparent',
-        color: 'white',
+        color: 'var(--text-color)',
         fontWeight: '700',
         cursor: 'pointer',
         fontSize: '0.85rem',
@@ -81,7 +81,7 @@ const ContributionDashboard = () => {
         <div style={{ maxWidth: '1400px', margin: '0 auto', paddingBottom: '3rem' }}>
             {/* Header Section */}
             <div style={{ marginBottom: '3rem' }}>
-                <h1 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'white', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>
+                <h1 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'var(--text-color)', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>
                     Financial Management
                 </h1>
                 <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: 0 }}>
@@ -140,7 +140,7 @@ const ContributionDashboard = () => {
                             padding: '0.5rem',
                             background: 'transparent',
                             border: 'none',
-                            color: 'white',
+                            color: 'var(--text-color)',
                             outline: 'none',
                             fontSize: '0.85rem',
                             minWidth: '200px'
@@ -152,7 +152,7 @@ const ContributionDashboard = () => {
                 <div style={{ overflowX: 'auto' }}>
                     <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                         <thead>
-                            <tr style={{ color: 'var(--text-muted)', fontSize: '0.75rem', textTransform: 'uppercase', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                            <tr style={{ color: 'var(--text-muted)', fontSize: '0.75rem', textTransform: 'uppercase', borderBottom: '1px solid var(--border-color)' }}>
                                 <th style={{ padding: '1rem 0', fontWeight: '600' }}>Date</th>
                                 <th style={{ padding: '1rem 0', fontWeight: '600' }}>Description</th>
                                 <th style={{ padding: '1rem 0', fontWeight: '600' }}>Category</th>
@@ -163,9 +163,9 @@ const ContributionDashboard = () => {
                         </thead>
                         <tbody>
                             {transactions.map((t) => (
-                                <tr key={t.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', fontSize: '0.85rem' }}>
+                                <tr key={t.id} style={{ borderBottom: '1px solid var(--border-color)', fontSize: '0.85rem' }}>
                                     <td style={{ padding: '1rem 0', color: 'var(--text-muted)' }}>{t.date}</td>
-                                    <td style={{ padding: '1rem 0', color: 'white', fontWeight: '700' }}>{t.description}</td>
+                                    <td style={{ padding: '1rem 0', color: 'var(--text-color)', fontWeight: '700' }}>{t.description}</td>
                                     <td style={{ padding: '1rem 0', color: 'var(--primary)' }}>{t.category}</td>
                                     <td style={{ padding: '1rem 0' }}>
                                         <span style={{ 
@@ -199,7 +199,7 @@ const ContributionDashboard = () => {
                     <div>Showing 1 to 4 of 4 entries</div>
                     <div style={{ display: 'flex', gap: '1rem' }}>
                         <span style={{ cursor: 'pointer', opacity: 0.5 }}>&lt; Prev</span>
-                        <span style={{ color: 'white' }}>Page 1 of 1</span>
+                        <span style={{ color: 'var(--text-color)' }}>Page 1 of 1</span>
                         <span style={{ cursor: 'pointer', opacity: 0.5 }}>Next &gt;</span>
                     </div>
                 </div>

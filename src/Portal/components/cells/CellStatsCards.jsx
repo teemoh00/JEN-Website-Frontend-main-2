@@ -22,7 +22,7 @@ const StatCard = ({ icon, value, label, subtext, color = 'var(--primary)', loadi
             {icon}
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem' }}>
-            <div style={{ fontSize: '2rem', fontWeight: '800', color: '#ffffff', lineHeight: '1.1' }}>{loading ? '...' : value}</div>
+            <div style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: '1.1' }}>{loading ? '...' : value}</div>
             <div style={{ color: '#94a3b8', fontSize: '0.85rem', fontWeight: '500' }}>{label}</div>
             {subtext && <div style={{ color: color, fontSize: '0.75rem', fontWeight: '600' }}>{subtext}</div>}
         </div>

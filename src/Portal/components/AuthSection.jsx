@@ -190,7 +190,7 @@ const AuthSection = () => {
                                 </div>
                                 <button type="submit" disabled={loading} style={{
                                     background: '#22c1e6',
-                                    color: 'white',
+                                    color: 'var(--text-color)',
                                     padding: '0.75rem',
                                     borderRadius: '0.5rem',
                                     fontWeight: '700',
@@ -239,7 +239,7 @@ const AuthSection = () => {
 
                                     <button type="submit" style={{
                                         background: 'linear-gradient(to right, #6366f1, #8b5cf6)', // Purple/Blue gradient
-                                        color: 'white',
+                                        color: 'var(--text-color)',
                                         padding: '0.75rem',
                                         borderRadius: '0.5rem',
                                         fontWeight: '600',
@@ -435,7 +435,7 @@ const AuthSection = () => {
 
                                 <button type="submit" disabled={loading} style={{
                                     background: '#22c1e6',
-                                    color: 'white',
+                                    color: 'var(--text-color)',
                                     padding: '0.75rem',
                                     borderRadius: '0.5rem',
                                     fontWeight: '700',

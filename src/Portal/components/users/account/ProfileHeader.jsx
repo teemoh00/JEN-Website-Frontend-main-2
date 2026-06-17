@@ -101,7 +101,7 @@ const ProfileHeader = ({ user, onEditProfilePic, onEditProfile }) => {
                             justifyContent: 'center',
                             fontSize: '4rem',
                             fontWeight: '700',
-                            color: 'white',
+                            color: 'var(--text-color)',
                             border: '6px solid var(--surface-1)',
                             boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.2)',
                             backgroundImage: avatarUrl ? `url(${avatarUrl})` : 'none',
@@ -185,7 +185,7 @@ const ProfileHeader = ({ user, onEditProfilePic, onEditProfile }) => {
                                 onClick={onEditProfile}
                                 style={{
                                     background: 'var(--primary)',
-                                    color: 'white',
+                                    color: 'var(--text-color)',
                                     border: 'none',
                                     padding: '0.6rem 1.5rem',
                                     borderRadius: '0.75rem',

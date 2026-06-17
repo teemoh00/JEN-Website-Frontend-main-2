@@ -194,7 +194,7 @@ const CreateMeetingModal = ({ onClose }) => {
                             ) : (
                                 <select name="category" value={formData.category} onChange={handleChange} style={inputStyle}>
                                     {categories.map(cat => (
-                                        <option key={cat.id} value={cat.id} style={{ color: '#ffffff', background: '#1a1a24' }}>{cat.name}</option>
+                                        <option key={cat.id} value={cat.id} style={{ color: 'var(--text-color)', background: '#1a1a24' }}>{cat.name}</option>
                                     ))}
                                 </select>
                             )}
@@ -210,9 +210,9 @@ const CreateMeetingModal = ({ onClose }) => {
                                 <input type="text" name="type" value={formData.type} onChange={handleChange} placeholder="e.g. Webinar" style={inputStyle} />
                             ) : (
                                 <select name="type" value={formData.type} onChange={handleChange} style={inputStyle}>
-                                    <option value="Physical" style={{ color: '#ffffff', background: '#1a1a24' }}>Physical</option>
-                                    <option value="Online" style={{ color: '#ffffff', background: '#1a1a24' }}>Online</option>
-                                    <option value="Hybrid" style={{ color: '#ffffff', background: '#1a1a24' }}>Hybrid</option>
+                                    <option value="Physical" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>Physical</option>
+                                    <option value="Online" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>Online</option>
+                                    <option value="Hybrid" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>Hybrid</option>
                                 </select>
                             )}
                         </div>
@@ -241,9 +241,9 @@ const CreateMeetingModal = ({ onClose }) => {
                         <div>
                             <label style={labelStyle}>Facilitator</label>
                             <select name="facilitator" value={formData.facilitator} onChange={handleChange} style={inputStyle} required>
-                                <option value="" style={{ color: '#ffffff', background: '#1a1a24' }}>Select a Facilitator</option>
+                                <option value="" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>Select a Facilitator</option>
                                 {members.map(member => (
-                                    <option key={member.id} value={member.id} style={{ color: '#ffffff', background: '#1a1a24' }}>{member.full_name}</option>
+                                    <option key={member.id} value={member.id} style={{ color: 'var(--text-color)', background: '#1a1a24' }}>{member.full_name}</option>
                                 ))}
                             </select>
                         </div>

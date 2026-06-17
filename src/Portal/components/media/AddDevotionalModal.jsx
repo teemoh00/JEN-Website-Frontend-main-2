@@ -48,7 +48,7 @@ const AddDevotionalModal = ({ onClose }) => {
     };
 
     const labelStyle = {
-        color: 'white',
+        color: 'var(--text-color)',
         fontSize: '0.85rem',
         fontWeight: '700',
         display: 'block'
@@ -125,7 +125,7 @@ const AddDevotionalModal = ({ onClose }) => {
                                     <option value="Pastor Tim" style={{ color: 'var(--text-color)', background: 'var(--surface-2)' }}>Pastor Tim</option>
                                     <option value="Guest Speaker" style={{ color: 'var(--text-color)', background: 'var(--surface-2)' }}>Guest Speaker</option>
                                 </select>
-                                <span style={{ position: 'absolute', right: '1rem', top: '2.3rem', pointerEvents: 'none', color: 'white', fontSize: '0.8rem', fontWeight: 'bold' }}>v</span>
+                                <span style={{ position: 'absolute', right: '1rem', top: '2.3rem', pointerEvents: 'none', color: 'var(--text-color)', fontSize: '0.8rem', fontWeight: 'bold' }}>v</span>
                             </div>
                         </div>
 
@@ -156,20 +156,20 @@ const AddDevotionalModal = ({ onClose }) => {
                             </div>
                             <div style={{ position: 'relative' }}>
                                 <label style={labelStyle}>Status</label>
-                                <select name="status" value={formData.status} onChange={handleChange} style={{ ...inputStyle, appearance: 'none', cursor: 'pointer', color: 'white' }}>
+                                <select name="status" value={formData.status} onChange={handleChange} style={{ ...inputStyle, appearance: 'none', cursor: 'pointer', color: 'var(--text-color)' }}>
                                     <option value="Draft" style={{ color: 'var(--text-color)', background: 'var(--surface-2)' }}>Draft</option>
                                     <option value="Published" style={{ color: 'var(--text-color)', background: 'var(--surface-2)' }}>Published</option>
                                 </select>
-                                <span style={{ position: 'absolute', right: '1rem', top: '2.3rem', pointerEvents: 'none', color: 'white', fontSize: '0.8rem', fontWeight: 'bold' }}>v</span>
+                                <span style={{ position: 'absolute', right: '1rem', top: '2.3rem', pointerEvents: 'none', color: 'var(--text-color)', fontSize: '0.8rem', fontWeight: 'bold' }}>v</span>
                             </div>
                         </div>
 
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '1rem', marginTop: '1rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '1rem', marginTop: '1rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-color)' }}>
                             <button type="button" onClick={onClose} style={{
                                 padding: '0.6rem 1.2rem',
                                 border: '1px solid rgba(34, 193, 230, 0.4)',
                                 background: 'transparent',
-                                color: 'white',
+                                color: 'var(--text-color)',
                                 borderRadius: '0.4rem',
                                 fontWeight: '600',
                                 cursor: 'pointer',
@@ -180,7 +180,7 @@ const AddDevotionalModal = ({ onClose }) => {
                                 borderRadius: '0.4rem',
                                 border: 'none',
                                 background: 'var(--primary)',
-                                color: 'white',
+                                color: 'var(--text-color)',
                                 fontWeight: '700',
                                 cursor: 'pointer',
                                 fontSize: '0.85rem'

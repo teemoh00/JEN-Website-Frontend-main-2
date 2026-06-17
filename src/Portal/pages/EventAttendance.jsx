@@ -21,20 +21,20 @@ const EventAttendance = () => {
             {/* Header */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
                 <div>
-                    <h1 style={{ fontSize: '1.8rem', fontWeight: '800', margin: 0, color: '#ffffff' }}>Event Attendance</h1>
+                    <h1 style={{ fontSize: '1.8rem', fontWeight: '800', margin: 0, color: 'var(--text-color)' }}>Event Attendance</h1>
                     <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem', fontSize: '0.95rem' }}>Check in attendees manually or scan QR codes.</p>
                 </div>
                 <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                    <button style={{ background: '#22c55e', color: '#ffffff', border: 'none', borderRadius: '0.5rem', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <button style={{ background: '#22c55e', color: 'var(--text-color)', border: 'none', borderRadius: '0.5rem', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <span>+</span> Register
                     </button>
-                    <button style={{ background: '#0ea5e9', color: '#ffffff', border: 'none', borderRadius: '0.5rem', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <button style={{ background: '#0ea5e9', color: 'var(--text-color)', border: 'none', borderRadius: '0.5rem', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <span>✉️</span> Email All QR Codes
                     </button>
-                    <button style={{ background: '#a855f7', color: '#ffffff', border: 'none', borderRadius: '0.5rem', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <button style={{ background: '#a855f7', color: 'var(--text-color)', border: 'none', borderRadius: '0.5rem', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <span>🔲</span> Scan QR Code
                     </button>
-                    <button style={{ background: '#ef4444', color: '#ffffff', border: 'none', borderRadius: '0.5rem', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <button style={{ background: '#ef4444', color: 'var(--text-color)', border: 'none', borderRadius: '0.5rem', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <span>📄</span> PDF Report
                     </button>
                 </div>
@@ -53,7 +53,7 @@ const EventAttendance = () => {
                             background: 'transparent',
                             border: '1px solid #ffffff',
                             borderRadius: '0.5rem',
-                            color: '#ffffff',
+                            color: 'var(--text-color)',
                             fontSize: '0.9rem',
                             fontWeight: '600',
                             outline: 'none',
@@ -61,13 +61,13 @@ const EventAttendance = () => {
                             cursor: 'pointer'
                         }}
                     >
-                        <option value="" style={{ color: '#ffffff', background: '#1a1a24' }}>Select an event...</option>
-                        <option value="1" style={{ color: '#ffffff', background: '#1a1a24' }}>LEADERSHIP TRAINING 2026 EDITION — 4/2/2026 (GILGIL)</option>
-                        <option value="2" style={{ color: '#ffffff', background: '#1a1a24' }}>YOUTH RETREAT 2026 — 5/15/2026 (NAIROBI)</option>
-                        <option value="3" style={{ color: '#ffffff', background: '#1a1a24' }}>ANNUAL GENERAL MEETING — 6/20/2026 (NAKURU)</option>
-                        <option value="4" style={{ color: '#ffffff', background: '#1a1a24' }}>SUNDAY SERVICE EXTRAVAGANZA — 7/05/2026 (MAIN SANCTUARY)</option>
+                        <option value="" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>Select an event...</option>
+                        <option value="1" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>LEADERSHIP TRAINING 2026 EDITION — 4/2/2026 (GILGIL)</option>
+                        <option value="2" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>YOUTH RETREAT 2026 — 5/15/2026 (NAIROBI)</option>
+                        <option value="3" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>ANNUAL GENERAL MEETING — 6/20/2026 (NAKURU)</option>
+                        <option value="4" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>SUNDAY SERVICE EXTRAVAGANZA — 7/05/2026 (MAIN SANCTUARY)</option>
                     </select>
-                    <span style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: '#ffffff', fontSize: '0.8rem' }}>▼</span>
+                    <span style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: 'var(--text-color)', fontSize: '0.8rem' }}>▼</span>
                 </div>
             </div>
 
@@ -76,59 +76,59 @@ const EventAttendance = () => {
                     {/* Stats Row */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                    <div style={{ width: '40px', height: '40px', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem' }}>📄</div>
+                    <div style={{ width: '40px', height: '40px', borderRadius: '8px', background: 'var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem' }}>📄</div>
                     <div>
-                        <div style={{ fontSize: '1.5rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>58</div>
+                        <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>58</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Registered</div>
                     </div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <div style={{ width: '40px', height: '40px', borderRadius: '8px', background: 'rgba(34, 197, 94, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem' }}>✅</div>
                     <div>
-                        <div style={{ fontSize: '1.5rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>51</div>
+                        <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>51</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Checked In</div>
                     </div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <div style={{ width: '40px', height: '40px', borderRadius: '8px', background: 'rgba(245, 158, 11, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem' }}>⏳</div>
                     <div>
-                        <div style={{ fontSize: '1.5rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>7</div>
+                        <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>7</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Pending</div>
                     </div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <div style={{ width: '40px', height: '40px', borderRadius: '8px', background: 'rgba(168, 85, 247, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem' }}>📊</div>
                     <div>
-                        <div style={{ fontSize: '1.5rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>87.9%</div>
+                        <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>87.9%</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Attendance Rate</div>
                     </div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <div style={{ width: '40px', height: '40px', borderRadius: '8px', background: 'rgba(59, 130, 246, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem' }}>📱</div>
                     <div>
-                        <div style={{ fontSize: '1.5rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>0</div>
+                        <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>0</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>QR Scans</div>
                     </div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <div style={{ width: '40px', height: '40px', borderRadius: '8px', background: 'rgba(234, 179, 8, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem' }}>✋</div>
                     <div>
-                        <div style={{ fontSize: '1.5rem', fontWeight: '800', color: '#ffffff', lineHeight: 1 }}>51</div>
+                        <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>51</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Manual</div>
                     </div>
                 </div>
             </div>
 
             {/* Quick Check-In Bar */}
-            <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '1rem', borderBottom: '1px solid rgba(255,255,255,0.05)', marginBottom: '1.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '1rem', borderBottom: '1px solid var(--border-color)', marginBottom: '1.5rem' }}>
                 <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: '600', marginRight: '1rem' }}>QUICK CHECK-IN:</span>
-                <input type="text" placeholder="Enter phone number or email..." style={{ background: 'transparent', border: 'none', color: '#ffffff', outline: 'none', flex: 1, fontSize: '0.9rem' }} />
+                <input type="text" placeholder="Enter phone number or email..." style={{ background: 'transparent', border: 'none', color: 'var(--text-color)', outline: 'none', flex: 1, fontSize: '0.9rem' }} />
                 <button style={{ background: 'transparent', border: 'none', color: 'var(--primary)', fontWeight: '600', cursor: 'pointer', fontSize: '0.9rem' }}>Check In</button>
             </div>
 
             {/* Search & Filter Tabs */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
-                <input type="text" placeholder="Search attendees..." style={{ background: 'transparent', border: 'none', color: '#ffffff', outline: 'none', fontSize: '0.9rem', width: '250px' }} />
+                <input type="text" placeholder="Search attendees..." style={{ background: 'transparent', border: 'none', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', width: '250px' }} />
                 <div style={{ display: 'flex', gap: '1rem' }}>
                     {['All (58)', 'Checked In (51)', 'Pending (7)'].map(tab => (
                         <button
@@ -153,11 +153,11 @@ const EventAttendance = () => {
 
             {/* Table Area */}
             <div>
-                <h3 style={{ color: '#ffffff', fontSize: '1.1rem', fontWeight: '700', marginBottom: '1.5rem' }}>Registered Attendees (58)</h3>
+                <h3 style={{ color: 'var(--text-color)', fontSize: '1.1rem', fontWeight: '700', marginBottom: '1.5rem' }}>Registered Attendees (58)</h3>
                 <div style={{ overflowX: 'auto' }}>
                     <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
                         <thead>
-                            <tr style={{ color: 'var(--text-muted)', borderBottom: '1px solid rgba(255,255,255,0.05)', textTransform: 'uppercase', letterSpacing: '0.05em', fontSize: '0.75rem' }}>
+                            <tr style={{ color: 'var(--text-muted)', borderBottom: '1px solid var(--border-color)', textTransform: 'uppercase', letterSpacing: '0.05em', fontSize: '0.75rem' }}>
                                 <th style={{ padding: '1rem 0', width: '40px' }}>#</th>
                                 <th style={{ padding: '1rem 0' }}>Name</th>
                                 <th style={{ padding: '1rem 0' }}>Phone</th>
@@ -171,9 +171,9 @@ const EventAttendance = () => {
                         </thead>
                         <tbody>
                             {mockAttendees.map((attendee, index) => (
-                                <tr key={attendee.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                                <tr key={attendee.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
                                     <td style={{ padding: '1rem 0', color: 'var(--text-muted)' }}>{index + 1}</td>
-                                    <td style={{ padding: '1rem 0', color: '#ffffff', fontWeight: '600' }}>{attendee.name}</td>
+                                    <td style={{ padding: '1rem 0', color: 'var(--text-color)', fontWeight: '600' }}>{attendee.name}</td>
                                     <td style={{ padding: '1rem 0', color: 'var(--text-muted)' }}>{attendee.phone}</td>
                                     <td style={{ padding: '1rem 0', color: 'var(--text-muted)' }}>{attendee.email}</td>
                                     <td style={{ padding: '1rem 0', color: 'var(--text-muted)' }}>{attendee.category}</td>
@@ -223,7 +223,7 @@ const EventAttendance = () => {
             </div>
                 </>
             ) : (
-                <div style={{ textAlign: 'center', color: 'var(--text-muted)', marginTop: '4rem', padding: '3rem', background: 'rgba(255,255,255,0.02)', borderRadius: '1rem' }}>
+                <div style={{ textAlign: 'center', color: 'var(--text-muted)', marginTop: '4rem', padding: '3rem', background: 'var(--border-color)', borderRadius: '1rem' }}>
                     <div style={{ fontSize: '3rem', marginBottom: '1rem', opacity: 0.5 }}>📅</div>
                     <p style={{ fontSize: '1.1rem', fontWeight: '600' }}>Please select an event to view attendance details.</p>
                 </div>

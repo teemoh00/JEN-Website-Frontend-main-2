@@ -194,7 +194,7 @@ const MeetingsList = () => {
                                 </tr>
                             ) : filteredMeetings.length > 0 ? filteredMeetings.map(m => (
                                 <tr key={m.id} style={{ borderBottom: '1px solid var(--border-color)', transition: 'background 0.2s' }}
-                                    onMouseOver={e => e.currentTarget.style.background = 'rgba(255,255,255,0.02)'}
+                                    onMouseOver={e => e.currentTarget.style.background = 'var(--border-color)'}
                                     onMouseOut={e => e.currentTarget.style.background = 'transparent'}
                                 >
                                     <td style={{ padding: '1rem 1.25rem', fontWeight: '600', color: 'var(--text-color)', whiteSpace: 'nowrap', maxWidth: '220px', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -449,7 +449,7 @@ const MeetingsList = () => {
                                     borderRadius: '0.5rem',
                                     background: '#ef4444',
                                     border: 'none',
-                                    color: 'white',
+                                    color: 'var(--text-color)',
                                     cursor: 'pointer',
                                     fontWeight: '700', fontSize: '0.9rem',
                                     opacity: deletePrompt.deleting ? 0.7 : 1,

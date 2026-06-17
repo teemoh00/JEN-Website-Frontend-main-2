@@ -255,12 +255,12 @@ const AttendanceTrackingList = ({ members = [] }) => {
 
                     <div style={{ display: 'flex', gap: '0.5rem' }}>
                         <button onClick={exportToExcel} style={{
-                            background: '#10b981', color: '#fff', border: 'none', padding: '0.6rem 0.8rem', borderRadius: '0.5rem', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.4rem', height: '38px'
+                            background: '#10b981', color: 'var(--text-color)', border: 'none', padding: '0.6rem 0.8rem', borderRadius: '0.5rem', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.4rem', height: '38px'
                         }}>
                             📊 Export
                         </button>
                         <button onClick={exportToPDF} style={{
-                            background: '#ef4444', color: '#fff', border: 'none', padding: '0.6rem 0.8rem', borderRadius: '0.5rem', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.4rem', height: '38px'
+                            background: '#ef4444', color: 'var(--text-color)', border: 'none', padding: '0.6rem 0.8rem', borderRadius: '0.5rem', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.4rem', height: '38px'
                         }}>
                             📄 PDF
                         </button>

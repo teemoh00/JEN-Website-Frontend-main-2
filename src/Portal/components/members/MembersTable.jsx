@@ -381,7 +381,7 @@ const MembersTable = () => {
                                     borderRadius: '0.5rem',
                                     border: 'none',
                                     background: 'var(--primary)',
-                                    color: 'white',
+                                    color: 'var(--text-color)',
                                     fontWeight: '700',
                                     cursor: 'pointer',
                                     flex: 1,

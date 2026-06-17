@@ -169,7 +169,7 @@ const CreateMemberModal = ({ onClose, initialStatus = 'Regular Member' }) => {
                             borderRadius: '0.4rem',
                             border: 'none',
                             background: 'var(--primary)',
-                            color: 'white',
+                            color: 'var(--text-color)',
                             fontWeight: '700',
                             cursor: 'pointer',
                             fontSize: '0.85rem'

@@ -82,7 +82,7 @@ const DeleteConfirmModal = ({ isOpen, title, message, onConfirm, onCancel, loadi
                             borderRadius: '0.75rem',
                             border: 'none',
                             background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
-                            color: 'white',
+                            color: 'var(--text-color)',
                             fontWeight: '700',
                             cursor: loading ? 'not-allowed' : 'pointer',
                             fontSize: '0.95rem',
