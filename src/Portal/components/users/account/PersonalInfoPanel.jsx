@@ -22,7 +22,7 @@ const PersonalInfoPanel = ({ user, onUpdate }) => {
     const handleCommit = async () => {
         setLoading(true);
         try {
-            await api.post('church/members/commit_to_ministry/');
+            await api.post('church/members/commit_to_ministry/', { email: user.email });
             setShowConfirm(false);
             setShowSuccess(true);
             if (onUpdate) onUpdate();
@@ -134,7 +134,7 @@ const PersonalInfoPanel = ({ user, onUpdate }) => {
                             </div>
                             <h3 style={{ margin: 0, color: 'var(--text-color)', fontSize: '1.5rem', fontWeight: '900' }}>Ministry Connection</h3>
                         </div>
-                        <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', lineHeight: '10', margin: 0, maxWidth: '550px', lineHeight: '1.6' }}>
+                        <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', margin: 0, maxWidth: '550px', lineHeight: '1.6' }}>
                             {user?.commitment_status === 'Committed Member'
                                 ? "You are a recognized pillar of our ministry. Your official commitment enables us to grow together in faith and service."
                                 : "Take the next step in your spiritual journey. Becoming a committed member opens doors to leadership, deeper service, and ministerial support."}

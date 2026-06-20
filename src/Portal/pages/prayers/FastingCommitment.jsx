@@ -5,10 +5,14 @@ import FastingTable from '../../components/prayers/fasting/FastingTable';
 import FastingAnalytics from '../../components/prayers/fasting/FastingAnalytics';
 import CommitToFastModal from '../../components/prayers/fasting/CommitToFastModal';
 import CreateFastingEventModal from '../../components/prayers/fasting/CreateFastingEventModal';
+import FastingEventsTable from '../../components/prayers/fasting/FastingEventsTable';
 
 const FastingCommitment = () => {
     const [showCommitModal, setShowCommitModal] = useState(false);
     const [showCreateEventModal, setShowCreateEventModal] = useState(false);
+    const [refreshTrigger, setRefreshTrigger] = useState(0);
+    const [filters, setFilters] = useState({ eventId: 'all', day: 'all', date: '' });
+
     return (
         <div style={{ maxWidth: '1400px', margin: '0 auto', paddingBottom: '4rem' }}>
             {/* Header */}
@@ -72,13 +76,14 @@ const FastingCommitment = () => {
             </div>
 
             {/* Dashboard Components */}
-            <FastingStatsCards />
-            <FastingFilters />
-            <FastingTable />
-            <FastingAnalytics />
+            <FastingStatsCards refreshTrigger={refreshTrigger} />
+            <FastingEventsTable refreshTrigger={refreshTrigger} />
+            <FastingFilters filters={filters} setFilters={setFilters} />
+            <FastingTable refreshTrigger={refreshTrigger} filters={filters} />
+            <FastingAnalytics refreshTrigger={refreshTrigger} />
 
-            {showCommitModal && <CommitToFastModal onClose={() => setShowCommitModal(false)} />}
-            {showCreateEventModal && <CreateFastingEventModal onClose={() => setShowCreateEventModal(false)} />}
+            {showCommitModal && <CommitToFastModal onClose={() => { setShowCommitModal(false); setRefreshTrigger(prev => prev + 1); }} />}
+            {showCreateEventModal && <CreateFastingEventModal onClose={() => { setShowCreateEventModal(false); setRefreshTrigger(prev => prev + 1); }} />}
 
         </div>
     );

@@ -4,11 +4,11 @@ const UnassignedMembersList = ({ members, selectedMembers, toggleSelection, load
     const [searchTerm, setSearchTerm] = useState('');
     const [filter, setFilter] = useState('All');
 
-    const locations = ['All', ...new Set(members.map(m => m.address).filter(Boolean))];
+    const locations = ['All', ...new Set(members.map(m => m.residence).filter(Boolean))];
 
     const filteredMembers = (members || []).filter(m => {
         const fullName = m.full_name || `${m.first_name || ''} ${m.last_name || ''}`.trim() || '';
-        return (filter === 'All' || m.address === filter) &&
+        return (filter === 'All' || m.residence === filter) &&
             fullName.toLowerCase().includes(searchTerm.toLowerCase());
     });
 
@@ -106,7 +106,7 @@ const UnassignedMembersList = ({ members, selectedMembers, toggleSelection, load
                         <div style={{ flex: 1 }}>
                             <div style={{ color: 'var(--text-color)', fontSize: '0.9rem', fontWeight: '500' }}>{member.full_name || `${member.first_name || ''} ${member.last_name || ''}`.trim()}</div>
                             <div style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>
-                                {member.address || 'No Address'} • <span style={{ color: '#f59e0b' }}>{member.commitment_status}</span>
+                                {member.residence || 'No Address'} • <span style={{ color: '#f59e0b' }}>{member.category || 'Regular Member'}</span>
                             </div>
                         </div>
                     </div>

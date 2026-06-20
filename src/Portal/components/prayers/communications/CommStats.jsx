@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import api from '../../../../api/axios';
 
 const StatCard = ({ label, value, description, icon, color = 'var(--primary)' }) => (
     <div style={{
@@ -41,7 +42,24 @@ const StatCard = ({ label, value, description, icon, color = 'var(--primary)' })
     </div>
 );
 
-const CommStats = () => {
+const CommStats = ({ refreshTrigger }) => {
+    const [stats, setStats] = useState({
+        total_communications: 0,
+        sms_sent: 0,
+        emails_sent: 0
+    });
+
+    useEffect(() => {
+        const fetchStats = async () => {
+            try {
+                const response = await api.get('prayers/communications/stats');
+                setStats(response.data);
+            } catch (error) {
+                console.error("Error fetching comm stats", error);
+            }
+        };
+        fetchStats();
+    }, [refreshTrigger]);
     return (
         <div style={{
             display: 'grid',
@@ -50,15 +68,15 @@ const CommStats = () => {
             marginBottom: '2rem'
         }}>
             <StatCard
-                label="Alerts Sent Today"
-                value="1,240"
-                description="+12% from last week"
+                label="Alerts Sent (All Time)"
+                value={stats.total_communications.toLocaleString()}
+                description={`${stats.sms_sent} SMS / ${stats.emails_sent} Emails`}
                 icon="📢"
             />
             <StatCard
                 label="Active Intercessors"
                 value="856"
-                description="Reachable via SMS/App"
+                description="Dummy stat for layout"
                 icon="👥"
                 color="#22c55e"
             />

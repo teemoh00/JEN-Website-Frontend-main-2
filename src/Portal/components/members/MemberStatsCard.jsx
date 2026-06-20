@@ -39,9 +39,16 @@ const StatCard = ({ title, value, label, description, icon, color = 'var(--prima
     </div>
 );
 
-const MemberStatsCard = () => {
-    const [stats] = useState({ total: 475, committed: 48, linked: 0, unlinked: 0 });
-    const [loading] = useState(false);
+const MemberStatsCard = ({ members = [], loading }) => {
+    const total = members.length;
+    const committed = members.filter(m => m.commitment_status === 'Committed Member').length;
+    // Assuming 'linked' implies they have a system account tied to their member record, 
+    // or we can just mock it as 0 for now since we don't have an explicit 'linked' field yet.
+    // For now, let's keep it 0 as the mock data was 0.
+    const linked = 0;
+    const unlinked = committed; // All committed members that aren't linked yet
+
+    const stats = { total, committed, linked, unlinked };
 
     const formatNum = (num) => num?.toLocaleString() || '0';
 

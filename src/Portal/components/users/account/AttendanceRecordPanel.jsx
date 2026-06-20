@@ -1,20 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import api from '../../../../api/axios';
 
-const AttendanceRecordPanel = () => {
-    // Mock data based on the provided image
-    const attendanceHistory = [
-        { id: 1, date: 'Feb 02, 2026', event: 'Sunday Service', type: 'Service', time: '10:00 AM', status: 'Present' },
-        { id: 2, date: 'Jan 28, 2026', event: 'Mid-Week Cell Group', type: 'Cell Meeting', time: '06:00 PM', status: 'Present' },
-        { id: 3, date: 'Jan 26, 2026', event: 'Sunday Service', type: 'Service', time: '-', status: 'Absent' },
-        { id: 4, date: 'Jan 21, 2026', event: 'Mid-Week Cell Group', type: 'Cell Meeting', time: '06:15 PM', status: 'Present' },
-        { id: 5, date: 'Jan 19, 2026', event: 'Sunday Service', type: 'Service', time: '09:55 AM', status: 'Present' },
-    ];
+const AttendanceRecordPanel = ({ user }) => {
+    const [attendanceHistory, setAttendanceHistory] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    const summary = { present: 35, absent: 2, rate: 94 };
+    useEffect(() => {
+        const fetchAttendance = async () => {
+            if (!user?.member_id) {
+                setLoading(false);
+                return;
+            }
+            try {
+                const response = await api.get(`accounts/attendance/?member_id=${user.member_id}`);
+                setAttendanceHistory(response.data);
+            } catch (err) {
+                console.error("Error fetching attendance:", err);
+                setError("Failed to load attendance history.");
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    const getStatusColor = (status) => {
-        return status === 'Present' ? '#4ade80' : '#ef4444';
+        fetchAttendance();
+    }, [user?.member_id]);
+
+    const presentCount = attendanceHistory.filter(r => r.attended).length;
+    const absentCount = attendanceHistory.filter(r => !r.attended).length;
+    const total = presentCount + absentCount;
+    const rate = total > 0 ? Math.round((presentCount / total) * 100) : 0;
+
+    const summary = { present: presentCount, absent: absentCount, rate: rate };
+
+    const getStatusColor = (attended) => {
+        return attended ? '#4ade80' : '#ef4444';
     };
+
+    if (loading) return <div style={{ padding: '2rem', color: 'var(--text-color)' }}>Loading attendance...</div>;
+    if (error) return <div style={{ padding: '2rem', color: '#ef4444' }}>{error}</div>;
 
     return (
         <div style={{
@@ -36,13 +60,15 @@ const AttendanceRecordPanel = () => {
             </div>
 
             <div style={{ overflowX: 'auto', marginBottom: '3rem' }}>
+                {attendanceHistory.length === 0 ? (
+                    <div style={{ padding: '2rem 0', color: 'var(--text-muted)' }}>No attendance records found yet.</div>
+                ) : (
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
                     <thead>
                         <tr style={{ color: 'var(--text-muted)', borderBottom: '1px solid var(--border-color)', textAlign: 'left' }}>
                             <th style={{ padding: '1rem 0', fontWeight: '500', width: '20%' }}>Date</th>
                             <th style={{ padding: '1rem 0', fontWeight: '500', width: '25%' }}>Event / Meeting</th>
                             <th style={{ padding: '1rem 0', fontWeight: '500', width: '20%' }}>Type</th>
-                            <th style={{ padding: '1rem 0', fontWeight: '500', width: '20%' }}>Check-in Time</th>
                             <th style={{ padding: '1rem 0', fontWeight: '500', width: '15%' }}>Status</th>
                         </tr>
                     </thead>
@@ -50,24 +76,24 @@ const AttendanceRecordPanel = () => {
                         {attendanceHistory.map(record => (
                             <tr key={record.id} style={{ borderBottom: 'none', color: 'var(--text-color)' }}>
                                 <td style={{ padding: '1.25rem 0' }}>{record.date}</td>
-                                <td style={{ padding: '1.25rem 0', fontWeight: '700' }}>{record.event}</td>
-                                <td style={{ padding: '1.25rem 0' }}>{record.type}</td>
-                                <td style={{ padding: '1.25rem 0', color: 'var(--text-muted)' }}>{record.time}</td>
+                                <td style={{ padding: '1.25rem 0', fontWeight: '700' }}>{record.meeting_type}</td>
+                                <td style={{ padding: '1.25rem 0' }}>{record.meeting_type}</td>
                                 <td style={{ padding: '1.25rem 0' }}>
                                     <span style={{
-                                        color: getStatusColor(record.status),
+                                        color: getStatusColor(record.attended),
                                         display: 'flex',
                                         alignItems: 'center',
                                         gap: '0.4rem',
                                         fontSize: '0.9rem'
                                     }}>
-                                        {record.status === 'Present' ? '✓ Present' : '✕ Absent'}
+                                        {record.attended ? '✓ Present' : '✕ Absent'}
                                     </span>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
+                )}
             </div>
 
             {/* Summary Stats Cards */}

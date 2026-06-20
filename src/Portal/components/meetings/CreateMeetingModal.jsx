@@ -43,9 +43,8 @@ const CreateMeetingModal = ({ onClose }) => {
 
         const fetchMembers = async () => {
             try {
-                console.log('Fetching committed members...');
-                // CORRECTED URL: church/members/
-                const res = await axios.get('church/members/?commitment=Committed Member');
+                console.log('Fetching members for facilitator list...');
+                const res = await axios.get('members?commitment=Committed Member');
                 console.log('Members response:', res.data);
 
                 const data = res.data;

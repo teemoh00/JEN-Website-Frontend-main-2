@@ -1,7 +1,41 @@
 import React, { useState } from 'react';
+import api from '../../../../api/axios';
 
-const ComposeMessage = () => {
+const ComposeMessage = ({ onMessageSent }) => {
     const [channel, setChannel] = useState('sms');
+    const [loading, setLoading] = useState(false);
+    const [formData, setFormData] = useState({
+        audience: 'all',
+        subject: '',
+        body: ''
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleSend = async () => {
+        if (!formData.body) return alert('Message body cannot be empty');
+        
+        setLoading(true);
+        try {
+            await api.post('prayers/communications/send', {
+                type: channel,
+                recipient_group: formData.audience,
+                subject: channel === 'email' ? formData.subject : null,
+                body: formData.body
+            });
+            alert('Message sent successfully!');
+            setFormData({ audience: 'all', subject: '', body: '' });
+            if (onMessageSent) onMessageSent();
+        } catch (error) {
+            console.error('Failed to send message', error);
+            alert('Failed to send message');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <div style={{
@@ -48,7 +82,7 @@ const ComposeMessage = () => {
                 {/* Audience */}
                 <div>
                     <label style={labelStyle}>Target Audience</label>
-                    <select style={inputStyle}>
+                    <select name="audience" value={formData.audience} onChange={handleChange} style={inputStyle}>
                         <option value="all">All Members</option>
                         <option value="intercessors">Intercessory Team</option>
                         <option value="leaders">Cell Leaders</option>
@@ -60,7 +94,7 @@ const ComposeMessage = () => {
                 {channel === 'email' && (
                     <div>
                         <label style={labelStyle}>Subject Line</label>
-                        <input type="text" placeholder="Urgent Prayer Request..." style={inputStyle} />
+                        <input type="text" name="subject" value={formData.subject} onChange={handleChange} placeholder="Urgent Prayer Request..." style={inputStyle} />
                     </div>
                 )}
 
@@ -73,6 +107,9 @@ const ComposeMessage = () => {
                         </span>
                     </label>
                     <textarea
+                        name="body"
+                        value={formData.body}
+                        onChange={handleChange}
                         rows={6}
                         placeholder={channel === 'sms' ? "Type your short message here..." : "Compose your full email..."}
                         style={{ ...inputStyle, resize: 'vertical' }}
@@ -81,7 +118,7 @@ const ComposeMessage = () => {
 
                 {/* Actions */}
                 <div style={{ display: 'flex', gap: '1rem', marginTop: 'auto' }}>
-                    <button style={{
+                    <button onClick={handleSend} disabled={loading} style={{
                         flex: 1,
                         padding: '1rem',
                         background: 'var(--primary)',
@@ -89,11 +126,12 @@ const ComposeMessage = () => {
                         border: 'none',
                         borderRadius: '0.75rem',
                         fontWeight: '700',
-                        cursor: 'pointer',
+                        cursor: loading ? 'not-allowed' : 'pointer',
                         fontSize: '1rem',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem'
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
+                        opacity: loading ? 0.7 : 1
                     }}>
-                        <span>🚀</span> Send Now
+                        <span>🚀</span> {loading ? 'Sending...' : 'Send Now'}
                     </button>
                     <button style={{
                         padding: '1rem',

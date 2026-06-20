@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import api from '../../../api/axios';
 
-const AddDevotionalModal = ({ onClose }) => {
+const AddDevotionalModal = ({ onClose, onSuccess }) => {
     const [formData, setFormData] = useState({
         title: '',
         date: '',
@@ -20,10 +21,21 @@ const AddDevotionalModal = ({ onClose }) => {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e) => {
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        alert('Devotional creation simulated: ' + JSON.stringify(formData));
-        onClose();
+        setLoading(true);
+        try {
+            await api.post('devotionals', formData);
+            if (onSuccess) onSuccess();
+            onClose();
+        } catch (error) {
+            console.error("Error creating devotional", error);
+            alert("Failed to create devotional. Please try again.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     // Styling from the image
@@ -182,9 +194,12 @@ const AddDevotionalModal = ({ onClose }) => {
                                 background: 'var(--primary)',
                                 color: 'var(--text-color)',
                                 fontWeight: '700',
-                                cursor: 'pointer',
-                                fontSize: '0.85rem'
-                            }}>Add Devotional</button>
+                                cursor: loading ? 'not-allowed' : 'pointer',
+                                fontSize: '0.85rem',
+                                opacity: loading ? 0.7 : 1
+                            }} disabled={loading}>
+                                {loading ? 'Saving...' : 'Add Devotional'}
+                            </button>
                         </div>
                     </form>
                 </div>

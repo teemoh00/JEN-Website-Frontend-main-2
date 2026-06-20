@@ -1,37 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
     LineChart, Line, PieChart, Pie, Cell, Legend
 } from 'recharts';
+import api from '../../../../api/axios';
 
-const FastingAnalytics = () => {
+const FastingAnalytics = ({ refreshTrigger }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [stats, setStats] = useState({
+        dayDistribution: [],
+        commitmentsOverTime: [],
+        participationData: []
+    });
 
-    // Dummy Data
-    const dayDistribution = [
-        { name: 'Mon', count: 12 },
-        { name: 'Tue', count: 19 },
-        { name: 'Wed', count: 25 }, // Most popular
-        { name: 'Thu', count: 18 },
-        { name: 'Fri', count: 22 },
-        { name: 'Sat', count: 15 },
-        { name: 'Sun', count: 10 },
-    ];
+    useEffect(() => {
+        const fetchStats = async () => {
+            if (!isOpen) return; // Only fetch when opened or you can fetch on mount
+            try {
+                const response = await api.get('prayers/fasting/stats');
+                setStats({
+                    dayDistribution: response.data.dayDistribution || [],
+                    commitmentsOverTime: response.data.commitmentsOverTime || [],
+                    participationData: response.data.participationData || []
+                });
+            } catch (error) {
+                console.error("Error fetching fasting analytics", error);
+            }
+        };
+        fetchStats();
+    }, [isOpen, refreshTrigger]);
 
-    const commitmentsOverTime = [
-        { date: 'Jan 25', count: 5 },
-        { date: 'Jan 26', count: 8 },
-        { date: 'Jan 27', count: 12 },
-        { date: 'Jan 28', count: 15 },
-        { date: 'Jan 29', count: 18 },
-        { date: 'Jan 30', count: 19 },
-        { date: 'Jan 31', count: 20 },
-    ];
-
-    const participationData = [
-        { name: 'Active Participants', value: 20 },
-        { name: 'Inactive', value: 5 },
-    ];
     const COLORS = ['var(--primary)', '#334155'];
 
     return (
@@ -76,7 +74,7 @@ const FastingAnalytics = () => {
                         <div style={{ height: '300px' }}>
                             <h4 style={{ color: 'var(--text-muted)', marginBottom: '1rem', fontSize: '0.9rem', textAlign: 'center' }}>Fasting Days Distribution</h4>
                             <ResponsiveContainer width="99%" height="100%" minWidth={0} minHeight={1}>
-                                <BarChart data={dayDistribution}>
+                                <BarChart data={stats.dayDistribution}>
                                     <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" />
                                     <XAxis dataKey="name" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
                                     <YAxis stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
@@ -93,7 +91,7 @@ const FastingAnalytics = () => {
                         <div style={{ height: '300px' }}>
                             <h4 style={{ color: 'var(--text-muted)', marginBottom: '1rem', fontSize: '0.9rem', textAlign: 'center' }}>Commitments Over Time</h4>
                             <ResponsiveContainer width="99%" height="100%" minWidth={0} minHeight={1}>
-                                <LineChart data={commitmentsOverTime}>
+                                <LineChart data={stats.commitmentsOverTime}>
                                     <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" />
                                     <XAxis dataKey="date" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
                                     <YAxis stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
@@ -111,7 +109,7 @@ const FastingAnalytics = () => {
                             <ResponsiveContainer width="99%" height="100%" minWidth={0} minHeight={1}>
                                 <PieChart>
                                     <Pie
-                                        data={participationData}
+                                        data={stats.participationData}
                                         cx="50%"
                                         cy="50%"
                                         innerRadius={60}
@@ -120,7 +118,7 @@ const FastingAnalytics = () => {
                                         paddingAngle={5}
                                         dataKey="value"
                                     >
-                                        {participationData.map((entry, index) => (
+                                        {stats.participationData.map((entry, index) => (
                                             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                         ))}
                                     </Pie>

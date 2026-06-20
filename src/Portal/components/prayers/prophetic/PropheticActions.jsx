@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ActionButton = ({ label, primary, green, filled, className }) => {
+const ActionButton = ({ label, primary, green, filled, className, onClick }) => {
     let background = 'transparent';
     let border = '1px solid var(--secondary)'; // Purple border default
     let color = 'var(--secondary)';
@@ -15,7 +15,7 @@ const ActionButton = ({ label, primary, green, filled, className }) => {
     }
 
     return (
-        <button className={`prophetic-action-btn ${className}`} style={{
+        <button onClick={onClick} className={`prophetic-action-btn ${className}`} style={{
             background,
             border,
             color,
@@ -32,7 +32,7 @@ const ActionButton = ({ label, primary, green, filled, className }) => {
     );
 };
 
-const PropheticActions = () => {
+const PropheticActions = ({ onNewProphecy, onNewSchedule }) => {
     return (
         <div className="prophetic-actions-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '2rem' }}>
             <style>{`
@@ -56,12 +56,12 @@ const PropheticActions = () => {
             `}</style>
             <div className="prophetic-action-group" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                 <ActionButton label="New Prophecy Type" />
-                <ActionButton label="New Prophecy/Instruction" />
+                <ActionButton label="New Prophecy/Instruction" onClick={onNewProphecy} />
                 <ActionButton label="Download All Communications" filled />
             </div>
 
             <div className="prophetic-action-group" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                <ActionButton label="Add A Prayer Schedule" green />
+                <ActionButton label="Add A Prayer Schedule" green onClick={onNewSchedule} />
                 <ActionButton label="View Prayer Schedules" green />
             </div>
         </div>

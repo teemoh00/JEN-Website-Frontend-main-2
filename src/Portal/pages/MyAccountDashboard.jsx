@@ -27,9 +27,9 @@ const MyAccountDashboard = () => {
             <ProfileTabs activeTab={activeTab} onTabChange={setActiveTab} />
 
             {activeTab === 'profile' && <PersonalInfoPanel user={user} onUpdate={refreshUser} />}
-            {activeTab === 'attendance' && <AttendanceRecordPanel />}
+            {activeTab === 'attendance' && <AttendanceRecordPanel user={user} />}
 
-            {isEditProfilePicModalOpen && <EditProfilePictureModal onClose={() => setIsEditProfilePicModalOpen(false)} onUpdate={refreshUser} />}
+            {isEditProfilePicModalOpen && <EditProfilePictureModal user={user} onClose={() => setIsEditProfilePicModalOpen(false)} onUpdate={refreshUser} />}
             {isEditProfileModalOpen && <EditProfileModal user={user} onClose={() => setIsEditProfileModalOpen(false)} onUpdate={refreshUser} />}
         </div>
     );

@@ -20,7 +20,7 @@ const ActionButton = ({ icon, label, primary = false, onClick }) => (
     </button>
 );
 
-const MembersActionBar = ({ onNewMember, onUploadExcel, onNewCategory, onNewCellGroup, onAddCommittedMember }) => {
+const MembersActionBar = ({ onNewMember, onNewCellGroup }) => {
     return (
         <div style={{
             marginBottom: '2rem',
@@ -31,10 +31,7 @@ const MembersActionBar = ({ onNewMember, onUploadExcel, onNewCategory, onNewCell
             padding: '0.5rem 0'
         }}>
             <ActionButton icon="➕" label="New Member" primary={true} onClick={onNewMember} />
-            <ActionButton icon="📂" label="Upload Excel" onClick={onUploadExcel} />
-            <ActionButton icon="🏷️" label="New Category" onClick={onNewCategory} />
             <ActionButton icon="👨‍👩‍👧‍👦" label="New Cell Group" onClick={onNewCellGroup} />
-            <ActionButton icon="🤝" label="Add Committed Member" onClick={onAddCommittedMember} />
         </div>
     );
 };

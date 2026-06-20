@@ -1,12 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import api from '../../../../api/axios';
 
-const MessageHistory = () => {
-    const logs = [
-        { id: 1, date: 'Feb 3, 10:30 AM', type: 'SMS', subject: 'Urgent Prayer: Sister Mary', recipient: 'Intercessors', status: 'Sent' },
-        { id: 2, date: 'Feb 2, 09:00 AM', type: 'Email', subject: 'Weekly Prayer Schedule', recipient: 'All Members', status: 'Sent' },
-        { id: 3, date: 'Feb 1, 08:45 PM', type: 'WhatsApp', subject: 'Vigil Reminder', recipient: 'Youth Ministry', status: 'Failed' },
-        { id: 4, date: 'Jan 30, 11:15 AM', type: 'SMS', subject: 'Healing Service Alert', recipient: 'Cell Leaders', status: 'Pending' },
-    ];
+const MessageHistory = ({ refreshTrigger }) => {
+    const [logs, setLogs] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchMessages = async () => {
+            try {
+                const response = await api.get('prayers/communications');
+                const mapped = response.data.map(item => ({
+                    id: item.id,
+                    date: new Date(item.created_at).toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
+                    type: item.type,
+                    subject: item.subject || item.body, // Fallback to body if no subject
+                    recipient: item.recipient_group,
+                    status: item.status
+                }));
+                setLogs(mapped);
+            } catch (err) {
+                console.error("Failed to load messages", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchMessages();
+    }, [refreshTrigger]);
 
     return (
         <div style={{
@@ -38,12 +57,16 @@ const MessageHistory = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {logs.map(log => (
+                        {loading ? (
+                            <tr><td colSpan="5" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>Loading...</td></tr>
+                        ) : logs.length === 0 ? (
+                            <tr><td colSpan="5" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>No messages found</td></tr>
+                        ) : logs.map(log => (
                             <tr key={log.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
                                 <td style={cellStyle}>
                                     <span style={{
                                         fontSize: '0.75rem', fontWeight: '700', padding: '0.25rem 0.5rem', borderRadius: '0.25rem',
-                                        background: 'var(--surface-2)', color: 'var(--text-muted)'
+                                        background: 'var(--surface-2)', color: 'var(--text-muted)', textTransform: 'uppercase'
                                     }}>
                                         {log.type}
                                     </span>
@@ -51,7 +74,7 @@ const MessageHistory = () => {
                                 <td style={{ ...cellStyle, fontWeight: '500', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                     {log.subject}
                                 </td>
-                                <td style={{ ...cellStyle, color: 'var(--text-muted)' }}>{log.recipient}</td>
+                                <td style={{ ...cellStyle, color: 'var(--text-muted)', textTransform: 'capitalize' }}>{log.recipient}</td>
                                 <td style={{ ...cellStyle, color: 'var(--text-muted)', fontSize: '0.8rem' }}>{log.date}</td>
                                 <td style={cellStyle}>
                                     <StatusBadge status={log.status} />

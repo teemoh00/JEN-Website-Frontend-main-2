@@ -1,19 +1,9 @@
 import React, { useState } from 'react';
 import { MOCK_MEMBERS } from '../../../mockData';
 
-const UsersTable = () => {
+const UsersTable = ({ users = [], loading, error }) => {
     const [filterRole, setFilterRole] = useState('All');
-    const [users] = useState(MOCK_MEMBERS.map(m => ({
-        id: m.id,
-        username: m.email,
-        email: m.email,
-        profile: { full_name: `${m.first_name} ${m.last_name}` },
-        is_staff: m.id === 1,
-        is_active: true,
-        date_joined: m.date_joined,
-    })));
-    const [loading] = useState(false);
-    const [error] = useState(null);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const getStatusColor = (status) => {
         switch (status) {
@@ -23,6 +13,23 @@ const UsersTable = () => {
             default: return 'var(--text-color)';
         }
     };
+
+    let displayedUsers = users;
+
+    if (filterRole !== 'All') {
+        const isStaffFilter = filterRole === 'Admin';
+        displayedUsers = displayedUsers.filter(u => !!u.is_staff === isStaffFilter);
+    }
+
+    if (searchTerm.trim() !== '') {
+        const lowerSearch = searchTerm.toLowerCase();
+        displayedUsers = displayedUsers.filter(u => 
+            (u.username && u.username.toLowerCase().includes(lowerSearch)) ||
+            (u.email && u.email.toLowerCase().includes(lowerSearch)) ||
+            (u.first_name && u.first_name.toLowerCase().includes(lowerSearch)) ||
+            (u.last_name && u.last_name.toLowerCase().includes(lowerSearch))
+        );
+    }
 
     return (
         <div style={{
@@ -55,6 +62,8 @@ const UsersTable = () => {
                     <input
                         type="text"
                         placeholder="Search users..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
                         style={{
                             background: 'var(--surface-2)',
                             border: '1px solid var(--border-color)',
@@ -85,10 +94,10 @@ const UsersTable = () => {
                     <tbody>
                         {loading && <tr><td colSpan="6" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>Loading users...</td></tr>}
                         {error && <tr><td colSpan="6" style={{ textAlign: 'center', padding: '2rem', color: '#ef4444' }}>{error}</td></tr>}
-                        {!loading && !error && users.map(user => (
+                        {!loading && !error && displayedUsers.map(user => (
                             <tr key={user.id} style={{ borderBottom: '1px solid var(--surface-2)', color: 'var(--text-color)' }}>
                                 <td style={{ padding: '1rem' }}>
-                                    <div style={{ fontWeight: '500', color: 'var(--text-color)' }}>{user.profile?.full_name || user.username}</div>
+                                    <div style={{ fontWeight: '500', color: 'var(--text-color)' }}>{user.first_name ? `${user.first_name} ${user.last_name}` : user.username}</div>
                                     <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{user.email}</div>
                                 </td>
                                 <td style={{ padding: '1rem' }}>
@@ -103,18 +112,15 @@ const UsersTable = () => {
                                     </span>
                                 </td>
                                 <td style={{ padding: '1rem' }}>
-                                    {user.profile ? (
-                                        <span style={{ color: '#4ade80' }}>✓ Profile Exists</span>
-                                    ) : (
-                                        <span style={{ color: 'var(--text-muted)' }}>- No Profile</span>
-                                    )}
+                                    {/* Link checking logic can be refined later */}
+                                    <span style={{ color: 'var(--text-muted)' }}>- Unknown</span>
                                 </td>
                                 <td style={{ padding: '1rem', color: 'var(--text-muted)' }}>
                                     {user.date_joined ? new Date(user.date_joined).toLocaleDateString() : 'Unknown'}
                                 </td>
                                 <td style={{ padding: '1rem' }}>
-                                    <span style={{ color: user.is_active ? '#4ade80' : '#ef4444', fontWeight: '500' }}>
-                                        ● {user.is_active ? 'Active' : 'Inactive'}
+                                    <span style={{ color: '#4ade80', fontWeight: '500' }}>
+                                        ● Active
                                     </span>
                                 </td>
                                 <td style={{ padding: '1rem', textAlign: 'right' }}>

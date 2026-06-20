@@ -6,6 +6,7 @@ import Give from './website/pages/Give';
 import Sermons from './website/pages/Sermons';
 import Events from './website/pages/Events';
 import Contact from './website/pages/Contact';
+import WebsitePledges from './website/pages/Pledges';
 import Portal from './Portal/pages/Portal';
 import PortalLayout from './Portal/layout/PortalLayout';
 import Dashboard from './Portal/pages/Dashboard';
@@ -52,7 +53,9 @@ import { AttendanceProvider } from './context/AttendanceContext';
 import EventRegistration from './website/pages/EventRegistration';
 import MeetingRegistration from './website/pages/MeetingRegistration';
 import MeetingJoinPortal from './website/pages/MeetingJoinPortal';
+import EventJoinPortal from './website/pages/EventJoinPortal';
 import QuickRegister from './website/pages/QuickRegister';
+import FastingRegistration from './website/pages/FastingRegistration';
 
 // Placeholder Pages
 const Placeholder = ({ title }) => <h1 style={{ color: 'white' }}>{title}</h1>;
@@ -72,10 +75,13 @@ function App() {
                 <Route path="/sermons" element={<Sermons />} />
                 <Route path="/events" element={<Events />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/pledges" element={<WebsitePledges />} />
                 <Route path="/events/:eventId/register" element={<EventRegistration />} />
                 <Route path="/meetings/:meetingId/register" element={<MeetingRegistration />} />
                 <Route path="/join/:slug" element={<MeetingJoinPortal />} />
+                <Route path="/event-join/:slug" element={<EventJoinPortal />} />
                 <Route path="/quick-register" element={<QuickRegister />} />
+                <Route path="/fasting-event/:id/register" element={<FastingRegistration />} />
 
                 {/* Portal Login Route */}
                 <Route path="/portal" element={<Portal />} />

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from '../../api/axios';
 
-const MeetingJoinPortal = () => {
+const EventJoinPortal = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
-    const [meeting, setMeeting] = useState(null);
+    const [event, setEvent] = useState(null);
     const [identifier, setIdentifier] = useState('');
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
@@ -14,29 +14,28 @@ const MeetingJoinPortal = () => {
     const [successMessage, setSuccessMessage] = useState('');
 
     useEffect(() => {
-        const fetchMeeting = async () => {
+        const fetchEvent = async () => {
             try {
-                // We need an endpoint to get meeting details by slug
-                const response = await axios.get(`meetings/meetings/by_slug/?slug=${slug}`);
-                setMeeting(response.data);
-                calculateTimeLeft(response.data.date, response.data.time);
+                const response = await axios.get(`events/by_slug/?slug=${slug}`);
+                setEvent(response.data);
+                calculateTimeLeft(response.data.start_date, response.data.start_time);
             } catch (err) {
-                console.error('Error fetching meeting:', err);
-                setError('Meeting not found or link expired.');
+                console.error('Error fetching event:', err);
+                setError('Event not found or link expired.');
             } finally {
                 setLoading(false);
             }
         };
-        fetchMeeting();
+        fetchEvent();
     }, [slug]);
 
     useEffect(() => {
-        if (!meeting) return;
+        if (!event) return;
         const timer = setInterval(() => {
-            calculateTimeLeft(meeting.date, meeting.time);
+            calculateTimeLeft(event.start_date, event.start_time);
         }, 1000);
         return () => clearInterval(timer);
-    }, [meeting]);
+    }, [event]);
 
     const calculateTimeLeft = (date, time) => {
         const target = new Date(`${date}T${time}`);
@@ -60,36 +59,32 @@ const MeetingJoinPortal = () => {
         setSubmitting(true);
         setError('');
         try {
-            const response = await axios.post('attendance/sessions/join_meeting/', {
+            const response = await axios.post('events/attendance/join/', {
                 slug,
                 identifier: identifier
             });
 
-            // Success! Attendence recorded, redirecting...
-            const { redirect_url, member_name } = response.data;
-            setSuccessMessage(`Welcome ${member_name}! You are checked in. ${redirect_url ? 'Redirecting to meeting...' : 'Attendance recorded.'}`);
+            // Success! Attendence recorded
+            const { member_name } = response.data;
+            setSuccessMessage(`Welcome ${member_name}! You are registered/checked in for this event.`);
             setTimeout(() => {
-                if (redirect_url) {
-                    window.location.href = redirect_url;
-                } else {
-                    navigate('/');
-                }
+                navigate('/');
             }, 2000);
         } catch (err) {
             if (err.response?.status === 404 && err.response?.data?.status === 'unregistered') {
-                // User not found, redirect to quick register
-                navigate(`/quick-register?slug=${slug}&identifier=${encodeURIComponent(identifier)}`);
+                // User not found, redirect to quick register. QuickRegister already handles `slug` so we'll pass `event_slug` so we can differentiate if needed.
+                navigate(`/quick-register?event_slug=${slug}&identifier=${encodeURIComponent(identifier)}`);
             } else {
-                setError(err.response?.data?.error || 'Unable to join meeting. Please try again.');
+                setError(err.response?.data?.error || 'Unable to join event. Please try again.');
             }
         } finally {
             setSubmitting(false);
         }
     };
 
-    if (loading) return <div style={{ minHeight: '100vh', background: '#0f172a', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>Loading Meeting Portal...</div>;
+    if (loading) return <div style={{ minHeight: '100vh', background: '#0f172a', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>Loading Event Portal...</div>;
 
-    if (error && !meeting) return (
+    if (error && !event) return (
         <div style={{ minHeight: '100vh', background: '#0f172a', color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <h2>{error}</h2>
             <button onClick={() => navigate('/')} style={{ marginTop: '1rem', padding: '0.5rem 1.5rem', background: 'var(--primary)', border: 'none', borderRadius: '0.5rem', cursor: 'pointer' }}>Go Home</button>
@@ -130,12 +125,12 @@ const MeetingJoinPortal = () => {
 
             <div className="portal-container animate-fade-in" style={{ width: '100%', maxWidth: '800px', padding: '2rem', position: 'relative', zIndex: 1 }}>
                 <h2 style={{ color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.9rem', marginBottom: '1rem' }}>Jesus Enthroned Network</h2>
-                <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>{meeting.title}</h1>
+                <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>{event.name}</h1>
                 <div style={{ color: 'var(--text-muted)', fontSize: '1.1rem', marginBottom: '1.5rem', fontWeight: '500' }}>
-                    {meeting.end_date && meeting.end_date !== meeting.date ? (
-                        `📅 ${meeting.date} - ${meeting.end_date}`
+                    {event.end_date && event.end_date !== event.start_date ? (
+                        `📅 ${event.start_date} - ${event.end_date}`
                     ) : (
-                        `📅 ${meeting.date}`
+                        `📅 ${event.start_date}`
                     )}
                 </div>
 
@@ -145,7 +140,7 @@ const MeetingJoinPortal = () => {
                     marginBottom: '3rem',
                     textAlign: 'center'
                 }}>
-                    <h3 style={{ fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '1.5rem' }}>Meeting starts in:</h3>
+                    <h3 style={{ fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '1.5rem' }}>Event starts in:</h3>
                     <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem' }}>
                         {['days', 'hours', 'minutes', 'seconds'].map(unit => (
                             <div key={unit} style={{ textAlign: 'center' }}>
@@ -157,7 +152,7 @@ const MeetingJoinPortal = () => {
                 </div>
 
                 <div className="glass-card animate-slide-up animate-delay-200" style={{ maxWidth: '400px', margin: '0 auto', padding: '2rem', borderRadius: '1rem' }}>
-                    <h3 style={{ fontSize: '1.2rem', marginBottom: '1.5rem' }}>Join Meeting</h3>
+                    <h3 style={{ fontSize: '1.2rem', marginBottom: '1.5rem' }}>Register / Check In</h3>
                     <form onSubmit={handleJoin} style={{ display: 'grid', gap: '1rem' }}>
                         <div style={{ textAlign: 'left' }}>
                             <label style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Phone Number or Email</label>
@@ -195,7 +190,7 @@ const MeetingJoinPortal = () => {
                                 opacity: submitting ? 0.7 : 1
                             }}
                         >
-                            {submitting ? 'Verifying...' : 'JOIN NOW'}
+                            {submitting ? 'Verifying...' : 'JOIN EVENT'}
                         </button>
                     </form>
                 </div>
@@ -217,4 +212,4 @@ const MeetingJoinPortal = () => {
     );
 };
 
-export default MeetingJoinPortal;
+export default EventJoinPortal;

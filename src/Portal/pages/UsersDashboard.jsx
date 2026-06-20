@@ -1,13 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import UserStatsCards from '../components/users/UserStatsCards';
 import UserActionsMenu from '../components/users/UserActionsMenu';
 import UsersTable from '../components/users/UsersTable';
 import AddUserModal from '../components/users/AddUserModal';
 import AssignRolesModal from '../components/users/AssignRolesModal';
+import api from '../../api/axios';
 
 const UsersDashboard = () => {
     const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
     const [isAssignRolesModalOpen, setIsAssignRolesModalOpen] = useState(false);
+
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const response = await api.get('users');
+                setUsers(response.data);
+            } catch (err) {
+                console.error("Error fetching users:", err);
+                setError("Failed to load users data.");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUsers();
+    }, []);
 
     return (
         <div style={{ maxWidth: '1400px', margin: '0 auto', paddingBottom: '2rem' }}>
@@ -20,7 +41,7 @@ const UsersDashboard = () => {
             </div>
 
             {/* Stats */}
-            <UserStatsCards />
+            <UserStatsCards users={users} loading={loading} />
 
             {/* Actions */}
             <UserActionsMenu
@@ -31,7 +52,7 @@ const UsersDashboard = () => {
             {/* Main Content Grid */}
             <div className="users-dashboard-grid">
                 <div style={{ gridArea: 'table' }}>
-                    <UsersTable />
+                    <UsersTable users={users} loading={loading} error={error} />
                 </div>
             </div>
 

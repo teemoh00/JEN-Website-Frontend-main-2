@@ -112,7 +112,7 @@ const ProfileHeader = ({ user, onEditProfilePic, onEditProfile }) => {
                         }}>
                             {!avatarUrl && <span style={{ opacity: 0.8 }}>{initials}</span>}
 
-                            {/* Hover Edit Overlay */}
+                            {/* Hover Edit Overlay (kept for full-image hover effect) */}
                             <div
                                 onClick={onEditProfilePic}
                                 style={{
@@ -138,6 +138,34 @@ const ProfileHeader = ({ user, onEditProfilePic, onEditProfile }) => {
                                 <span style={{ fontSize: '0.7rem', fontWeight: '700', textTransform: 'uppercase' }}>Change Photo</span>
                             </div>
                         </div>
+                        
+                        {/* Permanent Visible Edit Button */}
+                        <button
+                            onClick={onEditProfilePic}
+                            style={{
+                                position: 'absolute',
+                                bottom: '0px',
+                                right: '-10px',
+                                background: 'var(--primary)',
+                                color: 'white',
+                                border: '3px solid var(--surface-1)',
+                                borderRadius: '50%',
+                                width: '40px',
+                                height: '40px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                boxShadow: '0 4px 10px rgba(0,0,0,0.15)',
+                                transition: 'transform 0.2s ease',
+                                zIndex: 10
+                            }}
+                            onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.1)'}
+                            onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                            title="Edit Profile Picture"
+                        >
+                            📷
+                        </button>
                     </div>
 
                     {/* Name and Basic Controls */}

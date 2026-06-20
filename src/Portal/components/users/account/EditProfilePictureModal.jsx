@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import api from '../../../../api/axios';
 
-const EditProfilePictureModal = ({ onClose, onUpdate }) => {
+const EditProfilePictureModal = ({ user, onClose, onUpdate }) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -30,12 +30,12 @@ const EditProfilePictureModal = ({ onClose, onUpdate }) => {
         setError(null);
 
         const formData = new FormData();
-        // Since we are patching the User via Profile nesting, 
-        // we send it as profile.avatar
-        formData.append('profile.avatar', selectedFile);
+        // Use a simple key to avoid PHP dot/underscore conversion bugs
+        formData.append('avatar', selectedFile);
+        formData.append('email', user.email);
 
         try {
-            await api.patch('accounts/user/', formData, {
+            await api.post('accounts/user/avatar/', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

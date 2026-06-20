@@ -1,25 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import api from '../../../api/axios';
 
-const CreateCellModal = ({ onClose }) => {
+const CreateCellModal = ({ onClose, onSuccess }) => {
     const [formData, setFormData] = useState({
         cellName: '',
-        category: 'General',
         leader: '',
-        meetingDay: 'Wednesday',
-        time: '06:00 PM',
-        location: '',
         maxCapacity: '15'
     });
+
+    const [loading, setLoading] = useState(false);
+    const [committedMembers, setCommittedMembers] = useState([]);
+    const [fetchingMembers, setFetchingMembers] = useState(true);
+
+    useEffect(() => {
+        const fetchMembers = async () => {
+            try {
+                const response = await api.get('members');
+                const results = Array.isArray(response.data) ? response.data : (response.data.results || []);
+                const committed = results.filter(m => m.commitment_status === 'Committed Member');
+                setCommittedMembers(committed);
+            } catch (err) {
+                console.error("Error fetching committed members:", err);
+            } finally {
+                setFetchingMembers(false);
+            }
+        };
+        fetchMembers();
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        alert('Cell creation simulated: ' + JSON.stringify(formData));
-        onClose();
+        setLoading(true);
+        try {
+            await api.post('cells', {
+                name: formData.cellName,
+                leader_name: formData.leader,
+                description: `Max Capacity: ${formData.maxCapacity}`
+            });
+            if (onSuccess) onSuccess();
+            else onClose();
+        } catch (err) {
+            console.error('Failed to create cell:', err);
+            alert(err.response?.data?.error || 'Failed to create cell. Please try again.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     const inputStyle = {
@@ -69,89 +99,42 @@ const CreateCellModal = ({ onClose }) => {
                 </div>
 
                 <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '1.5rem' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
-                        <div>
-                            <label style={labelStyle}>Cell Name</label>
-                            <input
-                                type="text"
-                                name="cellName"
-                                value={formData.cellName}
-                                onChange={handleChange}
-                                placeholder="e.g. Goshen Alpha"
-                                style={{ ...inputStyle, color: formData.cellName ? 'white' : 'var(--text-muted)', fontWeight: formData.cellName ? '600' : 'normal' }}
-                            />
-                        </div>
-                        <div style={{ position: 'relative' }}>
-                            <label style={labelStyle}>Category</label>
-                            <select
-                                name="category"
-                                value={formData.category}
-                                onChange={handleChange}
-                                style={{ ...inputStyle, appearance: 'none', color: 'var(--text-color)' }}
-                            >
-                                <option>General</option>
-                                <option>Youth</option>
-                                <option>Young Adults</option>
-                                <option>Couples</option>
-                            </select>
-                            <span style={{ position: 'absolute', right: '0', top: '2rem', pointerEvents: 'none', fontSize: '0.8rem', color: 'var(--text-color)', fontWeight: 'bold' }}>v</span>
-                        </div>
+                    <div>
+                        <label style={labelStyle}>Cell Name</label>
+                        <input
+                            type="text"
+                            name="cellName"
+                            value={formData.cellName}
+                            onChange={handleChange}
+                            placeholder="e.g. Goshen Alpha"
+                            style={{ ...inputStyle, color: formData.cellName ? 'white' : 'var(--text-muted)', fontWeight: formData.cellName ? '600' : 'normal' }}
+                        />
                     </div>
 
-                    <div>
+                    <div style={{ position: 'relative' }}>
                         <label style={labelStyle}>Cell Leader</label>
-                        <input
-                            type="text"
-                            name="leader"
-                            value={formData.leader}
-                            onChange={handleChange}
-                            placeholder="Search member..."
-                            style={{ ...inputStyle, color: formData.leader ? 'white' : 'var(--text-muted)', fontWeight: formData.leader ? '600' : 'normal' }}
-                        />
-                    </div>
-
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
-                        <div style={{ position: 'relative' }}>
-                            <label style={labelStyle}>Meeting Day</label>
+                        {fetchingMembers ? (
+                            <div style={{ ...inputStyle, color: 'var(--text-muted)' }}>Loading committed members...</div>
+                        ) : (
                             <select
-                                name="meetingDay"
-                                value={formData.meetingDay}
+                                name="leader"
+                                value={formData.leader}
                                 onChange={handleChange}
-                                style={{ ...inputStyle, appearance: 'none', color: 'var(--text-color)' }}
+                                style={{
+                                    ...inputStyle,
+                                    appearance: 'none',
+                                    color: formData.leader ? 'white' : 'var(--text-muted)'
+                                }}
                             >
-                                <option>Monday</option>
-                                <option>Tuesday</option>
-                                <option>Wednesday</option>
-                                <option>Thursday</option>
-                                <option>Friday</option>
-                                <option>Saturday</option>
-                                <option>Sunday</option>
+                                <option value="" disabled>Select a committed member...</option>
+                                {committedMembers.map(member => (
+                                    <option key={member.id} value={member.full_name || `${member.first_name || ''} ${member.last_name || ''}`.trim()}>
+                                        {member.full_name || `${member.first_name || ''} ${member.last_name || ''}`.trim()}
+                                    </option>
+                                ))}
                             </select>
-                            <span style={{ position: 'absolute', right: '0', top: '2rem', pointerEvents: 'none', fontSize: '0.8rem', color: 'var(--text-color)', fontWeight: 'bold' }}>v</span>
-                        </div>
-                        <div style={{ position: 'relative' }}>
-                            <label style={labelStyle}>Time</label>
-                            <input
-                                type="text"
-                                name="time"
-                                value={formData.time}
-                                onChange={handleChange}
-                                style={{ ...inputStyle, color: 'var(--text-color)' }}
-                            />
-                            <span style={{ position: 'absolute', right: '0', top: '2rem', color: 'var(--text-muted)', fontSize: '0.9rem', opacity: 0.5 }}>🕒</span>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label style={labelStyle}>Location / Area</label>
-                        <input
-                            type="text"
-                            name="location"
-                            value={formData.location}
-                            onChange={handleChange}
-                            placeholder="e.g. Westlands, Nairobi"
-                            style={{ ...inputStyle, color: formData.location ? 'white' : 'var(--text-muted)', fontWeight: formData.location ? '600' : 'normal' }}
-                        />
+                        )}
+                        <span style={{ position: 'absolute', right: '0', top: '2rem', pointerEvents: 'none', fontSize: '0.8rem', color: 'var(--text-color)', fontWeight: 'bold' }}>v</span>
                     </div>
 
                     <div>

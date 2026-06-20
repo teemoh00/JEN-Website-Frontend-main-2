@@ -18,11 +18,12 @@ const Hero = () => {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                background: 'url("https://images.unsplash.com/photo-1438232992991-995b7058bbb3?q=80&w=2073&auto=format&fit=crop")',
+                background: 'url("/JEN.jpeg")',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-                opacity: 0.2,
-                mixBlendMode: 'overlay'
+                opacity: 0.4,
+                filter: 'blur(3px)',
+                transform: 'scale(1.03)'
             }}></div>
 
             <div className="container" style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'center' }}>

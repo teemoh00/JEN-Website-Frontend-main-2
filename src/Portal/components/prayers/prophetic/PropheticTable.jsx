@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import api from '../../../../api/axios';
 
 const PropheticTable = () => {
-    // Dummy Data matching the image
-    const instructions = [
-        { id: 1, title: 'Instructions on The December Conference', purpose: 2, date: '2025-08-14', status: 'Not Fulfilled' },
-        { id: 2, title: 'Instructions on The December Conference', purpose: 2, date: '2025-08-14', status: 'Not Fulfilled' },
-        { id: 3, title: 'Purpose', purpose: 1, date: '2025-05-11', status: 'Not Fulfilled' },
-    ];
+    const [instructions, setInstructions] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchInstructions = async () => {
+            try {
+                const response = await api.get('prayers/prophetic');
+                setInstructions(response.data);
+            } catch (err) {
+                console.error("Error fetching prophetic instructions", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchInstructions();
+    }, []);
 
     return (
         <div className="prophetic-table-wrapper" style={{
@@ -50,7 +61,11 @@ const PropheticTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {instructions.map((item, index) => (
+                        {loading ? (
+                            <tr><td colSpan="6" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>Loading...</td></tr>
+                        ) : instructions.length === 0 ? (
+                            <tr><td colSpan="6" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>No prophetic instructions found</td></tr>
+                        ) : instructions.map((item, index) => (
                             <tr key={item.id} style={{ borderBottom: '1px solid var(--border-color)', height: '70px' }} className="table-row-hover">
                                 <td style={cellStyle}>
                                     <div style={{ display: 'flex', gap: '0.5rem', color: 'var(--text-muted)' }}>
@@ -60,10 +75,10 @@ const PropheticTable = () => {
                                 </td>
                                 <td className="prophetic-id-cell" style={{ ...cellStyle, fontWeight: '700' }}>{item.id}</td>
                                 <td className="prophetic-title-cell" style={cellStyle}>{item.title}</td>
-                                <td style={cellStyle}>{item.purpose}</td>
-                                <td style={cellStyle}>{item.date}</td>
+                                <td style={cellStyle}>{item.purpose || 'General'}</td>
+                                <td style={cellStyle}>{new Date(item.date).toLocaleDateString()}</td>
                                 <td style={cellStyle}>
-                                    <span style={{ color: 'var(--text-muted)' }}>{item.status}</span>
+                                    <span style={{ color: item.status === 'Fulfilled' ? '#22c55e' : 'var(--text-muted)' }}>{item.status}</span>
                                 </td>
                             </tr>
                         ))}

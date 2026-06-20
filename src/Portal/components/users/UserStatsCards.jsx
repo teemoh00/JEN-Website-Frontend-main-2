@@ -33,15 +33,14 @@ const StatCard = ({ title, value, icon, color = 'var(--primary)', subtext, loadi
     </div>
 );
 
-const UserStatsCards = () => {
-    const [stats] = useState({
-        total_users: 215,
-        active_users: 198,
-        signed_in_today: 12,
-        locked_accounts: 2,
-        no_role_assigned: 5,
-    });
-    const [loading] = useState(false);
+const UserStatsCards = ({ users = [], loading }) => {
+    const stats = {
+        total_users: users.length,
+        active_users: users.length, // Assume all active for now as no inactive flag exists
+        signed_in_today: 0, // Not tracked in DB yet
+        locked_accounts: 0, // Not tracked in DB yet
+        no_role_assigned: users.filter(u => !u.is_staff).length,
+    };
 
     return (
         <div style={{

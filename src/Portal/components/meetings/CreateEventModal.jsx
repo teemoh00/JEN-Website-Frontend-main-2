@@ -1,7 +1,40 @@
 import React, { useState } from 'react';
+import axios from '../../../api/axios';
 
 const CreateEventModal = ({ onClose }) => {
     const [isNewEventType, setIsNewEventType] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [formData, setFormData] = useState({
+        name: '',
+        type: 'Conference',
+        start_date: '',
+        start_time: '',
+        end_date: '',
+        end_time: '',
+        venue: '',
+        description: '',
+        target_attendees: '',
+        facilitation_fee: ''
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            await axios.post('events', formData);
+            onClose(); // Call the onClose to refresh and close
+        } catch (err) {
+            console.error('Failed to create event:', err);
+            alert('Failed to create event. Please check required fields.');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <div style={{
@@ -31,31 +64,34 @@ const CreateEventModal = ({ onClose }) => {
 
                 <h2 style={{ margin: '0 0 2rem 0', color: 'var(--text-color)', fontSize: '1.4rem', fontWeight: '800' }}>Create New Event</h2>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     {/* Row 1: Event Name & Type */}
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                         <div>
-                            <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.5rem' }}>Event Name</label>
-                            <input type="text" placeholder="e.g. Easter Conference" style={{
-                                width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box'
+                            <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.5rem' }}>Event Name *</label>
+                            <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="e.g. Easter Conference" style={{
+                                width: '100%', padding: '0 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', height: '2.5rem'
                             }} />
                         </div>
                         <div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                                <label style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '600', margin: 0 }}>Event Type</label>
-                                <span onClick={() => setIsNewEventType(!isNewEventType)} style={{ color: '#0ea5e9', fontSize: '0.7rem', fontWeight: '600', cursor: 'pointer' }}>
+                                <label style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '600', margin: 0 }}>Event Type *</label>
+                                <span onClick={() => {
+                                    setIsNewEventType(!isNewEventType);
+                                    setFormData(prev => ({...prev, type: !isNewEventType ? '' : 'Conference'}))
+                                }} style={{ color: '#0ea5e9', fontSize: '0.7rem', fontWeight: '600', cursor: 'pointer' }}>
                                     {isNewEventType ? 'Cancel' : '+ Add New'}
                                 </span>
                             </div>
                             <div style={{ position: 'relative', height: '2.5rem', display: 'flex', alignItems: 'center' }}>
                                 {isNewEventType ? (
-                                    <input type="text" placeholder="e.g. Workshop" style={{
+                                    <input type="text" name="type" value={formData.type} onChange={handleChange} required placeholder="e.g. Workshop" style={{
                                         width: '100%', padding: '0 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', height: '100%', boxSizing: 'border-box'
                                     }} />
                                 ) : (
                                     <>
-                                        <select style={{
-                                            width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: 'var(--text-color)', outline: 'none', appearance: 'none', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', height: '100%', boxSizing: 'border-box'
+                                        <select name="type" value={formData.type} onChange={handleChange} required style={{
+                                            width: '100%', padding: '0 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', appearance: 'none', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', height: '100%', boxSizing: 'border-box'
                                         }}>
                                             <option value="Conference" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>Conference</option>
                                             <option value="Retreat" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>Retreat</option>
@@ -71,31 +107,31 @@ const CreateEventModal = ({ onClose }) => {
                     {/* Row 2: Dates */}
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                         <div>
-                            <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.5rem' }}>Start Date & Time</label>
+                            <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.5rem' }}>Start Date & Time *</label>
                             <div style={{ display: 'flex', gap: '0.5rem' }}>
                                 <div style={{ position: 'relative', flex: 1 }}>
-                                    <input type="date" style={{
-                                        width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', fontFamily: 'monospace', fontWeight: '700'
+                                    <input type="date" name="start_date" value={formData.start_date} onChange={handleChange} required style={{
+                                        width: '100%', padding: '0 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', fontFamily: 'monospace', fontWeight: '700', height: '2.5rem'
                                     }} />
                                 </div>
                                 <div style={{ position: 'relative', flex: 1 }}>
-                                    <input type="time" style={{
-                                        width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', fontFamily: 'monospace', fontWeight: '700'
+                                    <input type="time" name="start_time" value={formData.start_time} onChange={handleChange} required style={{
+                                        width: '100%', padding: '0 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', fontFamily: 'monospace', fontWeight: '700', height: '2.5rem'
                                     }} />
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.5rem' }}>End Date & Time</label>
+                            <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.5rem' }}>End Date & Time *</label>
                             <div style={{ display: 'flex', gap: '0.5rem' }}>
                                 <div style={{ position: 'relative', flex: 1 }}>
-                                    <input type="date" style={{
-                                        width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', fontFamily: 'monospace', fontWeight: '700'
+                                    <input type="date" name="end_date" value={formData.end_date} onChange={handleChange} required style={{
+                                        width: '100%', padding: '0 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', fontFamily: 'monospace', fontWeight: '700', height: '2.5rem'
                                     }} />
                                 </div>
                                 <div style={{ position: 'relative', flex: 1 }}>
-                                    <input type="time" style={{
-                                        width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', fontFamily: 'monospace', fontWeight: '700'
+                                    <input type="time" name="end_time" value={formData.end_time} onChange={handleChange} required style={{
+                                        width: '100%', padding: '0 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', fontFamily: 'monospace', fontWeight: '700', height: '2.5rem'
                                     }} />
                                 </div>
                             </div>
@@ -104,50 +140,50 @@ const CreateEventModal = ({ onClose }) => {
 
                     {/* Row 3: Venue */}
                     <div>
-                        <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.5rem' }}>Venue / Location</label>
-                        <input type="text" placeholder="e.g. Main Auditorium" style={{
-                            width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: 'var(--text-muted)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box'
+                        <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.5rem' }}>Venue / Location *</label>
+                        <input type="text" name="venue" value={formData.venue} onChange={handleChange} required placeholder="e.g. Main Auditorium" style={{
+                            width: '100%', padding: '0 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', height: '2.5rem'
                         }} />
                     </div>
 
                     {/* Row 4: Description */}
                     <div>
                         <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.5rem' }}>Description</label>
-                        <textarea placeholder="Event details..." rows="3" style={{
-                            width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: 'var(--text-muted)', outline: 'none', fontSize: '0.9rem', resize: 'vertical', fontFamily: 'monospace', boxSizing: 'border-box'
+                        <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Event details..." rows="3" style={{
+                            width: '100%', padding: '1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', resize: 'vertical', fontFamily: 'monospace', boxSizing: 'border-box'
                         }}></textarea>
                     </div>
 
                     {/* Row 5: Attendees & Fee */}
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                         <div>
-                            <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.5rem' }}>Target Attendees</label>
-                            <input type="text" placeholder="e.g. 100" style={{
-                                width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: 'var(--text-muted)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box'
+                            <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.5rem' }}>Target Attendees (Optional)</label>
+                            <input type="number" name="target_attendees" value={formData.target_attendees} onChange={handleChange} placeholder="e.g. 100" style={{
+                                width: '100%', padding: '0 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', height: '2.5rem'
                             }} />
                         </div>
                         <div>
-                            <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.5rem' }}>Facilitation Fee</label>
-                            <input type="text" placeholder="0.00" style={{
-                                width: '100%', padding: '0 1rem', background: 'transparent', border: 'none', color: 'var(--text-muted)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box'
+                            <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: '600', marginBottom: '0.5rem' }}>Facilitation Fee (Optional)</label>
+                            <input type="number" step="0.01" name="facilitation_fee" value={formData.facilitation_fee} onChange={handleChange} placeholder="0.00" style={{
+                                width: '100%', padding: '0 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', height: '2.5rem'
                             }} />
                         </div>
                     </div>
 
                     {/* Actions */}
                     <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1.5rem', marginTop: '1rem' }}>
-                        <button onClick={onClose} style={{
+                        <button type="button" onClick={onClose} style={{
                             background: 'transparent', border: 'none', color: 'var(--text-color)', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '600', cursor: 'pointer'
                         }}>
                             Cancel
                         </button>
-                        <button onClick={onClose} style={{
-                            background: '#22c1e6', color: 'var(--text-color)', border: 'none', borderRadius: '0.5rem', padding: '0.8rem 1.5rem', fontSize: '0.95rem', fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 15px rgba(34, 193, 230, 0.4)'
+                        <button type="submit" disabled={loading} style={{
+                            background: '#22c1e6', color: 'var(--bg-color)', border: 'none', borderRadius: '0.5rem', padding: '0.8rem 1.5rem', fontSize: '0.95rem', fontWeight: '700', cursor: loading ? 'not-allowed' : 'pointer', boxShadow: '0 4px 15px rgba(34, 193, 230, 0.4)', opacity: loading ? 0.7 : 1
                         }}>
-                            Publish Event
+                            {loading ? 'Publishing...' : 'Publish Event'}
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     );

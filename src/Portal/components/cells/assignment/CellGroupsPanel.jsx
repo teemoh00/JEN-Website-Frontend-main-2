@@ -45,7 +45,7 @@ const CellGroupsPanel = ({ cells, onAssign, loading }) => {
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
                                 <div>
                                     <div style={{ color: 'var(--text-color)', fontWeight: '600', fontSize: '0.95rem' }}>{cell.name}</div>
-                                    <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>{cell.location || 'No Location'} • {cell.leader_name || 'No Leader'}</div>
+                                    <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>{cell.leader_name || 'No Leader'}</div>
                                 </div>
                                 <button
                                     onClick={() => onAssign(cell.id)}

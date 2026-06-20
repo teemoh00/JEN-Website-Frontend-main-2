@@ -3,31 +3,12 @@ import api from '../../../api/axios';
 import CellDetailsModal from './CellDetailsModal';
 import DeleteConfirmModal from './DeleteConfirmModal';
 
-const CellsList = () => {
+const CellsList = ({ cells = [], loading, error, onRefresh }) => {
     const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'table'
     const [searchTerm, setSearchTerm] = useState('');
-    const [cells, setCells] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const [selectedCell, setSelectedCell] = useState(null);
     const [cellToDelete, setCellToDelete] = useState(null);
     const [deleting, setDeleting] = useState(false);
-
-    const fetchCells = async () => {
-        setLoading(true);
-        try {
-            const response = await api.get('church/cells/');
-            // Handle DRF pagination if present
-            const results = response.data.results || response.data;
-            setCells(Array.isArray(results) ? results : []);
-            setError(null);
-        } catch (err) {
-            console.error('Error fetching cells:', err);
-            setError('Failed to load cell groups. Please try again later.');
-        } finally {
-            setLoading(false);
-        }
-    };
 
     const handleDeleteClick = (id, name) => {
         setCellToDelete({ id, name });
@@ -37,9 +18,9 @@ const CellsList = () => {
         if (!cellToDelete) return;
         setDeleting(true);
         try {
-            await api.delete(`church/cells/${cellToDelete.id}/`);
+            await api.delete(`cells/${cellToDelete.id}`);
             setCellToDelete(null);
-            fetchCells();
+            if (onRefresh) onRefresh();
         } catch (err) {
             console.error('Error deleting cell:', err);
             alert('Failed to delete cell. Please try again.');
@@ -47,10 +28,6 @@ const CellsList = () => {
             setDeleting(false);
         }
     };
-
-    useEffect(() => {
-        fetchCells();
-    }, []);
 
     const filteredCells = cells.filter(cell =>
         cell.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -180,14 +157,10 @@ const CellsList = () => {
                                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Leader</div>
                                     </div>
                                 </div>
-                                <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '0.75rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+                                <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '0.75rem', display: 'grid', gridTemplateColumns: '1fr', gap: '0.5rem' }}>
                                     <div>
                                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Members</div>
                                         <div style={{ color: 'var(--text-color)' }}>{cell.member_count}</div>
-                                    </div>
-                                    <div>
-                                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Meeting</div>
-                                        <div style={{ color: 'var(--text-color)', fontSize: '0.9rem' }}>{cell.meeting_day || 'Not set'}</div>
                                     </div>
                                 </div>
                                 <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
@@ -214,8 +187,6 @@ const CellsList = () => {
                                 <th style={{ textAlign: 'left', padding: '1rem', color: 'var(--text-muted)', fontWeight: '600', fontSize: '0.85rem' }}>Name</th>
                                 <th style={{ textAlign: 'left', padding: '1rem', color: 'var(--text-muted)', fontWeight: '600', fontSize: '0.85rem' }}>Leader</th>
                                 <th style={{ textAlign: 'left', padding: '1rem', color: 'var(--text-muted)', fontWeight: '600', fontSize: '0.85rem' }}>Members</th>
-                                <th style={{ textAlign: 'left', padding: '1rem', color: 'var(--text-muted)', fontWeight: '600', fontSize: '0.85rem' }}>Location</th>
-                                <th style={{ textAlign: 'left', padding: '1rem', color: 'var(--text-muted)', fontWeight: '600', fontSize: '0.85rem' }}>Schedule</th>
                                 <th style={{ textAlign: 'left', padding: '1rem', color: 'var(--text-muted)', fontWeight: '600', fontSize: '0.85rem' }}>Status</th>
                                 <th style={{ textAlign: 'right', padding: '1rem', color: 'var(--text-muted)', fontWeight: '600', fontSize: '0.85rem' }}>Actions</th>
                             </tr>
@@ -226,8 +197,6 @@ const CellsList = () => {
                                     <td style={{ padding: '1rem', fontWeight: '500' }}>{cell.name}</td>
                                     <td style={{ padding: '1rem' }}>{cell.leader_name || 'N/A'}</td>
                                     <td style={{ padding: '1rem' }}>{cell.member_count}</td>
-                                    <td style={{ padding: '1rem' }}>{cell.location || 'N/A'}</td>
-                                    <td style={{ padding: '1rem' }}>{cell.meeting_day || 'Not set'}</td>
                                     <td style={{ padding: '1rem' }}>
                                         <span style={{
                                             background: cell.member_count > 0 ? 'rgba(34, 197, 94, 0.1)' : 'rgba(148, 163, 184, 0.1)',

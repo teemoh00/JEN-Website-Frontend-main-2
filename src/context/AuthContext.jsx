@@ -1,42 +1,53 @@
 import React, { createContext, useState, useContext } from 'react';
-import { MOCK_USER } from '../mockData';
+import api from '../api/axios';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    // Try to restore a saved mock session from localStorage; fall back to null
-    const [user, setUser] = useState(() => {
+    // Try to restore a saved session from localStorage
+    const [user, setUserState] = useState(() => {
         try {
-            const stored = localStorage.getItem('mockUser');
+            const stored = localStorage.getItem('user');
             return stored ? JSON.parse(stored) : null;
         } catch {
             return null;
         }
     });
-    const [loading] = useState(false);
-    const [error] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-    const login = (userData) => {
-        const u = userData || MOCK_USER;
-        localStorage.setItem('mockUser', JSON.stringify(u));
-        localStorage.setItem('token', 'mock-token-frontend-only');
-        setUser(u);
+    const setUser = (userData) => {
+        if (userData) {
+            localStorage.setItem('user', JSON.stringify(userData));
+        } else {
+            localStorage.removeItem('user');
+        }
+        setUserState(userData);
     };
 
     const logout = () => {
-        localStorage.removeItem('mockUser');
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        setUser(null);
+        localStorage.removeItem('mockUser'); // cleanup legacy
+        setUserState(null);
         window.location.href = '/portal';
     };
 
-    const refreshUser = () => {
-        // No-op in frontend-only mode
+    const refreshUser = async () => {
+        if (!user || !user.email) return;
+        try {
+            // Fetch latest user data from backend
+            const response = await api.get('accounts/user/', { params: { email: user.email } });
+            if (response.data && response.data.user) {
+                setUser(response.data.user);
+            }
+        } catch (err) {
+            console.error('Failed to refresh user:', err);
+        }
     };
 
     return (
-        <AuthContext.Provider value={{ user, setUser: login, loading, error, logout, refreshUser }}>
+        <AuthContext.Provider value={{ user, setUser, loading, error, logout, refreshUser }}>
             {children}
         </AuthContext.Provider>
     );

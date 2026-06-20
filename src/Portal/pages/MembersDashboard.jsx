@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MemberStatsCard from '../components/members/MemberStatsCard';
 import MembersTable from '../components/members/MembersTable';
 import MembersActionBar from '../components/members/MembersActionBar';
@@ -6,6 +6,7 @@ import UploadExcelModal from '../components/members/UploadExcelModal';
 import CreateMemberModal from '../components/members/CreateMemberModal';
 import NewMemberCategoryModal from '../components/members/NewMemberCategoryModal';
 import CreateCellModal from '../components/cells/CreateCellModal';
+import api from '../../api/axios';
 
 const MembersDashboard = () => {
     const [showUploadModal, setShowUploadModal] = useState(false);
@@ -13,6 +14,29 @@ const MembersDashboard = () => {
     const [createModalInitialStatus, setCreateModalInitialStatus] = useState('Regular Member');
     const [showCategoryModal, setShowCategoryModal] = useState(false);
     const [showCellModal, setShowCellModal] = useState(false);
+
+    const [members, setMembers] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchMembers = async () => {
+            try {
+                const response = await api.get('members');
+                setMembers(response.data);
+            } catch (err) {
+                console.error("Error fetching members:", err);
+                setError("Failed to load members data.");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchMembers();
+    }, []);
+
+    const unlinkedCommitted = members.filter(m => m.commitment_status === 'Committed Member').length; // For now assuming all are unlinked as requested before
+
     return (
         <div style={{ maxWidth: '1400px', margin: '0 auto', paddingBottom: '2rem' }}>
             {/* Header */}
@@ -22,41 +46,37 @@ const MembersDashboard = () => {
             </div>
 
             {/* Warning Banner */}
-            <div style={{
-                background: 'rgba(245, 158, 11, 0.05)',
-                border: '1px solid rgba(245, 158, 11, 0.2)',
-                borderRadius: '0.5rem',
-                padding: '1rem 1.5rem',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.8rem',
-                marginBottom: '2rem'
-            }}>
-                <span style={{ color: '#f59e0b', fontSize: '1.2rem' }}>⚠️</span>
-                <span style={{ color: '#f59e0b', fontWeight: '700', fontSize: '0.9rem' }}>Action Required:</span>
-                <span style={{ color: '#f59e0b', fontSize: '0.9rem' }}>You have 130 unlinked committed members. <a href="#" style={{ color: '#f59e0b', textDecoration: 'underline' }}>Review Now</a></span>
-            </div>
+            {unlinkedCommitted > 0 && (
+                <div style={{
+                    background: 'rgba(245, 158, 11, 0.05)',
+                    border: '1px solid rgba(245, 158, 11, 0.2)',
+                    borderRadius: '0.5rem',
+                    padding: '1rem 1.5rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.8rem',
+                    marginBottom: '2rem'
+                }}>
+                    <span style={{ color: '#f59e0b', fontSize: '1.2rem' }}>⚠️</span>
+                    <span style={{ color: '#f59e0b', fontWeight: '700', fontSize: '0.9rem' }}>Action Required:</span>
+                    <span style={{ color: '#f59e0b', fontSize: '0.9rem' }}>You have {unlinkedCommitted} unlinked committed members. <a href="#" style={{ color: '#f59e0b', textDecoration: 'underline' }}>Review Now</a></span>
+                </div>
+            )}
 
             {/* Stats */}
-            <MemberStatsCard />
+            <MemberStatsCard members={members} loading={loading} />
 
             {/* Action Bar */}
             <MembersActionBar 
-                onUploadExcel={() => setShowUploadModal(true)} 
                 onNewMember={() => {
                     setCreateModalInitialStatus('Regular Member');
                     setShowCreateModal(true);
                 }} 
-                onNewCategory={() => setShowCategoryModal(true)}
                 onNewCellGroup={() => setShowCellModal(true)}
-                onAddCommittedMember={() => {
-                    setCreateModalInitialStatus('Committed Member');
-                    setShowCreateModal(true);
-                }}
             />
 
             {/* Data Table */}
-            <MembersTable />
+            <MembersTable members={members} loading={loading} error={error} />
 
             {showUploadModal && <UploadExcelModal onClose={() => setShowUploadModal(false)} />}
             {showCreateModal && <CreateMemberModal onClose={() => setShowCreateModal(false)} initialStatus={createModalInitialStatus} />}

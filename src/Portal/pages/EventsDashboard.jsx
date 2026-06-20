@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CreateEventModal from '../components/meetings/CreateEventModal';
+import AllEventsList from '../components/events/AllEventsList';
 
 const EventsDashboard = () => {
     const [activeTab, setActiveTab] = useState('Events Dashboard');
@@ -69,8 +70,12 @@ const EventsDashboard = () => {
             {/* Main Content Area */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
                 
-                {/* Row 1: Upcoming & Overall Progress */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '2rem' }}>
+                {activeTab === 'All Events' ? (
+                    <AllEventsList />
+                ) : (
+                    <>
+                        {/* Row 1: Upcoming & Overall Progress */}
+                        <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '2rem' }}>
                     {/* Upcoming Events Box */}
                     <div style={{
                         borderRadius: '0.5rem',
@@ -202,9 +207,18 @@ const EventsDashboard = () => {
                     </div>
                 </div>
 
+                    </>
+                )}
             </div>
 
-            {isCreateModalOpen && <CreateEventModal onClose={() => setIsCreateModalOpen(false)} />}
+            {isCreateModalOpen && <CreateEventModal onClose={() => {
+                setIsCreateModalOpen(false);
+                if (activeTab === 'All Events') {
+                    // Quick hack to refresh active tab, ideally we'd pass a refresh callback
+                    setActiveTab(''); 
+                    setTimeout(() => setActiveTab('All Events'), 10);
+                }
+            }} />}
 
         </div>
     );

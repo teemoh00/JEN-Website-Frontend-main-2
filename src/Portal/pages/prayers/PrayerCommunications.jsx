@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CommStats from '../../components/prayers/communications/CommStats';
 import ComposeMessage from '../../components/prayers/communications/ComposeMessage';
 import MessageHistory from '../../components/prayers/communications/MessageHistory';
 
 const PrayerCommunications = () => {
+    const [refreshTrigger, setRefreshTrigger] = useState(0);
     return (
         <div style={{ maxWidth: '1400px', margin: '0 auto', paddingBottom: '4rem' }}>
             {/* Header */}
@@ -37,7 +38,7 @@ const PrayerCommunications = () => {
             </div>
 
             {/* Content Grid */}
-            <CommStats />
+            <CommStats refreshTrigger={refreshTrigger} />
 
             <div style={{
                 display: 'grid',
@@ -45,8 +46,8 @@ const PrayerCommunications = () => {
                 gap: '1.5rem',
                 alignItems: 'start'
             }}>
-                <ComposeMessage />
-                <MessageHistory />
+                <ComposeMessage onMessageSent={() => setRefreshTrigger(prev => prev + 1)} />
+                <MessageHistory refreshTrigger={refreshTrigger} />
             </div>
         </div>
     );

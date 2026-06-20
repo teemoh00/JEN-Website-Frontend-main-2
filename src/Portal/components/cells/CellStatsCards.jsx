@@ -29,23 +29,13 @@ const StatCard = ({ icon, value, label, subtext, color = 'var(--primary)', loadi
     </div>
 );
 
-const CellStatsCards = () => {
-    const [stats, setStats] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchStats = async () => {
-            try {
-                const response = await api.get('church/cells/stats/');
-                setStats(response.data);
-            } catch (err) {
-                console.error('Error fetching cell stats:', err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchStats();
-    }, []);
+const CellStatsCards = ({ cells = [], loading }) => {
+    const stats = {
+        total_cells: cells.length,
+        active_cells: cells.length, // Mock active cells as total cells for now
+        total_members: 0, // Would need member count per cell
+        needs_attention: 0
+    };
 
     const statConfig = [
         { icon: '🏘️', value: stats?.total_cells || '0', label: 'Total Cells', color: 'var(--text-color)' },

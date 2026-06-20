@@ -1,7 +1,43 @@
 import React, { useState } from 'react';
+import axios from '../../../api/axios';
 
-const AddBudgetItemModal = ({ onClose }) => {
+const AddBudgetItemModal = ({ budgetId, onClose, onAdd }) => {
     const [isNewCategory, setIsNewCategory] = useState(false);
+    
+    const [category, setCategory] = useState('Miscellaneous');
+    const [customCategory, setCustomCategory] = useState('');
+    const [description, setDescription] = useState('');
+    const [estimatedAmount, setEstimatedAmount] = useState(0);
+    const [vendor, setVendor] = useState('');
+    const [notes, setNotes] = useState('');
+    
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async () => {
+        const finalCategory = isNewCategory ? customCategory : category;
+        if (!finalCategory || !description || estimatedAmount === '') {
+            return alert("Category, description, and estimated amount are required.");
+        }
+
+        setLoading(true);
+        try {
+            await axios.post('events/budgets/items/', {
+                budget_id: budgetId,
+                category: finalCategory,
+                description: description,
+                estimated_amount: parseFloat(estimatedAmount),
+                vendor: vendor,
+                notes: notes
+            });
+            onAdd();
+            onClose();
+        } catch (err) {
+            console.error('Failed to add budget item:', err);
+            alert('Failed to add budget item');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <div style={{
@@ -36,12 +72,12 @@ const AddBudgetItemModal = ({ onClose }) => {
                             </div>
                             <div style={{ position: 'relative', height: '2.5rem', display: 'flex', alignItems: 'center' }}>
                                 {isNewCategory ? (
-                                    <input type="text" placeholder="e.g. Travel" style={{
+                                    <input type="text" value={customCategory} onChange={(e) => setCustomCategory(e.target.value)} placeholder="e.g. Travel" style={{
                                         width: '100%', padding: '0 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', height: '100%', boxSizing: 'border-box'
                                     }} />
                                 ) : (
                                     <>
-                                        <select style={{
+                                        <select value={category} onChange={(e) => setCategory(e.target.value)} style={{
                                             width: '100%', padding: '0 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', appearance: 'none', fontSize: '0.9rem', fontWeight: '600', cursor: 'pointer', height: '100%', boxSizing: 'border-box'
                                         }}>
                                             <option value="Miscellaneous" style={{ color: 'var(--text-color)', background: '#1a1a24' }}>Miscellaneous</option>
@@ -57,7 +93,7 @@ const AddBudgetItemModal = ({ onClose }) => {
                         </div>
                         <div>
                             <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.7rem', fontWeight: '700', marginBottom: '0.5rem', textTransform: 'capitalize' }}>Estimated Amount (KES) *</label>
-                            <input type="number" defaultValue="0" style={{
+                            <input type="number" value={estimatedAmount} onChange={(e) => setEstimatedAmount(e.target.value)} style={{
                                 width: '100%', padding: '0.8rem 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box'
                             }} />
                         </div>
@@ -66,7 +102,7 @@ const AddBudgetItemModal = ({ onClose }) => {
                     {/* Row 2: Description */}
                     <div>
                         <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.7rem', fontWeight: '700', marginBottom: '0.5rem', textTransform: 'capitalize' }}>Description *</label>
-                        <input type="text" placeholder="e.g. Main venue hire for 3 days" style={{
+                        <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="e.g. Main venue hire for 3 days" style={{
                             width: '100%', padding: '0.8rem 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box'
                         }} />
                     </div>
@@ -75,13 +111,13 @@ const AddBudgetItemModal = ({ onClose }) => {
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                         <div>
                             <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.7rem', fontWeight: '700', marginBottom: '0.5rem', textTransform: 'capitalize' }}>Vendor</label>
-                            <input type="text" placeholder="Supplier name" style={{
+                            <input type="text" value={vendor} onChange={(e) => setVendor(e.target.value)} placeholder="Supplier name" style={{
                                 width: '100%', padding: '0.8rem 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box'
                             }} />
                         </div>
                         <div>
                             <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.7rem', fontWeight: '700', marginBottom: '0.5rem', textTransform: 'capitalize' }}>Notes</label>
-                            <input type="text" placeholder="Optional" style={{
+                            <input type="text" value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Optional" style={{
                                 width: '100%', padding: '0.8rem 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box'
                             }} />
                         </div>
@@ -89,15 +125,15 @@ const AddBudgetItemModal = ({ onClose }) => {
 
                     {/* Actions */}
                     <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '1rem' }}>
-                        <button onClick={onClose} style={{
+                        <button onClick={onClose} disabled={loading} style={{
                             background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', color: 'var(--text-color)', padding: '0.6rem 1.25rem', borderRadius: '0.5rem', fontSize: '0.9rem', fontWeight: '600', cursor: 'pointer'
                         }}>
                             Cancel
                         </button>
-                        <button onClick={onClose} style={{
-                            background: '#7c3aed', color: 'var(--text-color)', border: 'none', borderRadius: '0.5rem', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer'
+                        <button onClick={handleSubmit} disabled={loading} style={{
+                            background: '#7c3aed', color: 'var(--text-color)', border: 'none', borderRadius: '0.5rem', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', opacity: loading ? 0.7 : 1
                         }}>
-                            Add Item
+                            {loading ? 'Adding...' : 'Add Item'}
                         </button>
                     </div>
                 </div>

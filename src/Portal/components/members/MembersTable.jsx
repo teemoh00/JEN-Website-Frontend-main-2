@@ -1,23 +1,41 @@
 import React, { useState } from 'react';
 import { MOCK_MEMBERS } from '../../../mockData';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import { addLogoToDoc } from '../../../utils/pdfHelper';
 
-const MembersTable = () => {
+const MembersTable = ({ members = [], loading, error }) => {
     const [activeTab, setActiveTab] = useState('regular'); // regular | committed
-    const allMockMembers = MOCK_MEMBERS.map(m => ({
+    const [searchTerm, setSearchTerm] = useState('');
+    
+    // Derived state from props
+    const formattedMembers = members.map(m => ({
         ...m,
-        profile_full_name: `${m.first_name} ${m.last_name}`,
-        full_name: `${m.first_name} ${m.last_name}`,
+        profile_full_name: m.full_name || 'Unnamed Member',
+        full_name: m.full_name || 'Unnamed Member',
         user_phone_number: m.phone_number,
         cell_group_name: m.cell_group,
-        category: 'Regular Member',
-        commitment_status: 'Regular Member',
+        category: m.commitment_status === 'Committed Member' ? 'Committed Member' : 'Regular Member',
         created_at: m.date_joined,
     }));
-    const [members] = useState(allMockMembers);
-    const [loading] = useState(false);
-    const [error] = useState(null);
-    const [totalCount] = useState(allMockMembers.length);
-    const [tabStats] = useState({ regular: 475, committed: 48 });
+
+    const regularMembers = formattedMembers.filter(m => m.commitment_status !== 'Committed Member');
+    const committedMembers = formattedMembers.filter(m => m.commitment_status === 'Committed Member');
+
+    let displayedMembers = activeTab === 'regular' ? regularMembers : committedMembers;
+
+    if (searchTerm.trim() !== '') {
+        const lowerSearch = searchTerm.toLowerCase();
+        displayedMembers = displayedMembers.filter(m => 
+            (m.full_name && m.full_name.toLowerCase().includes(lowerSearch)) ||
+            (m.email && m.email.toLowerCase().includes(lowerSearch)) ||
+            (m.phone_number && m.phone_number.includes(lowerSearch)) ||
+            (m.id && m.id.toString().includes(lowerSearch))
+        );
+    }
+
+    const totalCount = formattedMembers.length;
+    const tabStats = { regular: regularMembers.length, committed: committedMembers.length };
     const [selectedMember, setSelectedMember] = useState(null);
     const [showDetailModal, setShowDetailModal] = useState(false);
 
@@ -42,22 +60,95 @@ const MembersTable = () => {
         </button>
     );
 
-    const handleExport = (type) => {
-        if (type === 'Print' || type === 'PDF') {
+    const handleExport = async (type) => {
+        if (type === 'Print') {
             window.print();
             return;
         }
 
+        const tableData = displayedMembers.map(m => [
+            `MEM-${m.id.toString().padStart(3, '0')}`,
+            m.full_name || 'Unnamed',
+            m.phone_number || '-',
+            m.email || '-',
+            m.cell_group_name || '-',
+            m.category
+        ]);
+        const header = ["Member ID", "Full Name", "Phone", "Email", "Cell Group", "Status"];
+
         if (type === 'Copy') {
-            const data = members.map(m => `MEM-${m.id.toString().padStart(3, '0')}\t${m.profile_full_name || m.full_name}\t${m.user_phone_number || m.phone_number}\t${m.email || ''}\t${m.cell_group_name || '-'}\t${m.category}`).join('\n');
-            const header = "Member ID\tFull Name\tPhone\tEmail\tCell Group\tCategory\n";
-            navigator.clipboard.writeText(header + data);
+            const data = displayedMembers.map(m => `MEM-${m.id.toString().padStart(3, '0')}\t${m.full_name}\t${m.phone_number}\t${m.email}\t${m.cell_group_name}\t${m.category}`).join('\n');
+            const headerStr = header.join("\t") + "\n";
+            navigator.clipboard.writeText(headerStr + data);
             alert('Table data copied to clipboard!');
             return;
         }
 
-        // CSV/Excel export requires a backend — not available in frontend-only mode
-        alert(`${type} export requires a backend connection. This is a frontend-only demo.`);
+        if (type === 'CSV') {
+            const csvContent = "data:text/csv;charset=utf-8," 
+                + header.join(",") + "\n"
+                + tableData.map(e => e.join(",")).join("\n");
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "jen_members_export.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            return;
+        }
+
+        if (type === 'Excel') {
+            import('xlsx').then(XLSX => {
+                const worksheet = XLSX.utils.aoa_to_sheet([header, ...tableData]);
+                const workbook = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(workbook, worksheet, "Members");
+                XLSX.writeFile(workbook, "jen_members_export.xlsx");
+            });
+            return;
+        }
+
+        if (type === 'PDF') {
+            try {
+                const doc = new jsPDF();
+                
+                await addLogoToDoc(doc, 14, 10, 15, 15);
+
+                // Add Title
+                doc.setFontSize(20);
+                doc.setTextColor(34, 193, 230); // Primary color
+                doc.text("Jesus Enthroned Network", 32, 18);
+                
+                doc.setFontSize(12);
+                doc.setTextColor(100, 100, 100);
+                doc.text(`Members Database Export (${activeTab === 'regular' ? 'Regular' : 'Committed'})`, 32, 24);
+
+                // Add Table
+                autoTable(doc, {
+                    startY: 35,
+                    head: [header],
+                    body: tableData,
+                    theme: 'grid',
+                    styles: { fontSize: 8, cellPadding: 3 },
+                    headStyles: { fillColor: [34, 193, 230], textColor: 255, fontStyle: 'bold' },
+                    alternateRowStyles: { fillColor: [245, 247, 250] },
+                });
+
+                // Add Footer
+                const pageCount = doc.internal.getNumberOfPages();
+                for (let i = 1; i <= pageCount; i++) {
+                    doc.setPage(i);
+                    doc.setFontSize(8);
+                    doc.setTextColor(150);
+                    doc.text(`Generated on ${new Date().toLocaleString()} - Page ${i} of ${pageCount}`, 14, doc.internal.pageSize.height - 10);
+                }
+
+                doc.save("jen_members_report.pdf");
+            } catch (err) {
+                console.error("PDF generation failed:", err);
+                alert("Failed to generate PDF. Check console for details.");
+            }
+        }
     };
 
     return (
@@ -114,6 +205,8 @@ const MembersTable = () => {
                         <input
                             type="text"
                             placeholder="Search members..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
                             style={{
                                 background: 'transparent',
                                 border: 'none',
@@ -158,7 +251,7 @@ const MembersTable = () => {
                     <tbody>
                         {loading && <tr><td colSpan="8" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>Loading members...</td></tr>}
                         {error && <tr><td colSpan="8" style={{ textAlign: 'center', padding: '2rem', color: '#ef4444' }}>{error}</td></tr>}
-                        {!loading && !error && members.map(member => (
+                        {!loading && !error && displayedMembers.map(member => (
                             <tr key={member.id} style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
                                 <td style={{ padding: '1.5rem 1rem' }}>{member.id}</td>
                                 <td style={{ padding: '1.5rem 1rem', color: 'var(--text-color)' }}>
@@ -193,7 +286,7 @@ const MembersTable = () => {
 
             {/* Pagination ... */}
             <div style={{ padding: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-                <div>Showing {members.length} of {totalCount} entries</div>
+                <div>Showing {displayedMembers.length} entries</div>
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                     <button style={{ background: 'var(--border-color)', border: 'none', color: 'var(--text-color)', padding: '0.3rem 0.6rem', borderRadius: '0.3rem', cursor: 'pointer' }}>Previous</button>
                     <button style={{ background: 'var(--primary)', border: 'none', color: 'var(--bg-color)', padding: '0.3rem 0.6rem', borderRadius: '0.3rem', cursor: 'pointer', fontWeight: 'bold' }}>1</button>

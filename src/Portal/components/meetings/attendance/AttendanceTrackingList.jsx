@@ -3,6 +3,7 @@ import api from '../../../../api/axios';
 import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { addLogoToDoc } from '../../../../utils/pdfHelper';
 
 const AttendanceTrackingList = ({ members = [] }) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -60,8 +61,10 @@ const AttendanceTrackingList = ({ members = [] }) => {
         XLSX.writeFile(workbook, `${filename}.xlsx`);
     };
 
-    const exportToPDF = () => {
+    const exportToPDF = async () => {
         const doc = new jsPDF();
+
+        await addLogoToDoc(doc, 14, 5, 25, 25);
 
         let title = "Attendance Report";
         if (selectedMeeting !== 'all') {
@@ -70,9 +73,9 @@ const AttendanceTrackingList = ({ members = [] }) => {
         }
 
         doc.setFontSize(14);
-        doc.text(title, 14, 15);
+        doc.text(title, 14, 35);
         doc.setFontSize(10);
-        doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 22);
+        doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 42);
 
         const tableColumn = ["Name", "Phone", "Cell Group", "Rate", "Attended", "Status"];
         const tableRows = [];
@@ -92,7 +95,7 @@ const AttendanceTrackingList = ({ members = [] }) => {
         autoTable(doc, {
             head: [tableColumn],
             body: tableRows,
-            startY: 30,
+            startY: 50,
             styles: { fontSize: 8 },
             headStyles: { fillColor: [34, 193, 230] } // Theme primary color
         });

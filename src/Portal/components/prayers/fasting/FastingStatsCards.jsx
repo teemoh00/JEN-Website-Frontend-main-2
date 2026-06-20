@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import api from '../../../../api/axios';
 
 const StatCard = ({ label, value, description, icon }) => (
     <div style={{
@@ -32,7 +33,26 @@ const StatCard = ({ label, value, description, icon }) => (
     </div>
 );
 
-const FastingStatsCards = () => {
+const FastingStatsCards = ({ refreshTrigger }) => {
+    const [stats, setStats] = useState({
+        total_commitments: 0,
+        unique_participants: 0,
+        today_commitments: 0,
+        most_popular_day: 'N/A'
+    });
+
+    useEffect(() => {
+        const fetchStats = async () => {
+            try {
+                const response = await api.get('prayers/fasting/stats');
+                setStats(response.data);
+            } catch (error) {
+                console.error("Error fetching fasting stats", error);
+            }
+        };
+        fetchStats();
+    }, [refreshTrigger]);
+
     return (
         <div style={{
             display: 'grid',
@@ -42,25 +62,25 @@ const FastingStatsCards = () => {
         }}>
             <StatCard
                 label="Total Commitments"
-                value="20"
+                value={stats.total_commitments}
                 description="Total prayer commitments"
                 icon="🔥"
             />
             <StatCard
                 label="Unique Participants"
-                value="3"
+                value={stats.unique_participants}
                 description="Distinct participants"
                 icon="👥"
             />
             <StatCard
                 label="Most Popular Day"
-                value="Wednesday"
+                value={stats.most_popular_day}
                 description="Most selected fasting day"
                 icon="📅"
             />
             <StatCard
                 label="Today's Commitments"
-                value="3"
+                value={stats.today_commitments}
                 description="Commitments submitted today"
                 icon="⚡"
             />

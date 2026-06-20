@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import api from '../../api/axios';
 import { MOCK_ASSIGNMENT_STATS, MOCK_UNASSIGNED_MEMBERS, MOCK_CELLS } from '../../mockData';
 import AssignmentStatsCards from '../components/cells/assignment/AssignmentStatsCards';
 import UnassignedMembersList from '../components/cells/assignment/UnassignedMembersList';
@@ -6,16 +7,54 @@ import CellGroupsPanel from '../components/cells/assignment/CellGroupsPanel';
 
 const AssignMembersDashboard = () => {
     const [selectedMembers, setSelectedMembers] = useState([]);
-    const [stats] = useState(MOCK_ASSIGNMENT_STATS);
-    const [unassignedMembers, setUnassignedMembers] = useState(MOCK_UNASSIGNED_MEMBERS);
-    const [cells] = useState(MOCK_CELLS);
-    const [loading] = useState(false);
+    const [stats, setStats] = useState({ unassigned: 0, totalCells: 0, totalMembers: 0, avgPerCell: 0 });
+    const [unassignedMembers, setUnassignedMembers] = useState([]);
+    const [cells, setCells] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
+    const [refreshTrigger, setRefreshTrigger] = useState(0);
 
     const showToast = (message, type = 'success') => {
         setToast({ show: true, message, type });
         setTimeout(() => setToast({ show: false, message: '', type: 'success' }), 3000);
     };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                setLoading(true);
+                const [membersRes, cellsRes] = await Promise.all([
+                    api.get('members'),
+                    api.get('cells')
+                ]);
+
+                const allMembers = Array.isArray(membersRes.data) ? membersRes.data : (membersRes.data.results || []);
+                const allCells = Array.isArray(cellsRes.data) ? cellsRes.data : (cellsRes.data.results || []);
+
+                // Get a list of all active cell leader names
+                const leaderNames = allCells.map(c => c.leader_name).filter(Boolean);
+
+                // A member is unassigned if they have no cell_group AND they are not listed as a leader
+                const unassigned = allMembers.filter(m => !m.cell_group_name && !m.cell_group_id && !leaderNames.includes(m.full_name));
+                setUnassignedMembers(unassigned);
+                setCells(allCells);
+
+                setStats({
+                    unassigned_members: unassigned.length,
+                    total_cells: allCells.length,
+                    total_members: allMembers.length,
+                    assigned_members: allMembers.length - unassigned.length,
+                    needs_attention: 0 // Mocked for now
+                });
+            } catch (err) {
+                console.error("Error fetching data:", err);
+                showToast("Failed to load assignment data", "error");
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
+    }, [refreshTrigger]);
 
     const toggleSelection = (id) => {
         setSelectedMembers(prev =>
@@ -23,15 +62,24 @@ const AssignMembersDashboard = () => {
         );
     };
 
-    const handleAssign = (cellId) => {
+    const handleAssign = async (cellId) => {
         if (selectedMembers.length === 0) {
             showToast('Please select at least one member to assign.', 'error');
             return;
         }
-        // In-memory: remove selected members from the unassigned list
-        setUnassignedMembers(prev => prev.filter(m => !selectedMembers.includes(m.id)));
-        setSelectedMembers([]);
-        showToast('Members assigned successfully!', 'success');
+
+        try {
+            await api.post('members/assign', {
+                member_ids: selectedMembers,
+                cell_id: cellId
+            });
+            showToast('Members assigned successfully!', 'success');
+            setSelectedMembers([]);
+            setRefreshTrigger(prev => prev + 1);
+        } catch (err) {
+            console.error("Assign error", err);
+            showToast('Failed to assign members.', 'error');
+        }
     };
 
     return (

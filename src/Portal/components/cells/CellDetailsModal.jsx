@@ -11,7 +11,7 @@ const CellDetailsModal = ({ cell, onClose }) => {
     useEffect(() => {
         const fetchMembers = async () => {
             try {
-                const response = await api.get(`church/members/?cell_group=${cell.id}`);
+                const response = await api.get(`members?cell_id=${cell.id}`);
                 const results = response.data.results || response.data;
                 setMembers(Array.isArray(results) ? results : []);
             } catch (err) {
@@ -143,7 +143,7 @@ const CellDetailsModal = ({ cell, onClose }) => {
                 onConfirm={async () => {
                     setDeleting(true);
                     try {
-                        await api.delete(`church/cells/${cell.id}/`);
+                        await api.delete(`cells/${cell.id}`);
                         onClose();
                         window.location.reload();
                     } catch (err) {

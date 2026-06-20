@@ -1,12 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import api from '../../../../api/axios';
 
 const CommitToFastModal = ({ onClose }) => {
     const [formData, setFormData] = useState({
+        fastingEventId: '',
         fullName: '',
         email: '',
         phone: '',
         daysFasting: []
     });
+    const [events, setEvents] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const res = await api.get('prayers/fasting/events');
+                setEvents(res.data);
+                if (res.data.length > 0) {
+                    setFormData(prev => ({ ...prev, fastingEventId: res.data[0].id }));
+                }
+            } catch (err) {
+                console.error("Failed to load events", err);
+            }
+        };
+        fetchEvents();
+    }, []);
 
     const handleDayToggle = (day) => {
         setFormData(prev => ({
@@ -22,10 +41,25 @@ const CommitToFastModal = ({ onClose }) => {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        alert('Commitment simulated: ' + JSON.stringify(formData));
-        onClose();
+        setLoading(true);
+        try {
+            await api.post('prayers/fasting/commit', {
+                fasting_event_id: formData.fastingEventId,
+                full_name: formData.fullName,
+                email: formData.email,
+                phone: formData.phone,
+                days_fasting: formData.daysFasting
+            });
+            alert('Fasting Commitment successfully recorded!');
+            onClose();
+        } catch (error) {
+            console.error('Error committing to fast', error);
+            alert('Failed to submit commitment');
+        } finally {
+            setLoading(false);
+        }
     };
 
     const inputStyle = {
@@ -86,6 +120,21 @@ const CommitToFastModal = ({ onClose }) => {
                             style={{ ...inputStyle, color: formData.fullName ? 'white' : 'var(--text-muted)', fontWeight: formData.fullName ? '600' : 'normal' }}
                             required
                         />
+                    </div>
+
+                    <div>
+                        <label style={labelStyle}>Select Fasting Event</label>
+                        <select
+                            name="fastingEventId"
+                            value={formData.fastingEventId}
+                            onChange={handleChange}
+                            style={{ ...inputStyle, color: formData.fastingEventId ? 'white' : 'var(--text-muted)', fontWeight: formData.fastingEventId ? '600' : 'normal' }}
+                        >
+                            <option value="">-- General / Ongoing Fast --</option>
+                            {events.map(ev => (
+                                <option key={ev.id} value={ev.id} style={{ color: 'var(--text-color)', background: '#1a1a24' }}>{ev.title}</option>
+                            ))}
+                        </select>
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
@@ -153,16 +202,17 @@ const CommitToFastModal = ({ onClose }) => {
                             cursor: 'pointer',
                             fontSize: '0.85rem'
                         }}>Cancel</button>
-                        <button type="submit" style={{
+                        <button type="submit" disabled={loading} style={{
                             padding: '0.6rem 1.2rem',
                             borderRadius: '0.4rem',
                             border: 'none',
                             background: 'var(--primary)',
                             color: 'var(--text-color)',
                             fontWeight: '700',
-                            cursor: 'pointer',
-                            fontSize: '0.85rem'
-                        }}>Submit Commitment</button>
+                            cursor: loading ? 'not-allowed' : 'pointer',
+                            fontSize: '0.85rem',
+                            opacity: loading ? 0.7 : 1
+                        }}>{loading ? 'Submitting...' : 'Submit Commitment'}</button>
                     </div>
                 </form>
             </div>

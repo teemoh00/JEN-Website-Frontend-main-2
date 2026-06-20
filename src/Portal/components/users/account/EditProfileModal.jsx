@@ -7,7 +7,9 @@ const EditProfileModal = ({ user, onClose, onUpdate }) => {
         about_me: user?.profile?.about_me || '',
         date_of_birth: user?.date_of_birth || '',
         residence: user?.residence || '',
-        employment_status: user?.employment_status || ''
+        employment_status: user?.employment_status || '',
+        phone_number: user?.phone_number || '',
+        gender: user?.gender || ''
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -24,9 +26,12 @@ const EditProfileModal = ({ user, onClose, onUpdate }) => {
 
         try {
             await api.patch('accounts/user/', {
+                email: user.email, // Passing email since we aren't using real JWTs yet
                 date_of_birth: formData.date_of_birth,
                 residence: formData.residence,
                 employment_status: formData.employment_status,
+                phone_number: formData.phone_number,
+                gender: formData.gender,
                 profile: {
                     full_name: formData.full_name,
                     about_me: formData.about_me
@@ -109,6 +114,29 @@ const EditProfileModal = ({ user, onClose, onUpdate }) => {
                             rows="4"
                             style={{ ...inputStyle, resize: 'vertical' }}
                         />
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                        {/* Phone Number */}
+                        <div>
+                            <label style={labelStyle}>Phone Number</label>
+                            <input type="tel" name="phone_number" value={formData.phone_number} onChange={handleChange} style={inputStyle} />
+                        </div>
+                        
+                        {/* Gender */}
+                        <div>
+                            <label style={labelStyle}>Gender</label>
+                            <select
+                                name="gender"
+                                value={formData.gender}
+                                onChange={handleChange}
+                                style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }}
+                            >
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>

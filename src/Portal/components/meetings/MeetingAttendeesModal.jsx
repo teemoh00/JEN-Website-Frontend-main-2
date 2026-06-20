@@ -3,6 +3,7 @@ import axios from '../../../api/axios';
 import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { addLogoToDoc } from '../../../utils/pdfHelper';
 
 const MeetingAttendeesModal = ({ meeting, onClose }) => {
     const [attendees, setAttendees] = useState([]);
@@ -64,9 +65,11 @@ const MeetingAttendeesModal = ({ meeting, onClose }) => {
         XLSX.writeFile(wb, filename);
     };
 
-    const exportToPDF = () => {
+    const exportToPDF = async () => {
         if (attendees.length === 0) return;
         const doc = new jsPDF();
+
+        await addLogoToDoc(doc);
 
         // Header
         doc.setFontSize(16);

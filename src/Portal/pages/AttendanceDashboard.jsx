@@ -1,15 +1,31 @@
-import React from 'react';
-
-const mockBreakdownData = [
-    { id: 1, name: 'Sunday Service', date: 'Feb 02, 2026', type: 'Event', present: 450, absent: 50, excused: 10, rate: 90 },
-    { id: 2, name: 'Midweek Prayer', date: 'Feb 04, 2026', type: 'Meeting', present: 120, absent: 30, excused: 5, rate: 77 },
-    { id: 3, name: 'Youth Ministry', date: 'Feb 06, 2026', type: 'Event', present: 200, absent: 15, excused: 2, rate: 92 },
-    { id: 4, name: 'Men\'s Fellowship', date: 'Feb 07, 2026', type: 'Meeting', present: 85, absent: 20, excused: 8, rate: 75 },
-    { id: 5, name: 'Sunday Service', date: 'Feb 09, 2026', type: 'Event', present: 480, absent: 40, excused: 15, rate: 90 },
-    { id: 6, name: 'Outreach Program', date: 'Feb 12, 2026', type: 'Event', present: 300, absent: 10, excused: 5, rate: 95 }
-];
+import React, { useState, useEffect } from 'react';
+import api from '../../api/axios';
 
 const AttendanceDashboard = () => {
+    const [stats, setStats] = useState({
+        total_sessions: 0,
+        total_attendance: 0,
+        average_attendance: 0,
+        attendance_rate: 0,
+        missed_rate: 0
+    });
+    const [breakdown, setBreakdown] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchAnalytics = async () => {
+            try {
+                const response = await api.get('attendance/analytics/');
+                setStats(response.data.stats);
+                setBreakdown(response.data.breakdown);
+            } catch (err) {
+                console.error("Failed to load analytics", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchAnalytics();
+    }, []);
     return (
         <div style={{ maxWidth: '1400px', margin: '0 auto', paddingBottom: '2rem', fontFamily: 'Inter, sans-serif' }}>
             {/* Header */}
@@ -28,37 +44,36 @@ const AttendanceDashboard = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'rgba(59, 130, 246, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>📅</div>
                     <div>
-                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>15</div>
+                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>{stats.total_sessions.toLocaleString()}</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Total Sessions</div>
-                        <div style={{ fontSize: '0.65rem', color: '#f59e0b', marginTop: '0.25rem' }}>Last 30 days</div>
+                        <div style={{ fontSize: '0.65rem', color: '#f59e0b', marginTop: '0.25rem' }}>All time</div>
                     </div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'rgba(168, 85, 247, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>👥</div>
                     <div>
-                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>1,240</div>
+                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>{stats.total_attendance.toLocaleString()}</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Total Attendance</div>
                     </div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'rgba(236, 72, 153, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>📊</div>
                     <div>
-                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>82</div>
+                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>{stats.average_attendance.toLocaleString()}</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Avg. Attendance</div>
                     </div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'rgba(16, 185, 129, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>📈</div>
                     <div>
-                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>92%</div>
+                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>{stats.attendance_rate}%</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Attendance Rate</div>
-                        <div style={{ fontSize: '0.65rem', color: '#10b981', marginTop: '0.25rem' }}>+ 5% from last month</div>
                     </div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <div style={{ width: '45px', height: '45px', borderRadius: '10px', background: 'rgba(245, 158, 11, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>⚠️</div>
                     <div>
-                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>8%</div>
+                        <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-color)', lineHeight: 1 }}>{stats.missed_rate}%</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Missed Rate</div>
                     </div>
                 </div>
@@ -194,7 +209,15 @@ const AttendanceDashboard = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {mockBreakdownData.map((row) => (
+                            {loading ? (
+                                <tr>
+                                    <td colSpan="7" style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>Loading analytics data...</td>
+                                </tr>
+                            ) : breakdown.length === 0 ? (
+                                <tr>
+                                    <td colSpan="7" style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>No attendance data found.</td>
+                                </tr>
+                            ) : breakdown.map((row) => (
                                 <tr key={row.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
                                     <td style={{ padding: '1.5rem 0' }}>
                                         <div style={{ color: 'var(--text-color)', fontWeight: '700', marginBottom: '0.25rem' }}>{row.name}</div>
@@ -204,8 +227,8 @@ const AttendanceDashboard = () => {
                                         <span style={{ background: 'var(--border-color)', color: 'var(--text-color)', padding: '0.25rem 0.75rem', borderRadius: '1rem', fontSize: '0.75rem' }}>{row.type}</span>
                                     </td>
                                     <td style={{ padding: '1.5rem 0', color: '#22c55e', fontWeight: '600', textAlign: 'center' }}>{row.present}</td>
-                                    <td style={{ padding: '1.5rem 0', color: '#ef4444', fontWeight: '600', textAlign: 'center' }}>{row.absent}</td>
-                                    <td style={{ padding: '1.5rem 0', color: '#f59e0b', fontWeight: '600', textAlign: 'center' }}>{row.excused}</td>
+                                    <td style={{ padding: '1.5rem 0', color: '#ef4444', fontWeight: '600', textAlign: 'center' }}>{row.absent === 0 && row.type === 'Meeting' ? '-' : row.absent}</td>
+                                    <td style={{ padding: '1.5rem 0', color: '#f59e0b', fontWeight: '600', textAlign: 'center' }}>{row.excused === 0 ? '-' : row.excused}</td>
                                     <td style={{ padding: '1.5rem 0' }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                             <span style={{ color: row.rate >= 90 ? '#22c55e' : row.rate >= 80 ? '#3b82f6' : '#f59e0b', fontWeight: '700' }}>{row.rate}%</span>

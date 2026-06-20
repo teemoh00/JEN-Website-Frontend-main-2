@@ -8,11 +8,17 @@ const QuickRegister = () => {
     const navigate = useNavigate();
     const { setUser } = useAuth();
     const slug = searchParams.get('slug');
-    const initialPhone = searchParams.get('phone') || '';
+    const eventSlug = searchParams.get('event_slug');
+    const identifier = searchParams.get('identifier') || '';
+    
+    // Auto-detect if identifier is email or phone
+    const isEmail = identifier.includes('@');
+    const initialEmail = isEmail ? identifier : '';
+    const initialPhone = !isEmail ? identifier : '';
 
     const [formData, setFormData] = useState({
         full_name: '',
-        email: '',
+        email: initialEmail,
         phone_number: initialPhone,
         password: '',
         address: '',
@@ -52,9 +58,15 @@ const QuickRegister = () => {
                 setUser(response.data.user);
             }
 
-            setSuccessMessage('Registration successful! Now joining the meeting.');
+            setSuccessMessage('Registration successful! Now joining...');
             setTimeout(() => {
-                navigate(`/join/${slug}`);
+                if (eventSlug) {
+                    navigate(`/event-join/${eventSlug}`);
+                } else if (slug) {
+                    navigate(`/join/${slug}`);
+                } else {
+                    navigate('/');
+                }
             }, 2000);
         } catch (err) {
             console.error('Registration error:', err);
@@ -85,9 +97,29 @@ const QuickRegister = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            position: 'relative',
+            overflow: 'hidden'
         }}>
-            <div className="portal-container animate-fade-in" style={{ width: '100%', maxWidth: '500px', padding: '2rem' }}>
+            {/* Blurred Favicon Background overlay */}
+            <div style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '80vh',
+                height: '80vh',
+                backgroundImage: `url('/favicon.ico')`,
+                backgroundSize: 'contain',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                opacity: 0.4,
+                filter: 'blur(15px)',
+                zIndex: 0,
+                pointerEvents: 'none'
+            }} />
+
+            <div className="portal-container animate-fade-in" style={{ width: '100%', maxWidth: '500px', padding: '2rem', position: 'relative', zIndex: 1 }}>
                 <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                     <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Welcome to Jesus Enthroned Network</h1>
                     <p style={{ color: 'var(--text-muted)' }}>Please register to join the meeting</p>

@@ -1,25 +1,26 @@
 import React, { useState } from 'react';
 import axios from '../../../api/axios';
 
-const CreateNewVersionModal = ({ eventId, onClose, onCreated }) => {
-    const [name, setName] = useState('');
-    const [notes, setNotes] = useState('');
+const EditBudgetVersionModal = ({ budget, onClose, onUpdate }) => {
+    const [name, setName] = useState(budget?.name || '');
+    const [notes, setNotes] = useState(budget?.notes || '');
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async () => {
-        if (!name) return alert('Budget name is required');
+        if (!name) return alert("Budget name is required.");
+
         setLoading(true);
         try {
-            await axios.post('events/budgets/', {
-                event_id: eventId,
+            await axios.put('events/budgets/', {
+                id: budget.id,
                 name: name,
                 notes: notes
             });
-            onCreated();
+            onUpdate();
             onClose();
         } catch (err) {
-            console.error('Failed to create budget version:', err);
-            alert('Failed to create budget version');
+            console.error('Failed to update budget version:', err);
+            alert('Failed to update budget version');
         } finally {
             setLoading(false);
         }
@@ -44,32 +45,23 @@ const CreateNewVersionModal = ({ eventId, onClose, onCreated }) => {
                 padding: '2.5rem 2rem',
                 boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
             }}>
-                <h2 style={{ margin: '0 0 2rem 0', color: 'var(--text-color)', fontSize: '1.25rem', fontWeight: '800' }}>Create New Version</h2>
+                <h2 style={{ margin: '0 0 2rem 0', color: 'var(--text-color)', fontSize: '1.25rem', fontWeight: '800' }}>Edit Budget Properties</h2>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                    {/* Budget Name */}
                     <div>
-                        <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.7rem', fontWeight: '700', marginBottom: '0.5rem', textTransform: 'capitalize' }}>Budget Name *</label>
-                        <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Main Event Budget" style={{
+                        <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.7rem', fontWeight: '700', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Version Name *</label>
+                        <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Pre-Event Draft" style={{
                             width: '100%', padding: '0.8rem 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box'
                         }} />
                     </div>
 
-                    {/* Notes */}
                     <div>
-                        <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.7rem', fontWeight: '700', marginBottom: '0.5rem', textTransform: 'capitalize' }}>Notes</label>
-                        <textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Optional notes..." rows="3" style={{
-                            width: '100%', padding: '0.8rem 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', resize: 'vertical', fontFamily: 'monospace', boxSizing: 'border-box'
+                        <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.7rem', fontWeight: '700', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Notes (Optional)</label>
+                        <textarea value={notes} onChange={(e) => setNotes(e.target.value)} rows="3" placeholder="Any internal notes for this budget..." style={{
+                            width: '100%', padding: '0.8rem 1rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', color: 'var(--text-color)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box', resize: 'vertical'
                         }}></textarea>
                     </div>
 
-                    {/* Warning Text */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem' }}>
-                        <span style={{ color: '#f59e0b', fontSize: '1rem' }}>⚠️</span>
-                        <span style={{ color: '#f59e0b', fontSize: '0.85rem', fontWeight: '600' }}>A new version will copy existing items from the previous version.</span>
-                    </div>
-
-                    {/* Actions */}
                     <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '1rem' }}>
                         <button onClick={onClose} disabled={loading} style={{
                             background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', color: 'var(--text-color)', padding: '0.6rem 1.25rem', borderRadius: '0.5rem', fontSize: '0.9rem', fontWeight: '600', cursor: 'pointer'
@@ -79,7 +71,7 @@ const CreateNewVersionModal = ({ eventId, onClose, onCreated }) => {
                         <button onClick={handleSubmit} disabled={loading} style={{
                             background: '#7c3aed', color: 'var(--text-color)', border: 'none', borderRadius: '0.5rem', padding: '0.6rem 1.25rem', fontSize: '0.9rem', fontWeight: '700', cursor: 'pointer', opacity: loading ? 0.7 : 1
                         }}>
-                            {loading ? 'Creating...' : 'Create'}
+                            {loading ? 'Saving...' : 'Save Changes'}
                         </button>
                     </div>
                 </div>
@@ -88,4 +80,4 @@ const CreateNewVersionModal = ({ eventId, onClose, onCreated }) => {
     );
 };
 
-export default CreateNewVersionModal;
+export default EditBudgetVersionModal;
